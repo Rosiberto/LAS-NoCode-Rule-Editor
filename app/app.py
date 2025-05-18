@@ -16,3 +16,14 @@ from blocks.aggregation_min_block import  aggregation_min_block
 from blocks.aggregation_max_block import  aggregation_max_block
 from utils.utils import generate_rule, validate_email, validate_url, display_error_message, load_saved_flow, save_flow
 from barfi.flow.streamlit import st_flow
+
+
+
+
+
+
+def main():
+    
+
+if __name__ == "__main__":
+    main()
