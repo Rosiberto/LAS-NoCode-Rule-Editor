@@ -18,12 +18,13 @@ from utils.utils import generate_rule, validate_email, validate_url, display_err
 from barfi.flow.streamlit import st_flow
 
 
-
+def create_blocks():
+    print("oi")
 
 
 
 def main():
-    
+    create_blocks()
 
 if __name__ == "__main__":
     main()
