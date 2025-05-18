@@ -15,4 +15,4 @@ docker build -t epl-editor .
 docker run -p 5000:5000 epl-editor
 
 
-By: Rosiberto S.G. - 2025
+# By: Rosiberto S.G. - 2025
