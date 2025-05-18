@@ -1,0 +1,30 @@
+name: Sync main to v2.0.0
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configurar Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sincronizar main para v2.0.0
+        run: |
+          git fetch origin
+          git checkout v2.0.0 || git checkout -b v2.0.0
+          
+          # Forçar o merge entre main e v2.0.0, aceitando sempre as mudanças de main
+          git merge origin/main -X theirs --allow-unrelated-histories -m "Merge main into v2.0.0"
+
+          # Push das mudanças para v2.0.0
+          git push origin v2.0.0
