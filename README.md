@@ -13,3 +13,6 @@ A visual EPL rule editor integrated with **FIWARE Perseus CEP**, featuring a dra
 ```bash
 docker build -t epl-editor .
 docker run -p 5000:5000 epl-editor
+
+
+This branch contains the legacy version (v2.0.0) and is no longer maintained.
