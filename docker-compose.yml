@@ -1,0 +1,16 @@
+services:
+  
+# LAS-NoCode-Rule-Editor                
+  editor:
+    image: rosiberto/las-rule-editor:latest
+    container_name: editor
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - default    
+    
+networks:
+  default:
+    name: default
+    driver: bridge

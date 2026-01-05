@@ -1,6 +1,6 @@
 # LAS-NoCode-Rule-Editor
 
-A visual EPL rule editor integrated with **FIWARE Perseus CEP**, featuring a drag-and-drop interface built with **BARFI**, running on **Flask**, and containerized with **Docker**.
+A visual EPL rule editor integrated with **FIWARE Perseus CEP**, featuring a drag-and-drop interface built with **DRAWFLOW**, running on **Flask**, and containerized with **Docker**.
 
 ## 🔧 Features
 

@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.controls {
+  padding: 10px;
+  background-color: #fff;
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#drawflow {
+  width: 100%;
+  height: 70vh;
+  background-color: #f0f0f0;
+}
+
+.output {
+  padding: 10px;
+  background-color: #eee;
+  height: 20vh;
+  overflow-y: auto;
+}
+
+.drawflow-node .node-content {
+  font-size: 12px;
+}
+
+.drawflow-node input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 5px;
+  padding: 3px;
+  font-size: 12px;
+}
+
+.drawflow-node {
+  min-width: 180px;
+}
