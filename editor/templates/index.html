@@ -1,409 +1,391 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>LAS-NoCode Community</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-{% block title %}LAS-NoCode{% endblock %}
+	<!-- Drawflow CSS -->
+	<link rel="stylesheet" href="{{ url_for('flow.static', filename='css/drawflow.min.css') }}">
 
-{% block extra_css %}
-		<!-- Drawflow CSS -->
-		<link rel="stylesheet" href="{{ url_for('flow.static', filename='css/drawflow.min.css') }}">
+	<!-- Seu CSS customizado -->
+	<link rel="stylesheet" href="{{ url_for('flow.static', filename='css/beautiful.css') }}">
 
-		<!-- Seu CSS customizado -->
-		<link rel="stylesheet" href="{{ url_for('flow.static', filename='css/beautiful.css') }}">
+	<!-- FontAwesome para ícones -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
-		<!-- FontAwesome para ícones -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	<link rel="icon" type="image/png" sizes="16x16"  href="{{ url_for('flow.static',filename='favicons/favicon-16x16.png') }}">
 
-			<link rel="icon" type="image/png" sizes="16x16"  href="{{ url_for('flow.static',filename='favicons/favicon-16x16.png') }}">
-			<meta name="msapplication-TileColor" content="#ffffff">
-			<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="theme-color" content="#ffffff">
 		
-		<style>
-			/* Estilos do menu e botões */
-			.menu {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 10px 5px;
-			border-bottom: 1px solid #ddd;
-			background: white;
-			z-index: 10;
-			}
-			.menu ul {
-			margin: 0;
-			padding: 0;
-			display: flex;
-			list-style: none;
-			}
-			.menu ul li {
-			cursor: pointer;
-			margin-right: 20px;
-			padding-right: 10px;
-			border-right: 1px solid #ddd;
-			line-height: 30px;
-			font-weight: 600;
-			user-select: none;
-			}
-			.menu ul li.selected {
-			font-weight: 900;
-			color: #0e0e0e;
-			}
-			.menu button {
-			border-radius: 4px;
-			border: none;
-			padding: 6px 14px;
-			font-weight: 600;
-			cursor: pointer;
-			color: white;
-			transition: background-color 0.3s ease;
-			}
-			.btn-export {
-			background: #4ea9ff;
-			margin-right: 10px;
-			}
-			.btn-export:hover {
-			background: #3a8de0;
-			}
-			.btn-clear {
-			background: #e3195a;
-			margin-right: 10px;
-			}
-			.btn-clear:hover {
-			background: #b50e42;
-			}
-			.btn-generate-epl {
-			background: #fbfcfb;
-			}
-			.btn-generate-epl:hover {
-			background: #f0f7b1;
-			}
+	<style>
+	/* Estilos do menu e botões */
+	.menu {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px 5px;
+		border-bottom: 1px solid #ddd;
+		background: white;
+		z-index: 10;
+	}
+	.menu ul {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		list-style: none;
+	}
+	.menu ul li {
+		cursor: pointer;
+		margin-right: 20px;
+		padding-right: 10px;
+		border-right: 1px solid #ddd;
+		line-height: 30px;
+		font-weight: 600;
+		user-select: none;
+	}
+	.menu ul li.selected {
+		font-weight: 900;
+		color: #0e0e0e;
+	}
+	.menu button {
+		border-radius: 4px;
+		border: none;
+		padding: 6px 14px;
+		font-weight: 600;
+		cursor: pointer;
+		color: white;
+		transition: background-color 0.3s ease;
+	}
+	.btn-export {
+		background: #4ea9ff;
+		margin-right: 10px;
+	}
+	.btn-export:hover {
+		background: #3a8de0;
+	}
+	.btn-clear {
+		background: #e3195a;
+		margin-right: 10px;
+	}
+	.btn-clear:hover {
+		background: #b50e42;
+	}
+	.btn-generate-epl {
+		background: #fbfcfb;
+	}
+	.btn-generate-epl:hover {
+		background: #f0f7b1;
+	}
 
-			/* Estilo das colunas */
-			.editor-wrapper {
-			 	display: flex;
-				flex-grow: 1;
-				height: calc(100vh - 60px); /* ou a altura que sobra depois do header */
-				overflow: hidden; /* impede que a wrapper cresça além do body */
+	/* Estilo das colunas */
+	.editor-wrapper {
+	 	display: flex;
+		flex-grow: 1;
+		height: calc(100vh - 60px); /* ou a altura que sobra depois do header */
+		overflow: hidden; /* impede que a wrapper cresça além do body */
+	}
+	.editor-wrapper .col {
+		width: 180px;           /* largura fixa */
+		min-width: 180px;       /* garante que não aumente */
+		max-width: 180px;       /* garante que não aumente */
+		padding: 10px;
+		border-right: 1px solid #ddd;
+		background: #f9f9f9;
+		overflow-y: auto;       /* scroll vertical se necessário */
+		box-sizing: border-box; /* inclui padding na largura */		
+	}
+	.drag-drawflow {
+		cursor: grab;
+		background: white;
+		padding: 6px 8px;
+		margin-bottom: 10px;
+		border-radius: 4px;
+		box-shadow: 0 0 4px rgba(0,0,0,0.1);
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		font-size: 0.85rem;     /* menor texto */
+		user-select: none;
+		font-weight: 600;
+		box-sizing: border-box;  /* padding não aumenta a largura */
+	}
+	.editor-wrapper .col-right {
+		flex-grow: 1;
+		min-height: 0;        /* permite que filhos encolham */
+		height: calc(100vh - 60px);
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;    /* evita barra extra vertical */
+		padding-bottom: 100px; /* espaço suficiente para .btn-lock e .bar-zoom */
+	}
 
-			}
-			.editor-wrapper .col {
-				width: 180px;           /* largura fixa */
-				min-width: 180px;       /* garante que não aumente */
-				max-width: 180px;       /* garante que não aumente */
-				padding: 10px;
-				border-right: 1px solid #ddd;
-				background: #f9f9f9;
-				overflow-y: auto;       /* scroll vertical se necessário */
-				box-sizing: border-box; /* inclui padding na largura */		
-			}
-			.drag-drawflow {
-				cursor: grab;
-				background: white;
-				padding: 6px 8px;
-				margin-bottom: 10px;
-				border-radius: 4px;
-				box-shadow: 0 0 4px rgba(0,0,0,0.1);
-				display: flex;
-				align-items: center;
-				gap: 5px;
-				font-size: 0.85rem;     /* menor texto */
-				user-select: none;
-				font-weight: 600;
-				box-sizing: border-box;  /* padding não aumenta a largura */
-			}
-			.editor-wrapper .col-right {
-				flex-grow: 1;
-				min-height: 0;        /* permite que filhos encolham */
-				height: calc(100vh - 60px);
-				position: relative;
-				display: flex;
-				flex-direction: column;
-				overflow: hidden;    /* evita barra extra vertical */
-				padding-bottom: 100px; /* espaço suficiente para .btn-lock e .bar-zoom */
-			}
+	#drawflow {
+		background: #f0f0f0;
+		background-image:
+		linear-gradient(to right, #ddd 1px, transparent 1px),
+		linear-gradient(to bottom, #ddd 1px, transparent 1px);
+		background-size: 25px 25px;
+		overflow: auto;
+		width: 100%;
+		height: 100%;      /* altura fixa ou ajustável */				
+		position: relative;
+	}
 
-			#drawflow {
-				background: #f0f0f0;
-				background-image:
-					linear-gradient(to right, #ddd 1px, transparent 1px),
-					linear-gradient(to bottom, #ddd 1px, transparent 1px);
-				background-size: 25px 25px;
-				overflow: auto;
-				width: 100%;
-				height: 100%;      /* altura fixa ou ajustável */				
-      			position: relative;
-			}
-
-			/* Botão info, lock e zoom */
-			
-			.btn-info {
-				position: fixed;
-				bottom: 10px;
-				right: 200px;
-				cursor: pointer;
-				font-size: 28px;
-				color: #02047D;
-				user-select: none;
-				padding: 8px;
-				box-shadow: none;
-				border: none;
-				outline: none;
-				z-index: 20;
-			}
-			.btn-lock {
-				position: fixed;
-				bottom: 25px;
-				right: 160px;
-				cursor: pointer;
-				font-size: 24px;
-				color: #555;
-				user-select: none;
-				background: white;
-				border-radius: 50%;
-				padding: 8px;
-				box-shadow: 0 0 5px rgba(0,0,0,0.15);
-				z-index: 20;
-			}
-			.bar-zoom {
-				position: fixed;
-				bottom: 30px;
-				right: 50px;
-				display: flex;
-				gap: 10px;
-				background: white;
-				border-radius: 25px;
-				padding: 6px 12px;
-				box-shadow: 0 0 5px rgba(0,0,0,0.15);
-				z-index: 20;
-			}
-			.bar-zoom i {
-				cursor: pointer;
-				font-size: 20px;
-				color: #555;
-				user-select: none;
-				transition: color 0.2s;
-			}
-			.bar-zoom i:hover {
-				color: #4caf50;
-			}
-			.menu-section {
-				margin-bottom: 5px;
-			}
-			.menu-section-header {
-			font-weight: 700;
-			padding: 6px;
-			background: #eaeaea;
-			border-radius: 4px;
-			cursor: pointer;
-			user-select: none;
-			display: flex;
-			align-items: center;
-			gap: 5px;
-			font-size: 0.85rem;     /* diminui tamanho do texto */
-			}
-			.menu-section-content {
-			margin-top: 6px;
-			padding-left: 5px;
-			display: none; /* começa fechado */
-			}
-			.menu-section.open .menu-section-content {
-			display: block;
-			}
-			.menu-section.open .menu-section-header i {
-			transform: rotate(90deg);
-			transition: transform 0.2s ease;
-			}
-			.menu-section-header i {
-			transition: transform 0.2s ease;
-			}
-		</style>
-	{% endblock %}
-
-		
-		
-
-{% block content %}
-
-
+	/* Botão info, lock e zoom */
+	.btn-info {
+		position: fixed;
+		bottom: 10px;
+		right: 200px;
+		cursor: pointer;
+		font-size: 28px;
+		color: #02047D;
+		user-select: none;
+		padding: 8px;
+		box-shadow: none;
+		border: none;
+		outline: none;
+		z-index: 20;
+	}
+	.btn-lock {
+		position: fixed;
+		bottom: 25px;
+		right: 160px;
+		cursor: pointer;
+		font-size: 24px;
+		color: #555;
+		user-select: none;
+		background: white;
+		border-radius: 50%;
+		padding: 8px;
+		box-shadow: 0 0 5px rgba(0,0,0,0.15);
+		z-index: 20;
+	}
+	.bar-zoom {
+		position: fixed;
+		bottom: 30px;
+		right: 50px;
+		display: flex;
+		gap: 10px;
+		background: white;
+		border-radius: 25px;
+		padding: 6px 12px;
+		box-shadow: 0 0 5px rgba(0,0,0,0.15);
+		z-index: 20;
+	}
+	.bar-zoom i {
+		cursor: pointer;
+		font-size: 20px;
+		color: #555;
+		user-select: none;
+		transition: color 0.2s;
+	}
+	.bar-zoom i:hover {
+		color: #4caf50;
+	}
+	.menu-section {
+		margin-bottom: 5px;
+	}
+	.menu-section-header {
+		font-weight: 700;
+		padding: 6px;
+		background: #eaeaea;
+		border-radius: 4px;
+		cursor: pointer;
+		user-select: none;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		font-size: 0.85rem;     /* diminui tamanho do texto */
+	}
+	.menu-section-content {
+		margin-top: 6px;
+		padding-left: 5px;
+		display: none; /* começa fechado */
+	}
+	.menu-section.open .menu-section-content {
+		display: block;
+	}
+	.menu-section.open .menu-section-header i {
+		transform: rotate(90deg);
+		transition: transform 0.2s ease;
+	}
+	.menu-section-header i {
+		transition: transform 0.2s ease;
+	}
+	</style>
+</head>
+<body>		
   <h3>LAS-NoCode - EPL Rule Editor</h3>
 	
+	<div class="editor-wrapper">
+		<!-- Menu lateral com blocos -->
+		<div class="col">      
 
-  <div class="editor-wrapper">
-    <!-- Menu lateral com blocos -->
-    <div class="col">      
-
-      <div class="menu-section">
-	  
-        <div class="menu-section-header" onclick="toggleSection(this)">
-          <i class="fas fa-chevron-right"></i> General
-        </div>
-		<div class="menu-section-content">
-          <div class="drag-drawflow" draggable="true" data-node="RULE">
-            <i class="fas fa-cogs"></i> <small><span>RULE</span></small>
-          </div>
-		</div>
-      </div>
-	  
-      <!-- Blocos Básicos -->
-      <div class="menu-section">
-        <div class="menu-section-header" onclick="toggleSection(this)">
-          <i class="fas fa-chevron-right"></i> Block Basic
-        </div>
-			<div class="menu-section-content">
-			  <div class="drag-drawflow" draggable="true" data-node="EPL">
-				<i class="fas fa-file-code"></i> <small><span>EPL</span></small>
-			  </div>
-			  
-			  <div class="drag-drawflow" draggable="true" data-node="SELECT">
-				<i class="fas fa-database"></i> <small><span>SELECT</span></small>
-			  </div>
-
-			  <div class="drag-drawflow" draggable="true" data-node="WHERE">
-				<i class="fas fa-filter"></i> <small><span>WHERE</span></small>
-			  </div>
-			</div>
-		</div>
-		
-		<div class="menu-section">
+		  <div class="menu-section">	  
 			<div class="menu-section-header" onclick="toggleSection(this)">
-			  <i class="fas fa-chevron-right"></i> Block Window
+			  <i class="fas fa-chevron-right"></i> General
 			</div>
 				<div class="menu-section-content">
-				  <div class="drag-drawflow" draggable="true" data-node="LENGTH">
-					<i class="fas fa-window-restore"></i> <small><span>LENGTH</span></small>
+				  <div class="drag-drawflow" draggable="true" data-node="RULE">
+					<i class="fas fa-cogs"></i> <small><span>RULE</span></small>
 				  </div>
-				  <div class="drag-drawflow" draggable="true" data-node="TIME">
-					<i class="fas fa-hourglass-half"></i> <small><span>TIME</span></small>
+				</div>
+		  </div>
+		  
+		  <!-- Blocos Básicos -->
+		  <div class="menu-section">
+			<div class="menu-section-header" onclick="toggleSection(this)">
+			  <i class="fas fa-chevron-right"></i> Block Basic
+			</div>
+				<div class="menu-section-content">
+				  <div class="drag-drawflow" draggable="true" data-node="EPL">
+					<i class="fas fa-file-code"></i> <small><span>EPL</span></small>
+				  </div>			  
+				  <div class="drag-drawflow" draggable="true" data-node="SELECT">
+					<i class="fas fa-database"></i> <small><span>SELECT</span></small>
 				  </div>
-				</div>	
-		</div>
+				  <div class="drag-drawflow" draggable="true" data-node="WHERE">
+					<i class="fas fa-filter"></i> <small><span>WHERE</span></small>
+				  </div>
+				</div>
+			</div>
 			
-		<div class="menu-section">
-			<div class="menu-section-header" onclick="toggleSection(this)">
-			  <i class="fas fa-chevron-right"></i> Block Group/Sort
-			</div>
-				<div class="menu-section-content">
-				  <div class="drag-drawflow" draggable="true" data-node="GROUPBY">
-					<i class="fas fa-layer-group"></i> <small><span>GROUP BY</span></small>
-				  </div>
-				  <div class="drag-drawflow" draggable="true" data-node="ORDERBY">
-					<i class="fas fa-sort"></i> <small><span>ORDER BY</span></small>
-				  </div>          
+			<div class="menu-section">
+				<div class="menu-section-header" onclick="toggleSection(this)">
+				  <i class="fas fa-chevron-right"></i> Block Window
 				</div>
+					<div class="menu-section-content">
+					  <div class="drag-drawflow" draggable="true" data-node="LENGTH">
+						<i class="fas fa-window-restore"></i> <small><span>LENGTH</span></small>
+					  </div>
+					  <div class="drag-drawflow" draggable="true" data-node="TIME">
+						<i class="fas fa-hourglass-half"></i> <small><span>TIME</span></small>
+					  </div>
+					</div>	
+			</div>
+				
+			<div class="menu-section">
+				<div class="menu-section-header" onclick="toggleSection(this)">
+				  <i class="fas fa-chevron-right"></i> Block Group/Sort
+				</div>
+					<div class="menu-section-content">
+					  <div class="drag-drawflow" draggable="true" data-node="GROUPBY">
+						<i class="fas fa-layer-group"></i> <small><span>GROUP BY</span></small>
+					  </div>
+					  <div class="drag-drawflow" draggable="true" data-node="ORDERBY">
+						<i class="fas fa-sort"></i> <small><span>ORDER BY</span></small>
+					  </div>          
+					</div>
+			</div>
+		  
+			<div class="menu-section">
+				<div class="menu-section-header" onclick="toggleSection(this)">
+				  <i class="fas fa-chevron-right"></i> Block Pattern
+				</div>
+					<div class="menu-section-content">
+					  <div class="drag-drawflow" draggable="true" data-node="PATTERN">
+						<i class="fas fa-check-double"></i> <small><span>EVERY</span></small>
+					  </div>
+					</div>
+					<div class="menu-section-content">
+					  <div class="drag-drawflow" draggable="true" data-node="ATTRIBUTEPATTERN">
+						<i class="fas fa-check-circle"></i> <small><span>ATTRIBUTE EVERY</span></small>
+					  </div>
+					</div>
+					<div class="menu-section-content">
+					  <div class="drag-drawflow" draggable="true" data-node="PATTERNTYPE">
+						<i class="fas fa-check"></i> <small><span>EVERY TYPE</span></small>
+					  </div>
+					</div>
+			</div>
+
+		  <!-- Você pode adicionar mais seções como esta 👇 -->
+			<div class="menu-section">
+				<div class="menu-section-header" onclick="toggleSection(this)">
+				  <i class="fas fa-chevron-right"></i> Block Aggregation
+				</div>		
+					<div class="menu-section-content">
+					  <!-- Blocos avançados aqui -->
+					  <div class="drag-drawflow" draggable="true" data-node="AVG">
+						<i class="fas fa-balance-scale-right"></i> <small><span>AVG</span></small>
+					  </div>
+					  <div class="drag-drawflow" draggable="true" data-node="COUNT">
+						<i class="fab fa-contao"></i> <small><span>COUNT</span></small>
+					  </div>
+					  <div class="drag-drawflow" draggable="true" data-node="MAX">
+						<i class="fas fa-greater-than"></i> <small><span>MAX</span></small>
+					  </div>
+					  <div class="drag-drawflow" draggable="true" data-node="MIN">
+						<i class="fas fa-less-than"></i> <small><span>MIN</span></small>
+					  </div>
+					  <div class="drag-drawflow" draggable="true" data-node="SUM">
+						<i class="fas fa-plus"></i> <small><span>SUM</span></small>
+					  </div>
+				</div>
+			</div>
+		  
+			<div class="menu-section">
+				<div class="menu-section-header" onclick="toggleSection(this)">
+				  <i class="fas fa-chevron-right"></i> Action
+				</div>
+					<div class="menu-section-content">
+					  <div class="drag-drawflow" draggable="true" data-node="ACTIONTYPE">
+						<i class="fas fa-stream"></i> <small><span>ACTION TYPE</span></small>
+					  </div>
+					  <div class="drag-drawflow" draggable="true" data-node="POST">
+						<i class="fas fa-angle-double-right"></i> <small><span>POST</span></small>
+					  </div>	
+					  <div class="drag-drawflow" draggable="true" data-node="EMAIL">
+						<i class="fas fa-inbox"></i> <small><span>EMAIL</span></small>
+					  </div>		  
+					</div>
+			</div>
+		  
 		</div>
-      
-		<div class="menu-section">
-			<div class="menu-section-header" onclick="toggleSection(this)">
-			  <i class="fas fa-chevron-right"></i> Block Pattern
+
+		<!-- Área principal do editor -->
+		<div class="col-right">
+
+			<!-- Menu superior com abas e botões -->
+			<div class="menu">
+				<ul>
+				  <li id="btn-generate" class="btn-generate-epl">Generate EPL</li>
+				  <li id="btn-saveFlowToServer">Save</li>
+				  <li id="btn-loadFlowFromServer">Load</li>
+				</ul>
+
+				<div>
+				  <button class="btn-export" onclick="exportFlow()">Export</button>
+				  <button class="btn-clear" onclick="editor.clearModuleSelected()">Clear</button>
+				</div>
 			</div>
-				<div class="menu-section-content">
-				  <div class="drag-drawflow" draggable="true" data-node="PATTERN">
-					<i class="fas fa-check-double"></i> <small><span>EVERY</span></small>
-				  </div>
-				</div>
-				<div class="menu-section-content">
-				  <div class="drag-drawflow" draggable="true" data-node="ATTRIBUTEPATTERN">
-					<i class="fas fa-check-circle"></i> <small><span>ATTRIBUTE EVERY</span></small>
-				  </div>
-				</div>
-				<div class="menu-section-content">
-				  <div class="drag-drawflow" draggable="true" data-node="PATTERNTYPE">
-					<i class="fas fa-check"></i> <small><span>EVERY TYPE</span></small>
-				  </div>
-				</div>
+
+			<!-- Área do editor -->
+			<div id="drawflow" >
+			</div>
+
+			<!-- Botão de Info -->
+			<div class="btn-info" onclick="info()" title="information">
+				<i class="fas fa-info-circle"></i>
+			</div>
+			  
+			<!-- Botão de lock -->
+			<div class="btn-lock" onclick="toggleLock()" title="Bloquear / Desbloquear editor">
+				<i id="lock-icon" class="fas fa-lock"></i>
+			</div>
+
+			<!-- Barra de zoom -->
+			<div class="bar-zoom" title="Zoom">
+				<i class="fas fa-search-minus" onclick="editor.zoom_out()"></i>
+				<i class="fas fa-search" onclick="editor.zoom_reset()"></i>
+				<i class="fas fa-search-plus" onclick="editor.zoom_in()"></i>
+			</div>
 		</div>
+	</div>
 
-      <!-- Você pode adicionar mais seções como esta 👇 -->
-      <div class="menu-section">
-        <div class="menu-section-header" onclick="toggleSection(this)">
-          <i class="fas fa-chevron-right"></i> Block Aggregation
-        </div>		
-			<div class="menu-section-content">
-			  <!-- Blocos avançados aqui -->
-			  <div class="drag-drawflow" draggable="true" data-node="AVG">
-				<i class="fas fa-balance-scale-right"></i> <small><span>AVG</span></small>
-			  </div>
-			  <div class="drag-drawflow" draggable="true" data-node="COUNT">
-				<i class="fab fa-contao"></i> <small><span>COUNT</span></small>
-			  </div>
-			  <div class="drag-drawflow" draggable="true" data-node="MAX">
-				<i class="fas fa-greater-than"></i> <small><span>MAX</span></small>
-			  </div>
-			  <div class="drag-drawflow" draggable="true" data-node="MIN">
-				<i class="fas fa-less-than"></i> <small><span>MIN</span></small>
-			  </div>
-			  <div class="drag-drawflow" draggable="true" data-node="SUM">
-				<i class="fas fa-plus"></i> <small><span>SUM</span></small>
-			  </div>
-        </div>
-      </div>
-	  
-      <div class="menu-section">
-        <div class="menu-section-header" onclick="toggleSection(this)">
-          <i class="fas fa-chevron-right"></i> Action
-        </div>
-			<div class="menu-section-content">
-			  <div class="drag-drawflow" draggable="true" data-node="ACTIONTYPE">
-				<i class="fas fa-stream"></i> <small><span>ACTION TYPE</span></small>
-			  </div>
-			  <div class="drag-drawflow" draggable="true" data-node="POST">
-				<i class="fas fa-angle-double-right"></i> <small><span>POST</span></small>
-			  </div>	
-			  <div class="drag-drawflow" draggable="true" data-node="EMAIL">
-				<i class="fas fa-inbox"></i> <small><span>EMAIL</span></small>
-			  </div>		  
-			</div>
-      </div>
-      
-    </div>
-
-    <!-- Área principal do editor -->
-    <div class="col-right">
-
-      <!-- Menu superior com abas e botões -->
-      <div class="menu">
-        <ul>
-          <!--li onclick="editor.changeModule('Home'); changeModule(event);" class="selected">Home</li-->
-          <li id="btn-generate" class="btn-generate-epl">Generate EPL</li>
-
-          <li id="btn-saveFlowToServer">Save</li>
-
-          <li id="btn-loadFlowFromServer">Load</li>
-        </ul>
-
-        <div>
-          <button class="btn-export" onclick="exportFlow()">Export</button>
-          <button class="btn-clear" onclick="editor.clearModuleSelected()">Clear</button>
-        </div>
-
-      </div>
-
-      <!-- Área do editor Drawflow -->
-      <div id="drawflow" >
-        <!-- Canvas do Drawflow aparecerá aqui -->
-      </div>
-
-      <!-- Botão de Info -->
-	  <div class="btn-info" onclick="info()" title="information">
-        <i class="fas fa-info-circle"></i>
-      </div>
-	  
-      <!-- Botão de lock -->
-      <div class="btn-lock" onclick="toggleLock()" title="Bloquear / Desbloquear editor">
-        <i id="lock-icon" class="fas fa-lock"></i>
-      </div>
-
-      <!-- Barra de zoom -->
-      <div class="bar-zoom" title="Zoom">
-        <i class="fas fa-search-minus" onclick="editor.zoom_out()"></i>
-        <i class="fas fa-search" onclick="editor.zoom_reset()"></i>
-        <i class="fas fa-search-plus" onclick="editor.zoom_in()"></i>
-      </div>
-    </div>
-  </div>
-
-{% endblock %}
-
-
-{% block scripts %}
   <!-- Scripts -->
   <script type="module" src="{{ url_for('flow.static', filename='js/main.js') }}"></script>
   <script src="{{ url_for('flow.static', filename='js/drawflow.min.js') }}"></script>
@@ -411,7 +393,7 @@
   <script src="{{ url_for('flow.static', filename='js/sweetalert2@9.js') }}"></script>
 
   
-  <script>
+<script>
     
 	function info() {
 		Swal.fire({
@@ -431,7 +413,7 @@ start_date?, end_date?</code></pre>
   width: 700
 });
 
-	}
+}
 
 	
     function toggleLock() {
@@ -464,7 +446,7 @@ start_date?, end_date?</code></pre>
       const section = header.parentElement;
       section.classList.toggle('open');
     }
-  </script>
-  
-{% endblock %}
+</script>
 
+</body>
+</html>
