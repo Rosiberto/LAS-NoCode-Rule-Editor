@@ -15,7 +15,7 @@ export function addMin(editor, x = 100, y = 100) {
     {},
     getHtml('MIN', [
       { default: 'SELECT min '}, 
-	  { from: ' FROM ' }
+	  { default_from: ' FROM iotEvent' }
     ], null)
   );
   // Em vez de setTimeout
@@ -29,9 +29,8 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>Min</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br/>
-        <input type="text" placeholder="Enter min name." df-minname>
-		<br><br/><label>${fields[1].from}</label><br> <br/>
-        <input type="text" placeholder="Enter event name." df-eventname>
+        <input type="text" placeholder="Enter attribute name." df-minattributename>
+		<br> <br/><label>${fields[1].default_from}</label>
       </div>
     </div>
   `;
@@ -47,25 +46,17 @@ function updateNodeHtml(editor, nodeId) {
 
  // Pegamos o HTML base
   let html = getHtml('MIN', [{ default: 'SELECT min '},
-								{ from: ' FROM ' }
+								{ default_from: ' FROM iotEvent' }
 							   ]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
-  const minValue = node.data.minname || '';
-  const eventValue = node.data.eventname || '';
+  const minattributeValue = node.data.minattributename || '';
   
-  // Atualiza o primeiro input (df-minname)
+  // Atualiza o primeiro input (df-minattributename)
   html = html.replace(
-    /<input([^>]*)df-minname([^>]*)>/,
-    `<input$1df-minname$2 value="${minValue}" onchange="window.updateNode('${nodeId}', 'minname', this.value')">`
+    /<input([^>]*)df-minattributename([^>]*)>/,
+    `<input$1df-minattributename$2 value="${minattributeValue}" onchange="window.updateNode('${nodeId}', 'minattributename', this.value')">`
   );
-  
-  // Atualiza o segundo input (df-eventname)
-  html = html.replace(
-    /<input([^>]*)df-eventname([^>]*)>/,
-    `<input$1df-eventname$2 value="${eventValue}" onchange="window.updateNode('${nodeId}', 'eventname', this.value)">`
-  );
-  
   
   // Valida antes de setar o HTML
     editor.drawflow.drawflow[editor.module].data[nodeId].html = html;

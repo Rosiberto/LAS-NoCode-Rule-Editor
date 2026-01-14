@@ -14,8 +14,8 @@ export function addWhere(editor, x = 100, y = 100) {
     'select where',
     {},
     getHtml('SELECT WHERE', [
-      { default: 'SELECT * FROM '}, 
-	  { default_where: 'WHERE ' }
+      { default: 'SELECT *, '}, 
+	  { default_fromwhere: 'FROM iotEvent WHERE ' }
     ], null)
   );
   // Em vez de setTimeout
@@ -29,8 +29,8 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>Select Where</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br/>
-        <input type="text" placeholder="Enter event name." df-eventnamewhere>
-		<br><br/><label>${fields[1].default_where}</label><br> <br/>
+        <input type="text" placeholder="Enter attribute name." df-attributewhere>
+		<br><br/><label>${fields[1].default_fromwhere}</label><br> <br/>
         <input type="text" placeholder="Enter the condition." df-where>
       </div>
     </div>
@@ -46,17 +46,17 @@ function updateNodeHtml(editor, nodeId) {
   }
 
  // Pegamos o HTML base
-  let html = getHtml('SELECT', [{ default: 'SELECT * FROM '},
-								{ default_where: 'WHERE ' }
+  let html = getHtml('SELECT', [{ default: 'SELECT *, '},
+								{ default_fromwhere: 'FROM iotEvent WHERE ' }
 							   ]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
-  const value = node.data.eventnamewhere || '';
+  const value_attribute = node.data.attributewhere || '';
   const value_where = node.data.where || '';
 
   html = html.replace(
-    /<input([^>]*)df-eventnamewhere([^>]*)>/,
-    `<input$1df-eventnamewhere$2 value="${value}" onchange="window.updateNode('${nodeId}', 'eventnamewhere', this.value')">`
+    /<input([^>]*)df-attributewhere([^>]*)>/,
+    `<input$1df-attributewhere$2 value="${value_attribute}" onchange="window.updateNode('${nodeId}', 'attributewhere', this.value')">`
   );
 // Atualiza o segundo input (df-time)
   html = html.replace(

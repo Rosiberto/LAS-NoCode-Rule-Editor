@@ -23,7 +23,7 @@ function getHtml(title, fields) {
     <div>
       <div class="title-box"><strong>Order by</strong></div>
       <div class="box">
-        <input type="text" placeholder="Enter order." df-order>
+        <input type="text" placeholder="Enter attribute order." df-order>
       </div>
     </div>
   `;

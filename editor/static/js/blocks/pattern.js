@@ -1,5 +1,5 @@
-// blocks/sum.js
-export function addSum(editor, x = 100, y = 100) {
+// blocks/pattern.js
+export function addPattern(editor, x = 100, y = 100) {
 	
   if (isNaN(x) || isNaN(y)) {
     x = 100;
@@ -7,15 +7,15 @@ export function addSum(editor, x = 100, y = 100) {
   }
   
   const nodeId = editor.addNode(
-    'SUM',
+    'PATTERN',
     0, 1,
     x,
     y,
-    'sum',
+    'pattern',
     {},
-    getHtml('SUM', [
-      { default: 'SELECT sum '}, 
-	  { default_from: ' FROM iotEvent' }
+    getHtml('PATTERN', [
+      { default: 'SELECT * FROM pattern [every ev=iotEvent('}, 
+	  { close_pattern: ' )]' }
     ], null)
   );
   // Em vez de setTimeout
@@ -26,11 +26,11 @@ export function addSum(editor, x = 100, y = 100) {
 function getHtml(title, fields) {	
 	return `
     <div>
-      <div class="title-box"><strong>Sum</strong></div>
+      <div class="title-box"><strong>Pattern</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br/>
-        <input type="text" placeholder="Enter attribute name." df-sumattributename>
-		<br><br/><label>${fields[1].default_from}</label>
+        <input type="text" placeholder="Enter pattern." df-pattern>
+		<br><br/><label>${fields[1].close_pattern}</label>
       </div>
     </div>
   `;
@@ -44,20 +44,20 @@ function updateNodeHtml(editor, nodeId) {
     return;
   }
 
+	  
  // Pegamos o HTML base
-  let html = getHtml('SUM', [{ default: 'SELECT sum '},
-							 { default_from: ' FROM iotEvent' }
-							   ]);
+  let html = getHtml('PATTERN', [{ default: 'SELECT * FROM pattern [every ev=iotEvent('},
+								 { close_pattern: ')]' }
+							    ]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
-  const sumattributeValue = node.data.sumattributename || '';
- 
-  // Atualiza o primeiro input (df-sumattributename)
+  const value_pattern = node.data.pattern || '';
+
   html = html.replace(
-    /<input([^>]*)df-sumattributename([^>]*)>/,
-    `<input$1df-sumattributename$2 value="${sumattributeValue}" onchange="window.updateNode('${nodeId}', 'sumattributename', this.value')">`
+    /<input([^>]*)df-pattern([^>]*)>/,
+    `<input$1df-pattern$2 value="${value_pattern}" onchange="window.updateNode('${nodeId}', 'pattern', this.value')">`
   );
-   
+
   // Valida antes de setar o HTML
     editor.drawflow.drawflow[editor.module].data[nodeId].html = html;
     editor.updateConnectionNodes('');

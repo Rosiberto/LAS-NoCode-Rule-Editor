@@ -15,7 +15,7 @@ export function addAVG(editor, x = 100, y = 100) {
     {},
     getHtml('AVG', [
       { default: 'SELECT avg '}, 
-	  { from: ' FROM ' }
+	  { default_from: ' FROM iotEvent' }
     ], null)
   );
   // Em vez de setTimeout
@@ -29,9 +29,8 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>Avg</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br/>
-        <input type="text" placeholder="Enter avg name." df-avgname>
-		<br><br/><label>${fields[1].from}</label><br> <br/>
-        <input type="text" placeholder="Enter event name." df-eventname>
+        <input type="text" placeholder="Enter attribute name." df-avgattributename>
+		<br><br/><label>${fields[1].default_from}</label>
       </div>
     </div>
   `;
@@ -47,26 +46,18 @@ function updateNodeHtml(editor, nodeId) {
 
  // Pegamos o HTML base
   let html = getHtml('AVG', [{ default: 'SELECT avg '},
-								{ from: ' FROM ' }
+							 { default_from: ' FROM iotEvent' }
 							   ]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
-  const avgValue = node.data.avgname || '';
-  const eventValue = node.data.eventname || '';
+  const avgattributeValue = node.data.avgattributename || '';
   
-  // Atualiza o primeiro input (df-avgname)
+  // Atualiza o primeiro input (df-avgattributename)
   html = html.replace(
-    /<input([^>]*)df-avgname([^>]*)>/,
-    `<input$1df-avgname$2 value="${avgValue}" onchange="window.updateNode('${nodeId}', 'avgname', this.value')">`
+    /<input([^>]*)df-avgattributename([^>]*)>/,
+    `<input$1df-avgattributename$2 value="${avgattributeValue}" onchange="window.updateNode('${nodeId}', 'avgattributename', this.value')">`
   );
-  
-  // Atualiza o segundo input (df-eventname)
-  html = html.replace(
-    /<input([^>]*)df-eventname([^>]*)>/,
-    `<input$1df-eventname$2 value="${eventValue}" onchange="window.updateNode('${nodeId}', 'eventname', this.value)">`
-  );
-  
-  
+    
   // Valida antes de setar o HTML
     editor.drawflow.drawflow[editor.module].data[nodeId].html = html;
     editor.updateConnectionNodes('');

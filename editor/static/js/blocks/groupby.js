@@ -23,7 +23,7 @@ function getHtml(title, fields) {
     <div>
       <div class="title-box"><strong>Group by</strong></div>
       <div class="box">
-        <input type="text" placeholder="Enter group." df-group>
+        <input type="text" placeholder="Enter attribute group." df-group>
       </div>
     </div>
   `;

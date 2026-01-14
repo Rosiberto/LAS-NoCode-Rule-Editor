@@ -14,8 +14,8 @@ export function addLength(editor, x = 100, y = 100) {
     'select length',
     {},
     getHtml('SELECT WHERE', [
-      { default: 'SELECT * FROM '}, 
-	  { default_length: '#LENGTH ' }
+      { default: 'SELECT *, '}, 
+	  { default_length: 'FROM iotEvent.win:LENGTH ' }
     ], null)
   );
   // Em vez de setTimeout
@@ -29,7 +29,7 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>Select Length</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br/>
-        <input type="text" placeholder="Enter event name." df-eventnamelength>
+        <input type="text" placeholder="Enter attribute name." df-attributenamelength>
 		<br><br/><label>${fields[1].default_length}</label><br> <br/>
         <input type="text" placeholder="Enter the length." df-length>
       </div>
@@ -46,18 +46,18 @@ function updateNodeHtml(editor, nodeId) {
   }
 
  // Pegamos o HTML base
-  let html = getHtml('SELECT', [{ default: 'SELECT * FROM '},
-								{ default_length: '#LENGTH ' }
+  let html = getHtml('SELECT', [{ default: 'SELECT *, '},
+								{ default_length: 'FROM iotEvent.win:LENGTH ' }
 							   ]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
-  const value = node.data.eventnamelength || '';
+  const value = node.data.attributenamelength || '';
   const lengthValue = node.data.length || '';
   
-  // Atualiza o primeiro input (df-name)
+  // Atualiza o primeiro input (df-attributenamelength)
   html = html.replace(
-    /<input([^>]*)df-eventnamelength([^>]*)>/,
-    `<input$1df-eventnamelength$2 value="${value}" onchange="window.updateNode('${nodeId}', 'eventnamelength', this.value')">`
+    /<input([^>]*)df-attributenamelength([^>]*)>/,
+    `<input$1df-attributenamelength$2 value="${value}" onchange="window.updateNode('${nodeId}', 'attributenamelength', this.value')">`
   );
   
   // Atualiza o segundo input (df-length)

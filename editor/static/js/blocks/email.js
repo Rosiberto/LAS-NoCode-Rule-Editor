@@ -25,9 +25,9 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>EMAIL</strong></div>
       <div class="box">
         <input type="text" placeholder="Enter TO." df-to><br><br>
-		<input type="text" placeholder="Enter FROM." df-from><br><br>
-		<input type="text" placeholder="Enter Subject." df-subject><br><br>
-		<input type="text" placeholder="Enter Template." df-template>
+        <input type="text" placeholder="Enter FROM." df-from><br><br>
+        <input type="text" placeholder="Enter Subject." df-subject><br><br>
+        <input type="text" placeholder="Enter Template." df-template>
       </div>
     </div>
   `;
@@ -48,7 +48,7 @@ function updateNodeHtml(editor, nodeId) {
   const value = node.data.to || '';
   const value_from = node.data.from || '';
   const value_subject = node.data.subject || '';
-  const value_body = node.data.template || '';
+  const value_template = node.data.template || '';
 
 
   html = html.replace(
@@ -58,17 +58,17 @@ function updateNodeHtml(editor, nodeId) {
   
   html = html.replace(
     /<input([^>]*)df-from([^>]*)>/,
-    `<input$1df-from$2 value="${value}" onchange="window.updateNode('${nodeId}', 'from', this.value')">`
+    `<input$1df-from$2 value="${value_from}" onchange="window.updateNode('${nodeId}', 'from', this.value')">`
   );
   
   html = html.replace(
     /<input([^>]*)df-subject([^>]*)>/,
-    `<input$1df-subject$2 value="${value}" onchange="window.updateNode('${nodeId}', 'subject', this.value')">`
+    `<input$1df-subject$2 value="${value_subject}" onchange="window.updateNode('${nodeId}', 'subject', this.value')">`
   );
   
   html = html.replace(
     /<input([^>]*)df-template([^>]*)>/,
-    `<input$1df-template$2 value="${value}" onchange="window.updateNode('${nodeId}', 'template', this.value')">`
+    `<input$1df-template$2 value="${value_template}" onchange="window.updateNode('${nodeId}', 'template', this.value')">`
   );
   
   // Valida antes de setar o HTML

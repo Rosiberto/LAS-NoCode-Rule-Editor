@@ -15,7 +15,7 @@ export function addCount(editor, x = 100, y = 100) {
     {},
     getHtml('COUNT', [
       { default: 'SELECT count '}, 
-	  { from: ' FROM ' }
+	  { default_from: ' FROM iotEvent' }
     ], null)
   );
   // Em vez de setTimeout
@@ -29,9 +29,8 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>Count</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br/>
-        <input type="text" placeholder="Enter count name." df-countname>
-		<br><br/><label>${fields[1].from}</label><br> <br/>
-        <input type="text" placeholder="Enter event name." df-eventname>
+        <input type="text" placeholder="Enter attribute name." df-countattributename>
+		<br><br/><label>${fields[1].default_from}</label>
       </div>
     </div>
   `;
@@ -47,23 +46,16 @@ function updateNodeHtml(editor, nodeId) {
 
  // Pegamos o HTML base
   let html = getHtml('COUNT', [{ default: 'SELECT count '},
-								{ from: ' FROM ' }
+								{ default_from: ' FROM iotEvent' }
 							   ]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
-  const countValue = node.data.countname || '';
-  const eventValue = node.data.eventname || '';
+  const countattributeValue = node.data.countattributename || '';
   
-  // Atualiza o primeiro input (df-countname)
+  // Atualiza o primeiro input (df-countattributename)
   html = html.replace(
-    /<input([^>]*)df-countname([^>]*)>/,
-    `<input$1df-countname$2 value="${countValue}" onchange="window.updateNode('${nodeId}', 'countname', this.value')">`
-  );
-  
-  // Atualiza o segundo input (df-eventname)
-  html = html.replace(
-    /<input([^>]*)df-eventname([^>]*)>/,
-    `<input$1df-eventname$2 value="${eventValue}" onchange="window.updateNode('${nodeId}', 'eventname', this.value)">`
+    /<input([^>]*)df-countattributename([^>]*)>/,
+    `<input$1df-countattributename$2 value="${countattributeValue}" onchange="window.updateNode('${nodeId}', 'countattributename', this.value')">`
   );
   
   

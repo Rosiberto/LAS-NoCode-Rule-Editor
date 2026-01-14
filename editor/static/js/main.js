@@ -14,6 +14,10 @@ import { addCount } from './blocks/count.js';
 import { addMin } from './blocks/min.js';
 import { addMax } from './blocks/max.js';
 import { addSum } from './blocks/sum.js';
+import { addPattern } from './blocks/pattern.js';
+import { addAttributePattern } from './blocks/attribute-pattern.js';
+import { addPatternType } from './blocks/pattern-type.js';
+
 
 
 window.editor = null;
@@ -34,7 +38,10 @@ const nodeFactory = {
   'MIN': addMin,
   'MAX' : addMax,
   'COUNT' : addCount,
-  'SUM' : addSum
+  'SUM' : addSum,
+  'PATTERN' : addPattern,
+  'ATTRIBUTEPATTERN' :addAttributePattern,
+  'PATTERNTYPE' : addPatternType
 
 };
 
@@ -43,8 +50,8 @@ function initDrawflow() {
   const editorDiv = document.getElementById('drawflow');
   const editor = new Drawflow(editorDiv);
   editor.start();
-  editor.addModule('Home');   // ✅ Garante que "Home" exista
-  editor.changeModule('Home'); // ✅ Alterna para ele
+  editor.addModule('Home');   //  Garante que "Home" exista
+  editor.changeModule('Home'); // Alterna para ele
 
   window.editor = editor;
 
@@ -117,8 +124,6 @@ function initDrawflow() {
         });
       }
 	  
-	  // Faça o mesmo para os outros tipos de blocos, se necessário
-		
       // Atualiza o HTML com os novos dados
       if (node.name === 'RULE') {
         import('./blocks/rule.js').then(module => {
@@ -166,7 +171,29 @@ function initDrawflow() {
         import('./blocks/sum.js').then(module => {
           module.updateNodeHtml(editor, nodeId);
         });
-      }	 
+      }
+
+	 // Atualiza o HTML com os novos dados
+     if (node.name === 'PATTERN') {
+       import('./blocks/pattern.js').then(module => {
+         module.updateNodeHtml(editor, nodeId);
+       });
+     }	 
+
+	// Atualiza o HTML com os novos dados
+     if (node.name === 'ATTRIBUTEPATTERN') {
+       import('./blocks/attribute-pattern.js').then(module => {
+         module.updateNodeHtml(editor, nodeId);
+       });
+     }	 
+
+	// Atualiza o HTML com os novos dados
+     if (node.name === 'PATTERNTYPE') {
+       import('./blocks/pattern-type.js').then(module => {
+         module.updateNodeHtml(editor, nodeId);
+       });
+     }
+	  
     }
   };
 
@@ -220,6 +247,10 @@ function setupControls() {
   document.getElementById('btn-max')?.addEventListener('click', () => addMax(window.editor));
   document.getElementById('btn-sum')?.addEventListener('click', () => addSum(window.editor));
   document.getElementById('btn-count')?.addEventListener('click', () => addCount(window.editor));
+  document.getElementById('btn-pattern')?.addEventListener('click', () => addPattern(window.editor));
+  document.getElementById('btn-attributepattern')?.addEventListener('click', () => addAttributePattern(window.editor));
+  document.getElementById('btn-patterntype')?.addEventListener('click', () => addPatternType(window.editor));
+  
   
   document.getElementById('btn-generate')?.addEventListener('click', generateEPL);
   document.getElementById('btn-saveFlowToServer')?.addEventListener('click', saveFlowToServer);
@@ -230,95 +261,113 @@ function generateEPL() {
   const data = window.editor.export();
   const nodes = data.drawflow.Home.data;
 
-  let post = '', epl_='', select = '', from = '', 
-      whereevent_where='', where_where = '', 
-      groupby = '', orderby = '', action = null, 
-      email_to='', email_from='', email_subject='', 
-      email_template='', min = '', minevent = '', 
-      max = '', maxevent = '', avg = '', 
-      avgevent = '', count = '', countevent = '', 
-      sum = '', sumevent = '', rule_name = '';
+  let post ='', epl_='', select_ ='', from ='', 
+	  whereattribute ='', orderby ='', groupby ='',
+	  min ='',  max ='', avg ='', count ='', sum ='',
+	  length ='', time ='', pattern ='', patterntype ='',
+	  attributepattern ='', action = null, data_post='',
+      email_to='', email_from='', 
+	  email_subject='', email_template='',  
+	  rule_name ='';
 
   for (const id in nodes) {
     const node = nodes[id];
     const name = node.name;
     const d = node.data;
 
-    if (name === 'SELECT') {
-      select = `SELECT * FROM ${d.select || ''}`;
-	  //console.log(select);
-    } else if (name === 'RULE') {
-      rule_name = `${d.rule || ''}`;
-    //console.log(rule_name);
-    } else if (name === 'SELECT WHERE') {
-      whereevent_where = ` SELECT * FROM ${d.eventnamewhere || ''}`;
-      where_where = ` WHERE ${d.where || ''}`;
-	  //console.log(whereevent_where + ' ' + where_where);
-    } else if (name === 'GROUP BY') {
-      groupby = ` GROUP BY ${d.group || ''}`;
-	  //console.log(groupby);
+	if (name === 'RULE') {
+		rule_name = `${d.rule || ''}`;
+		//console.log(rule_name);
 	} else if (name === 'EPL') {
-      epl_ = ` ${d.epl || ''}`;
-	  //console.log(epl_);
-    } else if (name === 'ORDER BY') {
-      orderby = ` ORDER BY ${d.order || ''}`;
-	  //console.log(orderby);
+		epl_ = `${d.epl || ''}`;
+		// console.log(epl_);
+    } else if (name === 'SELECT') {
+		select_ = `SELECT *, ${d.select || ''} FROM iotEvent`;
+		//console.log(select_);
+    } else if (name === 'SELECT WHERE') {
+		whereattribute = `SELECT *, ${d.attributewhere || ''} FROM iotEvent WHERE ${d.where || ''}`;
+		//console.log(whereattribute);
+	} else if (name === 'LENGTH') {
+		length = `SELECT *, ${d.attributenamelength || ''} FROM iotEvent.win:length(${d.length || ''})`;
+		//console.log(length);
+	} else if (name === 'TIME') {
+		time = `SELECT *, ${d.attributenametime || ''} FROM iotEvent.win:time(${d.length || ''} sec)`;
+		//console.log(time);
+    } else if (name === 'GROUPBY') {
+		groupby = ` GROUP BY ${d.group || ''}`;
+		//console.log(groupby);
+    } else if (name === 'ORDERBY') {
+		orderby = ` ORDER BY ${d.order || ''}`;
+		//console.log(orderby);
+	} else if (name === 'PATTERN') {
+		pattern = `SELECT * FROM pattern [every ev=iotEvent( ${d.pattern || ''})]`;
+		//console.log(pattern);
+	} else if (name === 'ATTRIBUTEPATTERN') {
+		attributepattern = `SELECT *, ${d.attribute || ''} FROM pattern [every ev=iotEvent( ${d.pattern || ''})]`;
+		//console.log(attributepattern);
+	} else if (name === 'PATTERNTYPE') {
+		patterntype = `SELECT *, ${d.attributepattern || ''} FROM pattern [every ev=iotEvent( ${d.pattern || ''} and type='${d.typepattern || ''}')]`;
+		//console.log(patterntype);
+	
+	
 	} else if (name === 'EMAIL') {
-      email_to = `${d.to || ''}`;
-	  email_from = `${d.from || ''}`;
-      email_subject = `${d.subject || ''}`;
-	  email_template = `${d.template || ''}`;
-	  //console.log(email_to +' '+email_from+' '+email_subject+' '+email_template);
+		email_to = `${d.to || ''}`;
+		email_from = `${d.from || ''}`;
+		email_subject = `${d.subject || ''}`;
+		email_template = `${d.template || ''}`;
+		//console.log(email_to +' '+email_subject+' '+email_template);
 	} else if (name === 'POST') {
-      post = `${d.post || ''}`;
-	  //console.log("console.log "+ post);
+		post = `${d.post || ''}`;
+		data_post = `${d.data_post || ''}`;
+		//console.log("console.log "+ post +" data_post: "+data_post);
     } else if (name === 'AVG') {
-      avg = `SELECT avg(${d.avgname || ''})`;
-	  avgevent = ` FROM ${d.eventname || ''}`;
-	  avg = avg + avgevent
-	  //console.log("console.log "+ avg + ' ' + avgevent);
+		avg = `SELECT avg(${d.avgattributename || ''}) FROM iotEvent`;
+	  //console.log("console.log "+ avg );
 	} else if (name === 'COUNT') {
-      count = `SELECT count(${d.countname || ''})`;
-	  countevent = ` FROM ${d.eventname || ''}`;
-	  count = count + countevent
-	  //console.log("console.log "+ count + ' ' + countevent);
+		count = `SELECT count(${d.countattributename || ''}) FROM iotEvent`;
+	  //console.log("console.log "+ count );
 	} else if (name === 'MIN') {
-      min = `SELECT min(${d.minname || ''})`;
-	  minevent = ` FROM ${d.eventname || ''}`;
-	  min = min + minevent
-	  //console.log("console.log "+ min + ' ' + minevent);
+		min = `SELECT min(${d.minattributename || ''})FROM iotEvent`;
+	  //console.log("console.log "+ min);
 	} else if (name === 'MAX') {
-      max = `SELECT max(${d.maxname || ''})`;
-	  maxevent = ` FROM ${d.eventname || ''}`;
-	  max = max + maxevent
-	  //console.log("console.log "+ max + ' ' + maxevent);
+		max = `SELECT max(${d.maxattributename || ''}) FROM iotEvent`;
+	  //console.log("console.log "+ max);
 	} else if (name === 'SUM') {
-      sum = `SELECT sum(${d.sumname || ''})`;
-	  sumevent = ` FROM ${d.eventname || ''}`;
-	  sum = sum + sumevent
-	  //console.log("console.log "+ sum + ' ' + sumevent);
+		sum = `SELECT sum(${d.sumname || ''}) FROM iotEvent`;
+	  //console.log("console.log "+ sum);
     } else if (name === 'ACTIONTYPE') {
-      action = {
-        type: d.type || '',
-        parameters: { }
-      };		
-	}
-	if (post){
-		action.parameters.url = post;
-		//console.log("POST action.parameters.url " + action.parameters.url);  
-	}else if (email_to){
-		action.parameters.to = email_to; 
-		action.parameters.from = email_from; 
-		action.parameters.subject = email_subject; 
-		action.parameters.template = email_template; 
-	}		
+		action = {
+			type: d.type || '',
+			template: '', 
+			parameters: { }        
+		};		
+	  }    
   }
-  const epl = epl_ + select + avg + count + min + max + sum + whereevent_where + where_where + orderby + groupby;
+
+  const epl = epl_ + select_ + length + time + avg + count + min + max + sum + whereattribute + pattern + attributepattern + patterntype + orderby + groupby;
   
+  if (action) {
+    if (post){
+      action.template = data_post; 
+      action.parameters.url = post;
+      action.parameters.headers = { "Content-Type": "application/json" };
+      //action.parameters.json = { ruleName: rule_name, epl: epl, data: data_post};
+      //action.parameters.json = { ruleName: rule_name, data: data_post};
+      //action.parameters.json = { ruleName: rule_name};
+      console.log("POST action.template " + action.template);  
+    }else if (email_to){
+      action.template = email_template; 
+      action.parameters.to = email_to; 
+      action.parameters.from = email_from; 
+      action.parameters.subject = email_subject; 
+      console.log("EMAIL action.template " + action.template);  
+     
+    }		
+  }
   const result = { rule_name, epl, action };
 
   Swal.fire({
-    title: 'EPL Gerado',
+    title: 'View EPL',
     html: `<pre style="text-align:left; max-height:400px; overflow:auto;">${JSON.stringify(result, null, 2)}</pre>`,
     width: 800
   });
@@ -335,19 +384,20 @@ function generateEPL() {
 // ** Nova função para salvar no backend **
 function saveFlowToServer() {
   const flow = window.editor.export();
-  const name = prompt('Digite um nome para salvar o fluxo:', 'Meu fluxo');
+  const name = prompt('Enter a name to save the flow.:', 'My flow');
       
   if (!name) {
-    alert('Nome é obrigatório');
+    alert('Name is required!');
     return;
   }
-      
+/*      
   Swal.fire({
     title: 'Save Flow',
     html: `<pre style="text-align:left; max-height:400px; overflow:auto;">${JSON.stringify(flow, null, 2)}</pre>`,
     width: 800
   });
-  console.log(flow);
+*/ 
+  //console.log(flow);
   
   fetch('/flow/saveFlow', {
       method: 'POST',
@@ -357,9 +407,9 @@ function saveFlowToServer() {
     .then(res => res.json())
     .then(data => {
       if (data.error) {
-        alert('Erro ao salvar fluxo: ' + data.error);
+        alert('Error saving flow: ' + data.error);
       } else {
-        alert(`Fluxo salvo com sucesso! ID: ${data.id}`);
+        alert(`Flow saved successfully.! ID: ${data.id}`);
       }
     })
     .catch(err => alert('Erro na comunicação: ' + err.message));
@@ -386,26 +436,26 @@ function saveFlowToServer() {
 //}
 
 function loadFlowFromServer() {
-  // 1️⃣ Buscar todos os fluxos
+  // Buscar todos os fluxos
   fetch('/flow/listFlows')
     .then(res => res.json())
     .then(flows => {
       if (flows.error) {
-        alert('Erro: ' + flows.error);
+        alert('Error: ' + flows.error);
         return;
       }
 
       if (flows.length === 0) {
-        Swal.fire('Nenhum fluxo salvo encontrado');
+        Swal.fire('No saved flows found.');
         return;
       }
 
-      // 2️⃣ Criar HTML para SweetAlert
+      // Criar HTML para SweetAlert
       const html = flows.map(f => 
         `<div class="flow-item" data-id="${f.id}" style="cursor:pointer; padding:5px 0;">${f.name} (ID: ${f.id})</div>`
       ).join('');
 
-      // 3️⃣ Mostrar modal
+      // Mostrar modal
       Swal.fire({
         title: 'Choose a rule to load',
         html: html,
@@ -413,7 +463,7 @@ function loadFlowFromServer() {
         showConfirmButton: false
       });
 
-      // 4️⃣ Adicionar evento de clique
+      // Adicionar evento de clique
       document.querySelectorAll('.flow-item').forEach(item => {
         item.addEventListener('click', () => {
           const id = item.getAttribute('data-id');
@@ -439,7 +489,6 @@ function loadFlowFromServer() {
 
 
 
-// 👇 ADICIONE ISSO
 window.generateEPL = generateEPL;
 
 window.onload = function() {

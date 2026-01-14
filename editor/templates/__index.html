@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editor Visual EPL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Drawflow CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/drawflow.min.css') }}">
+
+  <!-- Seu CSS customizado -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/beautiful.css') }}">
+
+  <!-- FontAwesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+  <style>
+    /* Estilos do menu e botões */
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+      background: white;
+      z-index: 10;
+    }
+    .menu ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      list-style: none;
+    }
+    .menu ul li {
+      cursor: pointer;
+      margin-right: 20px;
+      padding-right: 10px;
+      border-right: 1px solid #ddd;
+      line-height: 30px;
+      font-weight: 600;
+      user-select: none;
+    }
+    .menu ul li.selected {
+      font-weight: 900;
+      color: #0e0e0e;
+    }
+    .menu button {
+      border-radius: 4px;
+      border: none;
+      padding: 6px 14px;
+      font-weight: 600;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    .btn-export {
+      background: #4ea9ff;
+      margin-right: 10px;
+    }
+    .btn-export:hover {
+      background: #3a8de0;
+    }
+    .btn-clear {
+      background: #e3195a;
+      margin-right: 10px;
+    }
+    .btn-clear:hover {
+      background: #b50e42;
+    }
+    .btn-generate-epl {
+      background: #fbfcfb;
+    }
+    .btn-generate-epl:hover {
+      background: #f0f7b1;
+    }
+
+    /* Estilo das colunas */
+    .wrapper {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+    .col {
+      width: 180px;
+      padding: 10px;
+      border-right: 1px solid #ddd;
+      background: #f9f9f9;
+      overflow-y: auto;
+    }
+    .drag-drawflow {
+      cursor: grab;
+      background: white;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+      font-weight: 600;
+    }
+    .col-right {
+      flex-grow: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #drawflow {
+      flex-grow: 1;
+      background: #f0f0f0;
+      background-image:
+        linear-gradient(to right, #ddd 1px, transparent 1px),
+        linear-gradient(to bottom, #ddd 1px, transparent 1px);
+      background-size: 25px 25px;
+      overflow: auto;
+      position: relative;
+    }
+
+    /* Botão lock e zoom */
+    .btn-lock {
+      position: fixed;
+      bottom: 10px;
+      right: 140px;
+      cursor: pointer;
+      font-size: 24px;
+      color: #555;
+      user-select: none;
+      background: white;
+      border-radius: 50%;
+      padding: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.15);
+      z-index: 20;
+    }
+    .bar-zoom {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+      background: white;
+      border-radius: 25px;
+      padding: 6px 12px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.15);
+      z-index: 20;
+    }
+    .bar-zoom i {
+      cursor: pointer;
+      font-size: 20px;
+      color: #555;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .bar-zoom i:hover {
+      color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+
+  <header style="display:flex; align-items:center; justify-content: space-between; padding: 10px 15px; background: #231f35; color: white;">
+    <h2 style="margin: 0;">LAS-NoCode Rule Editor</h2>
+    <a href="https://github.com/jerosoler/Drawflow" target="_blank" style="color: white; text-decoration: none;">
+      <i class="fab fa-github fa-2x"></i>
+    </a>
+  </header>
+
+  <div class="wrapper">
+    <!-- Menu lateral com blocos -->
+    <div class="col">
+      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="SELECT">
+        <i class="fas fa-database"></i> <span>SELECT</span>
+      </div>
+      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="WHERE">
+        <i class="fas fa-filter"></i> <span>WHERE</span>
+      </div>
+      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="GROUP BY">
+        <i class="fas fa-layer-group"></i> <span>GROUP BY</span>
+      </div>
+      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="ORDER BY">
+        <i class="fas fa-sort"></i> <span>ORDER BY</span>
+      </div>
+      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="ACTION">
+        <i class="fas fa-bolt"></i> <span>ACTION</span>
+      </div>
+    </div>
+
+    <!-- Área principal do editor -->
+    <div class="col-right">
+
+      <!-- Menu superior com abas e botões -->
+      <div class="menu">
+        <ul>
+          <li onclick="editor.changeModule('Home'); changeModule(event);" class="selected">Home</li>
+          <li class="btn-generate-epl" onclick="generateEPL()">Gerar EPL</li>
+
+          <li onclick="saveFlowToServer()">Salvar</li>
+          <li onclick="loadFlowFromServer()">Carregar</li>
+        </ul>
+
+        <div>
+          <button class="btn-export" onclick="exportFlow()">Export</button>
+          <button class="btn-clear" onclick="editor.clearModuleSelected()">Clear</button>
+        </div>
+
+      </div>
+
+      <!-- Área do editor Drawflow -->
+      <div id="drawflow" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <!-- Canvas do Drawflow aparecerá aqui -->
+      </div>
+
+      <!-- Botão de lock -->
+      <div class="btn-lock" onclick="toggleLock()" title="Bloquear / Desbloquear editor">
+        <i id="lock-icon" class="fas fa-lock"></i>
+      </div>
+
+      <!-- Barra de zoom -->
+      <div class="bar-zoom" title="Zoom">
+        <i class="fas fa-search-minus" onclick="editor.zoom_out()"></i>
+        <i class="fas fa-search" onclick="editor.zoom_reset()"></i>
+        <i class="fas fa-search-plus" onclick="editor.zoom_in()"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/drawflow.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/sweetalert2.min.js') }}"></script>
+
+  
+  <script>
+    window.editor = new Drawflow(document.getElementById("drawflow"));
+    editor.reroute = true;
+    editor.start();
+
+    function toggleLock() {
+      const lockIcon = document.getElementById('lock-icon');
+      if (editor.editor_mode === 'fixed') {
+        editor.editor_mode = 'edit';
+        lockIcon.classList.remove('fa-lock-open');
+        lockIcon.classList.add('fa-lock');
+      } else {
+        editor.editor_mode = 'fixed';
+        lockIcon.classList.remove('fa-lock');
+        lockIcon.classList.add('fa-lock-open');
+      }
+    }
+
+    function changeModule(event) {
+      document.querySelectorAll(".menu ul li").forEach(li => li.classList.remove('selected'));
+      event.target.classList.add('selected');
+    }
+
+    function exportFlow() {
+      Swal.fire({
+        title: 'Export',
+        html: `<pre><code>${JSON.stringify(editor.export(), null, 4)}</code></pre>`,
+        width: 800
+      });
+    }
+	
+	
+ function generateEPL() {
+  const data = window.editor.export();
+  const nodes = data.drawflow.Home.data;
+
+  let select = '', where = '', groupby = '', orderby = '', action = null;
+
+  for (const id in nodes) {
+    const node = nodes[id];
+    const name = node.name;
+    const d = node.data;
+
+    if (name === 'SELECT') {
+      select = `SELECT ${d.fields || '*'} FROM ${d.tabela || ''}`;
+    } else if (name === 'WHERE') {
+      where = ` WHERE ${d.condicao || ''}`;
+    } else if (name === 'GROUP BY') {
+      groupby = ` GROUP BY ${d.campo || ''}`;
+    } else if (name === 'ORDER BY') {
+      orderby = ` ORDER BY ${d.campo || ''}`;
+    } else if (name === 'ACTION') {
+      action = {
+        type: d.type,
+        parameters: {
+          url: d.url,
+          headers: {},
+          payload: d.payload
+        }
+      };
+      (d.headers || '').split('\n').forEach(line => {
+        const [k, v] = line.split(':').map(s => s.trim());
+        if (k && v) {
+          action.parameters.headers[k] = v;
+        }
+      });
+    }
+  }
+
+  const epl = select + where + groupby + orderby;
+  const result = { epl, action };
+
+
+  // Mostrar na tela
+  Swal.fire({
+    title: 'EPL Gerado',
+    html: `<pre style="text-align:left; max-height:400px; overflow:auto;">${JSON.stringify(result, null, 2)}</pre>`,
+    width: 800
+  });
+
+  // Enviar para o backend
+  //fetch('/gerar_epl', {
+  //  method: 'POST',
+  //  headers: { 'Content-Type': 'application/json' },
+  //  body: JSON.stringify(result)
+  //})
+  //  .then(res => res.json())
+  //  .then(j => console.log('Resposta backend:', j));
+}
+
+
+    /*
+    function generateEPL() {
+      const flow = editor.export();
+      let epl = "/* Exemplo EPL gerado a partir do fluxo * /\n";
+      epl += JSON.stringify(flow, null, 2);
+
+      Swal.fire({
+        title: 'EPL Gerado',
+        html: `<pre style="text-align:left; max-height:400px; overflow:auto;">${epl}</pre>`,
+        width: 800
+      });
+    } */
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("node", ev.target.getAttribute('data-node'));
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      const name = ev.dataTransfer.getData("node");
+      const rect = editor.precanvas.getBoundingClientRect();
+      const x = (ev.clientX - rect.left) * (editor.precanvas.clientWidth / rect.width);
+      const y = (ev.clientY - rect.top) * (editor.precanvas.clientHeight / rect.height);
+      addNode(name, x, y);
+    }
+
+	
+    function addNode(name, x, y) {
+      const content = `<div class="box">
+        <p>${name}</p>
+        <input type="text" placeholder="config..." />
+      </div>`;
+      editor.addNode(name, 1, 1, x, y, name.toLowerCase(), {}, content);
+    }
+	
+	
+/************/
+
+
+    // ** Nova função para salvar no backend **
+    function saveFlowToServer() {
+      const flow = editor.export();
+      const name = prompt('Digite um nome para salvar o fluxo:', 'Meu fluxo');
+      if (!name) {
+        alert('Nome é obrigatório');
+        return;
+      }
+
+      fetch('http://127.0.0.1:5000/saveFlow', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name, flow})
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert('Erro ao salvar fluxo: ' + data.error);
+        } else {
+          alert(`Fluxo salvo com sucesso! ID: ${data.id}`);
+        }
+      })
+      .catch(err => alert('Erro na comunicação: ' + err.message));
+    }
+
+    // ** Nova função para carregar fluxo do backend **
+    function loadFlowFromServer() {
+      const id = prompt('Digite o ID do fluxo para carregar:');
+      if (!id) return;
+
+      fetch(`http://127.0.0.1:5000/getFlow/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert('Erro: ' + data.error);
+          } else {
+            editor.clear(); // Limpa antes de importar
+            editor.import(data.flow);
+          }
+        })
+        .catch(err => alert('Erro na comunicação: ' + err.message));
+    }
+  </script>
+</body>
+</html>

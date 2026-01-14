@@ -26,6 +26,8 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>POST</strong></div>
       <div class="box">
         <input type="text" placeholder="Enter URL." df-post>
+        <br/><br/>
+        <input type="text" placeholder="Enter template." df-data_post>
       </div>
     </div>
   `;
@@ -44,13 +46,18 @@ function updateNodeHtml(editor, nodeId) {
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
   const value = node.data.post || '';
+  const value_data = node.data.data_post || '';
 
   html = html.replace(
     /<input([^>]*)df-post([^>]*)>/,
     `<input$1df-post$2 value="${value}" onchange="window.updateNode('${nodeId}', 'post', this.value')">`
   );
 
-  
+  html = html.replace(
+    /<input([^>]*)df-data_post([^>]*)>/,
+    `<input$1df-data_post$2 value="${value_data}" onchange="window.updateNode('${nodeId}', 'post', this.value')">`
+  );
+
   // Valida antes de setar o HTML
     editor.drawflow.drawflow[editor.module].data[nodeId].html = html;
     editor.updateConnectionNodes('');

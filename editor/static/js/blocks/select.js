@@ -13,8 +13,10 @@ export function addSelect(editor, x = 100, y = 100) {
     y,
     'select',
     { },
-    getHtml('SELECT', [ { default: 'SELECT * FROM ' } ], null) //id será substituído
+    getHtml('SELECT', [ { default: 'SELECT *, '}, 
+						{ from: ' FROM iotEvent' } ], null)
   );
+  
 
   //console.log("Criando SELECT nodeId:", nodeId);
   //console.log("nodeId:", nodeId);
@@ -32,7 +34,8 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>Select</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br/>
-        <input type="text" placeholder="Enter event name." df-select>
+        <input type="text" placeholder="Enter attribute name." df-select><br> <br/>
+		<label>${fields[1].from}</label>
       </div>
     </div>
   `;
@@ -47,7 +50,8 @@ function updateNodeHtml(editor, nodeId) {
   }
 
  // Pegamos o HTML base
-  let html = getHtml('SELECT', [{ default: 'SELECT * FROM ' }]);
+  let html = getHtml('SELECT', [{ default: 'SELECT *, '}, 
+								{ from: ' FROM iotEvent' }]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
   const value = node.data.select || '';

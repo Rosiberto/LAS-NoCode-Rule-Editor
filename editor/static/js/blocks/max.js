@@ -15,7 +15,7 @@ export function addMax(editor, x = 100, y = 100) {
     {},
     getHtml('MAX', [
       { default: 'SELECT max '}, 
-	  { from: ' FROM ' }
+	  { default_from: ' FROM iotEvent' }
     ], null)
   );
   // Em vez de setTimeout
@@ -29,9 +29,8 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>Max</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br/>
-        <input type="text" placeholder="Enter max name." df-maxname>
-		<br><br/><label>${fields[1].from}</label><br> <br/>
-        <input type="text" placeholder="Enter event name." df-eventname>
+        <input type="text" placeholder="Enter attribute name." df-maxattributename>
+		<br> <br/><br><br/><label>${fields[1].default_from}</label>
       </div>
     </div>
   `;
@@ -47,25 +46,17 @@ function updateNodeHtml(editor, nodeId) {
 
  // Pegamos o HTML base
   let html = getHtml('MAX', [{ default: 'SELECT max '},
-								{ from: ' FROM ' }
+								{ default_from: ' FROM iotEvent' }
 							   ]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
-  const maxValue = node.data.maxname || '';
-  const eventValue = node.data.eventname || '';
+  const maxattributeValue = node.data.maxattributename || '';
   
-  // Atualiza o primeiro input (df-maxname)
+  // Atualiza o primeiro input (df-maxattributename)
   html = html.replace(
-    /<input([^>]*)df-maxname([^>]*)>/,
-    `<input$1df-maxname$2 value="${maxValue}" onchange="window.updateNode('${nodeId}', 'maxname', this.value')">`
+    /<input([^>]*)df-maxattributename([^>]*)>/,
+    `<input$1df-maxattributename$2 value="${maxattributeValue}" onchange="window.updateNode('${nodeId}', 'maxattributename', this.value')">`
   );
-  
-  // Atualiza o segundo input (df-eventname)
-  html = html.replace(
-    /<input([^>]*)df-eventname([^>]*)>/,
-    `<input$1df-eventname$2 value="${eventValue}" onchange="window.updateNode('${nodeId}', 'eventname', this.value)">`
-  );
-  
   
   // Valida antes de setar o HTML
     editor.drawflow.drawflow[editor.module].data[nodeId].html = html;

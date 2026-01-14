@@ -14,8 +14,8 @@ export function addTime(editor, x = 100, y = 100) {
     'select time',
     {},
     getHtml('SELECT TIME', [
-      { default: 'SELECT * FROM '}, 
-	  { default_time: '#TIME ' }
+      { default: 'SELECT *, '}, 
+	  { default_time: 'FROM iotEvent.win:TIME ' }
     ], null)
   );
   // Em vez de setTimeout
@@ -29,7 +29,7 @@ function getHtml(title, fields) {
       <div class="title-box"><strong>Select Time</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br/>
-        <input type="text" placeholder="Enter event name." df-eventname>
+        <input type="text" placeholder="Enter attribute name." df-attributenametime>
 		<br><br/><label>${fields[1].default_time}</label><br> <br/>
         <input type="text" placeholder="Enter the time." df-time>
       </div>
@@ -46,18 +46,18 @@ function updateNodeHtml(editor, nodeId) {
   }
 
  // Pegamos o HTML base
-  let html = getHtml('SELECT', [{ default: 'SELECT * FROM '},
-								{ default_time: '#TIME ' }
+  let html = getHtml('SELECT', [ { default: 'SELECT *, '}, 
+								 { default_time: 'FROM iotEvent.win:TIME ' }
 							   ]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
-  const value = node.data.eventname || '';
+  const attributeValue = node.data.eventname || '';
   const timeValue = node.data.time || '';
   
   // Atualiza o primeiro input (df-name)
   html = html.replace(
-    /<input([^>]*)df-eventname([^>]*)>/,
-    `<input$1df-eventname$2 value="${value}" onchange="window.updateNode('${nodeId}', 'eventname', this.value')">`
+    /<input([^>]*)df-attributenametime([^>]*)>/,
+    `<input$1df-attributenametime$2 value="${attributeValue}" onchange="window.updateNode('${nodeId}', 'attributenametime', this.value')">`
   );
   
   // Atualiza o segundo input (df-time)
