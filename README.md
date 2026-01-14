@@ -1,18 +1,18 @@
 # LAS-NoCode-Rule-Editor - Community Edition
-Esta é a versão **Community** do LAS NoCode Rule Editor.
-O LAS NoCode Rule Editor é um editor visual de regras e fluxos, desenvolvido em Flask, e pode ser utilizado de forma independente ou integrado a outras aplicações.
+This is the **Community Edition** of the LAS NoCode Rule Editor.  
+The LAS NoCode Rule Editor is a visual editor for rules and flows, developed in Flask, which can be used standalone or integrated into other applications.
 
 A visual EPL rule editor integrated with **FIWARE Perseo CEP**, featuring a drag-and-drop interface built with **DRAWFLOW**, running on **Flask**, and containerized with **Docker**.
 
 ## Features
 
-- Visual creation of complex rules using blocks  
-- Automatic EPL (Event Processing Language) code generation  
-- Seamless rule deployment to FIWARE Perseo via REST API
-- Criar e editar regras e fluxos via interface web.
-- Exportar/importar configurações.
-- Estrutura modular (Blueprint Flask) para fácil integração.
-- Totalmente containerizável via Docker.
+- Visual creation of complex rules using blocks.
+- Automatic EPL (Event Processing Language) code generation.
+- Seamless rule deployment to FIWARE Perseo via REST API.
+- Create and edit rules and flows via a web interface.
+- Export and import configurations.
+- Modular structure (Flask Blueprint) for easy integration.
+- Fully containerized with Docker.
 
 ## Running with Docker
 
@@ -31,20 +31,20 @@ A visual EPL rule editor integrated with **FIWARE Perseo CEP**, featuring a drag
 3. docker compose up -d
 ```
 
-Access the application
+## Access the application
 Once the container is running, open your browser and go to: http://localhost:5000
 
 
-## Integração com outras aplicações
-Esta edição Community pode ser incorporada em outras aplicações Flask como Blueprint.
-Por exemplo, sua aplicação privada TT pode usar o editor como funcionalidade sem expor código proprietário.
+## Integration with other applications
+This Community Edition can be incorporated into other Flask applications as a Blueprint.
+For example, your private application TT can use the editor as a feature without exposing proprietary code.
 
-## Licença
-Este projeto é distribuído sob MIT License. Veja LICENSE para mais detalhes.
+## License
+This project is distributed under the MIT License. See LICENSE for more details.
 
-## Observações
-Esta versão é Community: gratuita e open source.
-Para usos comerciais, você pode integrar o editor em sistemas proprietários, mantendo a licença do editor intacta.
+## Notes
+This is the Community Edition: free and open source.
+For commercial use, you can integrate the editor into proprietary systems while keeping the editor’s license intact.
 
 ## Support
 If you encounter any issues or have suggestions, please contact:
