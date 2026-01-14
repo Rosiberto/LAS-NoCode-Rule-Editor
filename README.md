@@ -40,7 +40,7 @@ This Community Edition can be incorporated into other Flask applications as a Bl
 For example, your private application TT can use the editor as a feature without exposing proprietary code.
 
 ## License
-This project is distributed under the MIT License. See LICENSE for more details.
+This project is distributed under the MIT License. See [MIT License](LICENSE) for more details.
 
 ## Notes
 This is the Community Edition: free and open source.
