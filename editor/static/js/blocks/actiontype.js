@@ -22,15 +22,14 @@ export function addActionType(editor, x = 100, y = 100) {
 function getHtml(title, fields) {	
 	return `
     <div>
-      <div class="title-box"><strong>Action Type</strong></div><br>      
-	  <div class="box">         
-           <select df-type>
-		     <option value="">select type</option>
-             <option value="email">EMAIL</option>
-             <option value="post">POST</option>                
-           </select>
-      </div>
-	  
+      <div class="title-box"><strong>Action Type</strong></div>   
+	      <div class="box">         
+          <select df-type>
+		        <option value="">select type</option>
+            <option value="email">EMAIL</option>
+            <option value="post">POST</option>                
+          </select>
+        </div>	  
     </div>
   `;
 }

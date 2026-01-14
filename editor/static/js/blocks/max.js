@@ -28,9 +28,9 @@ function getHtml(title, fields) {
     <div>
       <div class="title-box"><strong>Max</strong></div>
       <div class="box">
-		<label>${fields[0].default}</label><br> <br/>
+		    <label>${fields[0].default}</label><br> <br/>
         <input type="text" placeholder="Enter attribute name." df-maxattributename>
-		<br> <br/><br><br/><label>${fields[1].default_from}</label>
+		    <br><br/><label>${fields[1].default_from}</label>
       </div>
     </div>
   `;
@@ -46,8 +46,8 @@ function updateNodeHtml(editor, nodeId) {
 
  // Pegamos o HTML base
   let html = getHtml('MAX', [{ default: 'SELECT max '},
-								{ default_from: ' FROM iotEvent' }
-							   ]);
+								             { default_from: ' FROM iotEvent'}
+							              ]);
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
   const maxattributeValue = node.data.maxattributename || '';

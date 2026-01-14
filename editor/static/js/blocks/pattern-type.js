@@ -30,13 +30,13 @@ function getHtml(title, fields) {
     <div>
       <div class="title-box"><strong>Pattern Type</strong></div>
       <div class="box">
-		<label>${fields[0].default}</label><br> <br/>
+		    <label>${fields[0].default}</label><br> <br/>
         <input type="text" placeholder="Enter attribute." df-attributepattern>
-		<br><br/><label>${fields[1].from_pattern}</label><br/><br/>
+		    <br><br/><label>${fields[1].from_pattern}</label><br/><br/>
         <input type="text" placeholder="Enter pattern." df-pattern>
-		<br><br/><label>${fields[2].and_type}</label><br/><br/>
+		    <br><br/><label>${fields[2].and_type}</label><br/><br/>
         <input type="text" placeholder="Enter type." df-typepattern>
-		<br><br/><label>${fields[3].close_pattern}</label><br/><br/>
+		    <br><br/><label>${fields[3].close_pattern}</label>
       </div>
     </div>
   `;

@@ -2,15 +2,13 @@ services:
   
 # LAS-NoCode-Rule-Editor                
   editor:
-    image: rosiberto/las-rule-editor:latest
+    build:
+      context: ./editor
     container_name: editor
+    hostname: editor
     restart: always
+    volumes:
+      - ./editor:/app
+      - ./editor/flow.db:/app/flow.db
     ports:
       - "5000:5000"
-    networks:
-      - default    
-    
-networks:
-  default:
-    name: default
-    driver: bridge
