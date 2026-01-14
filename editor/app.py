@@ -1,5 +1,5 @@
 from flask import Flask
-from editor import flow_bp  # importa o blueprint
+from editor.routes import flow_bp
 
 def create_app():
     app = Flask(__name__)
@@ -17,3 +17,7 @@ if __name__ == "__main__":
         port=5000,
         debug=True
     )
+
+# rodar a app
+# na pasta LAS-NoCode-Rule-Editor>
+# rodar:  python -m editor.app

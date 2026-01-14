@@ -44,16 +44,9 @@ def index():
 @flow_bp.route('/gerar_epl', methods=['POST'])
 def gerar_epl():
     data = request.json
-    # data deve ter a estrutura:
-    # {
-    #   "rule_name": "...",
-    #   "epl": "...",
-    #   "action": { type, parameters: {url, headers, payload} }
-    # }
-
-    # Aqui você pode fazer a chamada ao Perseo FIWARE ou salvar a regra
+    
     if not data or 'rule_name' not in data or 'epl' not in data or 'action' not in data:
-        return jsonify({'error': 'Payload inválido'}), 400
+        return jsonify({'error': 'Invalid payload'}), 400
 
     payload = {
         "name": data["rule_name"],

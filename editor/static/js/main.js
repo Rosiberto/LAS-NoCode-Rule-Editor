@@ -261,14 +261,14 @@ function generateEPL() {
   const data = window.editor.export();
   const nodes = data.drawflow.Home.data;
 
-  let post ='', epl_='', select_ ='', from ='', 
-	  whereattribute ='', orderby ='', groupby ='',
-	  min ='',  max ='', avg ='', count ='', sum ='',
-	  length ='', time ='', pattern ='', patterntype ='',
-	  attributepattern ='', action = null, data_post='',
-      email_to='', email_from='', 
-	  email_subject='', email_template='',  
-	  rule_name ='';
+  let post ='', epl_='', select_ ='', whereattribute ='', 
+      orderby ='', groupby ='', min ='',  max ='', avg ='', 
+      count ='', sum ='', length ='', time ='', 
+      pattern ='', patterntype ='', attributepattern ='', 
+      action = null, data_post='',
+      email_to ='', email_from ='', 
+	    email_subject ='', email_template ='',  
+	    rule_name ='';
 
   for (const id in nodes) {
     const node = nodes[id];
@@ -372,7 +372,7 @@ function generateEPL() {
     width: 800
   });
 
-  fetch('/flow/gerar_epl', {
+  fetch('/gerar_epl', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(result)
@@ -397,9 +397,9 @@ function saveFlowToServer() {
     width: 800
   });
 */ 
-  //console.log(flow);
+  console.log(flow);
   
-  fetch('/flow/saveFlow', {
+  fetch('/saveFlow', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({name, flow})
@@ -415,29 +415,9 @@ function saveFlowToServer() {
     .catch(err => alert('Erro na comunicação: ' + err.message));
   }
 
-// ** Nova função para carregar fluxo do backend **
-//function loadFlowFromServer() {
-//  const id = prompt('Digite o ID do fluxo para carregar:');
-//  if (!id) return;
-
-//  fetch(`/flow/getFlow/${id}`)
-//    .then(res => res.json())
-//    .then(data => {
-//      if (data.error) {
-//        alert('Erro: ' + data.error);
-//        console.log('Error: ' + data.error);
-//      } else {
-//       window.editor.clear(); // Limpa antes de importar
-//        window.editor.import(data.flow);
-//        console.log('Fluxo carregado: ' + data.flow);
-//      }
-//    })
-//    .catch(err => alert('Erro na comunicação: ' + err.message));/
-//}
-
 function loadFlowFromServer() {
   // Buscar todos os fluxos
-  fetch('/flow/listFlows')
+  fetch('/listFlows')
     .then(res => res.json())
     .then(flows => {
       if (flows.error) {
