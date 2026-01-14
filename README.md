@@ -11,5 +11,4 @@ A visual EPL rule editor integrated with **FIWARE Perseus CEP**, featuring a dra
 ## 🚀 Running with Docker
 
 ```bash
-docker build -t epl-editor .
-docker run -p 5000:5000 epl-editor
+docker compose up -d
