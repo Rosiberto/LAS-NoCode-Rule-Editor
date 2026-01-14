@@ -1,4 +1,4 @@
-# LAS-NoCode-Rule-Editor - Community Edition
+# LAS-NoCode Rule Editor - Community Edition
 This is the **Community Edition** of the LAS NoCode Rule Editor (LAS).  
 The LAS NoCode Rule Editor is a visual editor for rules and flows, developed in Flask, which can be used standalone or integrated into other applications.
 
