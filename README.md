@@ -2,7 +2,8 @@
 This is the **Community Edition** of the LAS NoCode Rule Editor (LAS).  
 The LAS NoCode Rule Editor is a visual editor for rules and flows, developed in Flask, which can be used standalone or integrated into other applications.
 
-A visual EPL rule editor integrated with **FIWARE Perseo CEP**, featuring a drag-and-drop interface built with **DRAWFLOW**, running on **Flask**, and containerized with **Docker**.
+Based on EPL rules with native integration with **FIWARE Perseo CEP**, it provides a drag-and-drop interface built with **Drawflow**, running on **Flask** and containerized with **Docker**.
+
 
 ## Features
 
