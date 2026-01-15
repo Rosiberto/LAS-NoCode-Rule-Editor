@@ -48,5 +48,4 @@ This is the Community Edition: free and open source.
 For commercial use, you can integrate the editor into proprietary systems while keeping the editor’s license intact.
 
 ## Support
-If you encounter any issues or have suggestions, please contact:
-[Fale Conosco](mailto:rosibertogoncalves6@gmail.com?subject=Contato)
+If you encounter any issues or have suggestions, please contact [Fale Conosco](mailto:rosibertogoncalves6@gmail.com).
