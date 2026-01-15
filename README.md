@@ -38,7 +38,7 @@ Once the container is running, open your browser and go to: http://localhost:500
 
 ## Integration with other applications
 This Community Edition can be incorporated into other Flask applications as a Blueprint.
-For example, your private application TT can use the editor as a feature without exposing proprietary code.
+For example, your private application can use the editor as a feature without exposing proprietary code.
 
 ## License
 This project is distributed under the MIT License. See [MIT License](LICENSE) for more details.
