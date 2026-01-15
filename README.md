@@ -49,4 +49,4 @@ For commercial use, you can integrate the editor into proprietary systems while 
 
 ## Support
 If you encounter any issues or have suggestions, please contact:
-rosibertogoncalves6@gmail.com
+[Fale Conosco](mailto:rosibertogoncalves6@gmail.com?subject=Contato)
