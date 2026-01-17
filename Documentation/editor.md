@@ -12,8 +12,7 @@ The Rule Editor is composed of the following components:
 
 **(a) Side Menu**: Provides access to the building blocks used to define and construct rules.
 
-**(b) Top Menu**: Contains actions to **Generate EPL**, **Save**, and **Load**.  
-  Additionally, it includes controls to **Clear the Editor Workspace** and **Export the Rule Flow**.
+**(b) Top Menu**: Contains actions to **Generate EPL**, **Save**, and **Load**. Additionally, it includes controls to **Clear the Editor Workspace** and **Export the Rule Flow**.
 
 **(c) Editor Workspace**: The primary area where rules are designed, configured, and assembled.
 
