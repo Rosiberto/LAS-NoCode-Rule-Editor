@@ -5,7 +5,7 @@ The LAS NoCode Rule Editor is a visual editor for rules and flows, developed in 
 Based on EPL rules with native integration with **FIWARE Perseo CEP**, it provides a drag-and-drop interface built with **Drawflow**, running on **Flask** and containerized with **Docker**.
 
 ## Docummentation
-See [Open documentation folder](./documentation/).
+See [Open documentation folder](./Documentation/).
 
 ## Features
 
