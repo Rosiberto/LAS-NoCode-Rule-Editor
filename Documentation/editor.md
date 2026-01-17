@@ -6,7 +6,7 @@
 
 ## Rule Editor Structure
 
-![Rule Editor Overview](Documentation/path/to/editor.png)
+![Rule Editor Overview](images/editor.png)
 
 The Rule Editor is composed of the following components:
 
