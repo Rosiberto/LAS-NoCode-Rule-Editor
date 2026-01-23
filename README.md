@@ -12,10 +12,10 @@ Complex Event Processing plays a key role in Internet of Things (IoT), smart cit
 
 **LAS addresses this challenge by offering a low-code, visual abstraction layer that:**
 
-- Reduces the cognitive barrier for CEP rule creation  
-- Standardizes rule definition through structured, block-based flows  
-- Enables reproducible experimentation using containerized execution  
-- Facilitates integration with existing IoT and event-driven systems  
+- Reduces the cognitive barrier for CEP rule creation.
+- Standardizes rule definition through structured, block-based flows.  
+- Enables reproducible experimentation using containerized execution.  
+- Facilitates integration with existing IoT and event-driven systems.  
 
 This makes LAS suitable for **research, education, and applied experimentation** involving real-time event processing.
 
@@ -23,13 +23,13 @@ This makes LAS suitable for **research, education, and applied experimentation**
 
 ## Key Features
 
-- Visual creation of complex CEP rules using blocks  
-- Automatic generation of EPL (Event Processing Language) code  
-- Native integration with FIWARE Perseo CEP via REST API  
-- Web-based rule and flow editor  
-- Import and export of rule configurations  
-- Modular architecture using Flask Blueprints for easy integration  
-- Fully containerized execution using Docker and Docker Compose  
+- Visual creation of complex CEP rules using blocks.  
+- Automatic generation of EPL (Event Processing Language) code.  
+- Native integration with FIWARE Perseo CEP via REST API.  
+- Web-based rule and flow editor. 
+- Import and export of rule configurations.  
+- Modular architecture using Flask Blueprints for easy integration.  
+- Fully containerized execution using Docker and Docker Compose.  
 
 ---
 
@@ -37,9 +37,9 @@ This makes LAS suitable for **research, education, and applied experimentation**
 
 LAS is implemented using:
 
-- **Backend:** Python (Flask)  
-- **Frontend:** JavaScript and HTML, based on Drawflow  
-- **Deployment:** Docker containers for reproducible environments  
+- **Backend:** Python (Flask).  
+- **Frontend:** JavaScript and HTML, based on Drawflow.  
+- **Deployment:** Docker containers for reproducible environments.  
 
 The editor can be run as a standalone application or embedded into other Flask-based systems.
 
@@ -72,11 +72,11 @@ Once the container is running, open your browser and access the editor at: http:
 
 LAS can be used to define CEP rules for IoT scenarios such as:
 
-* Detecting abnormal sensor readings
+* Detecting abnormal sensor readings.
 
-* Identifying event patterns in smart environments
+* Identifying event patterns in smart environments.
 
-* Prototyping and testing CEP-based applications
+* Prototyping and testing CEP-based applications.
 
 Rules are visually defined using blocks and automatically translated into EPL for execution in FIWARE Perseo CEP.
 
@@ -87,7 +87,7 @@ The Community Edition can be integrated into other Flask applications as a Bluep
 
 
 ## Documentation
-Additional documentation and examples are available in the [documentation folder](./Documentation/).
+Additional documentation and examples are available in the [documentation folder](./documentation/) and [examples](./example).
 
 
 ## License
@@ -99,4 +99,4 @@ This is the Community Edition of LAS and is free and open source. The editor can
 
 
 ## Support
-For issues, bug reports, or suggestions, please use the GitHub issue tracker or contact the [maintainers] (mailto:rosibertogoncalves6@gmail.com).
+For issues, bug reports, or suggestions, please use the GitHub issue tracker or contact the [maintainers](mailto:rosibertogoncalves6@gmail.com).
