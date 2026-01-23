@@ -27,7 +27,7 @@ export function addAttributePattern(editor, x = 100, y = 100) {
 function getHtml(title, fields) {	
 	return `
     <div>
-      <div class="title-box"><strong>Pattern</strong></div>
+      <div class="title-box"><strong>Attribute Every</strong></div>
       <div class="box">
 		<label>${fields[0].default}</label><br> <br>
         <input type="text" placeholder="Enter attribute name." df-attribute><br><br>

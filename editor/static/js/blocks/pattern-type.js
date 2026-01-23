@@ -28,7 +28,7 @@ export function addPatternType(editor, x = 100, y = 100) {
 function getHtml(title, fields) {	
 	return `
     <div>
-      <div class="title-box"><strong>Pattern Type</strong></div>
+      <div class="title-box"><strong>Every Type</strong></div>
       <div class="box">
 		    <label>${fields[0].default}</label><br> <br/>
         <input type="text" placeholder="Enter attribute." df-attributepattern>
