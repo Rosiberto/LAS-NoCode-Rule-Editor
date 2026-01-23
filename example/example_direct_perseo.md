@@ -18,11 +18,12 @@ This example demonstrates how to use the LAS-NoCode Rule Editor to create a **ru
 
 In the editor, create a rule using blocks:
 
-[Condition: TEMPERATURE > 30] ---> [Action: GENERATE ALERT]
+[Condition: temperature! > 30] ---> [Action: GENERATE ALERT FOR EMAIL]
 
-
-- **Condition Block:** defines the threshold for temperature  
-- **Action Block:** specifies the action executed by Perseo CEP when the condition is met  
+- **RULE:** defines the rule name  
+- **WHERE Block:** sets the temperature threshold  
+- **Action Type Block:** specifies the action that Perseo CEP executes when the condition is met  
+- **EMAIL Block:** defines the configuration for sending the email alert
 
 Click **“Generate EPL”** to deploy the rule to Perseo CEP via the editor’s API.
 
@@ -31,9 +32,9 @@ Click **“Generate EPL”** to deploy the rule to Perseo CEP via the editor’s
 ## 2. Generated EPL
 
 ```sql
-SELECT temperature
-FROM TemperatureEvent
-WHERE temperature > 30
+SELECT temperature!
+FROM iotEvent
+WHERE temperature! > 30
 ```
 Perseo CEP will evaluate this rule for every event sent to its API.
 
@@ -53,7 +54,7 @@ HEADERS = {"Content-Type": "application/json"}
 
 while True:
     temp = random.randint(25, 35)
-    event = {"type": "TemperatureEvent", "temperature": temp}
+    event = {"type": "iotEvent", "temperature": temp}
     response = requests.post(PERSEO_URL, json=event, headers=HEADERS)
     print(f"Sent event: {event}, response status: {response.status_code}")
     time.sleep(1)
@@ -66,10 +67,10 @@ while True:
 ## 4. Expected Output
 
 ```yaml
-Sent event: {'type': 'TemperatureEvent', 'temperature': 28}, response status: 200
-Sent event: {'type': 'TemperatureEvent', 'temperature': 32}, response status: 200
+Sent event: {'type': 'iotEvent', 'temperature': 28}, response status: 200
+Sent event: {'type': 'iotEvent', 'temperature': 32}, response status: 200
 ALERT: High temperature detected!
-Sent event: {'type': 'TemperatureEvent', 'temperature': 27}, response status: 200
+Sent event: {'type': 'iotEvent', 'temperature': 27}, response status: 200
 ```
 
 Alerts are logged by Perseo CEP based on the deployed rule.

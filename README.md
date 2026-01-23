@@ -1,42 +1,49 @@
 # LAS-NoCode Rule Editor — Community Edition
 
-LAS-NoCode Rule Editor (LAS) is an open-source, containerized, low-code framework for designing, validating, and deploying Complex Event Processing (CEP) rules, with a focus on reproducible experimentation and education in IoT systems.
+**LAS-NoCode Rule Editor (LAS)** is an open-source, containerized, low-code framework for designing, validating, and deploying **Complex Event Processing (CEP)** rules, with a focus on reproducible experimentation and education in IoT systems.
 
-The tool provides a visual, block-based editor that automatically generates EPL (Event Processing Language) rules and supports native integration with FIWARE Perseo CEP.
+The tool provides a visual, block-based editor that automatically generates **EPL (Event Processing Language)** rules and supports native integration with **FIWARE Perseo CEP**.
 
+---
 
 ## Statement of Need
 
 Complex Event Processing plays a key role in Internet of Things (IoT), smart cities, and distributed systems research. However, defining and maintaining CEP rules using textual languages such as EPL requires advanced expertise and often hinders reproducibility, experimentation, and teaching.
 
-LAS addresses this challenge by offering a low-code, visual abstraction layer that:
-- Reduces the cognitive barrier to CEP rule creation;
-- Standardizes rule definition through structured block-based flows;
-- Enables reproducible experimentation using containerized execution;
-- Facilitates integration with existing IoT and event-driven systems.
+**LAS addresses this challenge by offering a low-code, visual abstraction layer that:**
 
-This makes LAS suitable for research, education, and applied experimentation involving real-time event processing.
+- Reduces the cognitive barrier for CEP rule creation  
+- Standardizes rule definition through structured, block-based flows  
+- Enables reproducible experimentation using containerized execution  
+- Facilitates integration with existing IoT and event-driven systems  
 
+This makes LAS suitable for **research, education, and applied experimentation** involving real-time event processing.
+
+---
 
 ## Key Features
 
-- Visual creation of complex CEP rules using blocks
-- Automatic generation of EPL (Event Processing Language) code
-- Native integration with FIWARE Perseo CEP via REST API
-- Web-based rule and flow editor
-- Import and export of rule configurations
-- Modular architecture using Flask Blueprints for easy integration
-- Fully containerized execution using Docker and Docker Compose
+- Visual creation of complex CEP rules using blocks  
+- Automatic generation of EPL (Event Processing Language) code  
+- Native integration with FIWARE Perseo CEP via REST API  
+- Web-based rule and flow editor  
+- Import and export of rule configurations  
+- Modular architecture using Flask Blueprints for easy integration  
+- Fully containerized execution using Docker and Docker Compose  
 
+---
 
 ## Architecture Overview
 
 LAS is implemented using:
-- **Backend**: Python (Flask)
-- **Frontend**: JavaScript and HTML, based on Drawflow
-- **Deployment**: Docker containers for reproducible environments
 
-The editor can be executed as a standalone application or embedded into other Flask-based systems.
+- **Backend:** Python (Flask)  
+- **Frontend:** JavaScript and HTML, based on Drawflow  
+- **Deployment:** Docker containers for reproducible environments  
+
+The editor can be run as a standalone application or embedded into other Flask-based systems.
+
+---
 
 
 ## Running with Docker
@@ -58,12 +65,12 @@ docker compose up -d
 ```
 
 ## Accessing the Application
-Once the container is running, access the editor at: http://localhost:5000
+Once the container is running, open your browser and access the editor at: http://localhost:5000
 
 
 ## Example Use Case
 
-* LAS can be used to define CEP rules for IoT scenarios such as:
+LAS can be used to define CEP rules for IoT scenarios such as:
 
 * Detecting abnormal sensor readings
 
@@ -71,9 +78,8 @@ Once the container is running, access the editor at: http://localhost:5000
 
 * Prototyping and testing CEP-based applications
 
-* Rules are visually defined using blocks and automatically translated into EPL for execution in FIWARE Perseo CEP.
+Rules are visually defined using blocks and automatically translated into EPL for execution in FIWARE Perseo CEP.
 
-* Integration with Other Applications
 
 
 ## Integration with Other Applications
@@ -93,4 +99,4 @@ This is the Community Edition of LAS and is free and open source. The editor can
 
 
 ## Support
-For issues, bug reports, or suggestions, please use the GitHub issue tracker or contact the [maintainers](mailto:rosibertogoncalves6@gmail.com).
+For issues, bug reports, or suggestions, please use the GitHub issue tracker or contact the [maintainers] (mailto:rosibertogoncalves6@gmail.com).
