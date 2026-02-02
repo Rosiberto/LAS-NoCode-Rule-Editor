@@ -5,7 +5,9 @@ import time
 # Replace with your Perseo CEP endpoint
 
 PERSEO_URL = "http://localhost:9090/perseo/api/v1/rules/notify"  
-HEADERS = {"Content-Type": "application/json"}
+HEADERS = {"Content-Type": "application/json",
+           "fiware-service": "titania", 
+           "fiware-servicepath": "/"}
 
 while True:
     temp = random.randint(25, 35)

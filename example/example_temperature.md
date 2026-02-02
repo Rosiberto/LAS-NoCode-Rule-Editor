@@ -68,7 +68,9 @@ import random
 import time
 
 ORION_URL = "http://localhost:1026/v2/entities/TemperatureSensor/attrs"
-HEADERS = {"Content-Type": "application/json"}
+HEADERS = {"Content-Type": "application/json",
+           "fiware-service": "titania",
+           "fiware-servicepath": "/"}
 
 while True:
     temp = random.randint(25, 35)
