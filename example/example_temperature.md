@@ -67,16 +67,32 @@ import requests
 import random
 import time
 
-ORION_URL = "http://localhost:1026/v2/entities/TemperatureSensor/attrs"
+ORION_URL = "http://localhost:1026/v2/entities/Room1/attrs"
 HEADERS = {"Content-Type": "application/json",
            "fiware-service": "titania",
            "fiware-servicepath": "/"}
 
-while True:
+i = 1
+while i < 3 :
     temp = random.randint(25, 35)
-    payload = {"temperature": {"value": temp}}
-    response = requests.patch(ORION_URL, json=payload, headers=HEADERS)
+
+    event = {
+        "data": [
+            {
+                "id": "Room1",
+                "type": "Room",
+                "temperature": {
+                    "type": "Number",
+                    "value": temp
+                }
+            }
+        ],
+        "subscriptionId": "simulated-sent-event"
+    }
+
+    response = requests.patch(ORION_URL, json=event, headers=HEADERS)
     print(f"Sent event: {payload}, response status: {response.status_code}")
+    i+= 1
     time.sleep(1)
 ```
 
@@ -88,10 +104,13 @@ while True:
 ## 5. Expected Output
 
 ```yaml
-Sent event: {'temperature': {'value': 28}}, response status: 204
-Sent event: {'temperature': {'value': 32}}, response status: 204
-ALERT: High temperature detected!
-Sent event: {'temperature': {'value': 27}}, response status: 204
+time=2026-02-22T03:49:33.985Z | lvl=INFO | corr=7fe63ee4-0fa1-11f1-8d3f-a20024534928 | trans=1771729386-998-00000000051 | from=172.19.0.6 | srv=titania | subsrv=/ | comp=Orion | op=logTracing.cpp[211]:logInfoRequestWithPayload | msg=Request received: POST /v2/entities?options=upsert, request payload (217 bytes): {"id":"Tank:tank:001","type":"Tank","l":{"type":"Text","value":28,"metadata":{"TimeInstant":{"type":"DateTime","value":"2026-02-22T03:49:33.121Z"}}},"TimeInstant":{"type":"DateTime","value":"2026-02-22T03:49:33.121Z"}}, response code: 204
+
+
+time=2026-02-22T04:33:08.450Z | lvl=INFO | corr=95f525be-0fa7-11f1-ba28-a20024534928 | trans=1771729386-998-00000000099 | from=172.19.0.6 | srv=titania | subsrv=/ | comp=Orion | op=logTracing.cpp[211]:logInfoRequestWithPayload | msg=Request received: POST /v2/entities?options=upsert, request payload (218 bytes): {"id":"Tank:tank:001","type":"Tank","l":{"type":"Text","value":32,"metadata":{"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:33:06.838Z"}}},"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:33:06.838Z"}}, response code: 204
+
+
+time=2026-02-22T04:32:49.332Z | lvl=INFO | corr=8a5025c4-0fa7-11f1-b284-a20024534928 | trans=1771729386-998-00000000097 | from=172.19.0.6 | srv=titania | subsrv=/ | comp=Orion | op=logTracing.cpp[211]:logInfoRequestWithPayload | msg=Request received: POST /v2/entities?options=upsert, request payload (218 bytes): {"id":"Tank:tank:001","type":"Tank","l":{"type":"Text","value":27,"metadata":{"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:32:47.252Z"}}},"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:32:47.252Z"}}, response code: 204
 ```
 
 Alerts can be logged or stored via Perseo CEP actions.

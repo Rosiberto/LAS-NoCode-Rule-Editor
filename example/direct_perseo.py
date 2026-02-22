@@ -24,7 +24,7 @@ while i<3:
                 }
             }
         ],
-        "subscriptionId": "simulated-subscription"
+        "subscriptionId": "simulated-sent-event"
     }
 
     response = requests.post(PERSEO_URL, json=event, headers=HEADERS)
