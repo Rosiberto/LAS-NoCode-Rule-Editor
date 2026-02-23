@@ -60,12 +60,12 @@ function updateNodeHtml(editor, nodeId) {
 
   html = html.replace(
     /<input([^>]*)df-attribute([^>]*)>/,
-    `<input$1df-attribute$2 value="${value_attribute}" onchange="window.updateNode('${nodeId}', 'attribute', this.value')">`
+    `<input$1df-attribute$2 value="${value_attribute}" onchange="window.updateNode('${nodeId}', 'attribute', this.value)">`
   );
   
   html = html.replace(
     /<input([^>]*)df-pattern([^>]*)>/,
-    `<input$1df-pattern$2 value="${value_pattern}" onchange="window.updateNode('${nodeId}', 'pattern', this.value')">`
+    `<input$1df-pattern$2 value="${value_pattern}" onchange="window.updateNode('${nodeId}', 'pattern', this.value)">`
   );
 
   // Valida antes de setar o HTML

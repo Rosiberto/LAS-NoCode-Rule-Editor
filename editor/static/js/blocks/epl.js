@@ -59,7 +59,7 @@ function updateNodeHtml(editor, nodeId) {
 
   html = html.replace(
     /<input([^>]*)df-epl([^>]*)>/,
-    `<input$1df-epl$2 value="${value}" onchange="window.updateNode('${nodeId}', 'epl', this.value')">`
+    `<input$1df-epl$2 value="${value}" onchange="window.updateNode('${nodeId}', 'epl', this.value)">`
   );
 
   
