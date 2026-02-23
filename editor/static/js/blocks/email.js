@@ -53,22 +53,22 @@ function updateNodeHtml(editor, nodeId) {
 
   html = html.replace(
     /<input([^>]*)df-to([^>]*)>/,
-    `<input$1df-to$2 value="${value}" onchange="window.updateNode('${nodeId}', 'to', this.value')">`
+    `<input$1df-to$2 value="${value}" onchange="window.updateNode('${nodeId}', 'to', this.value)">`
   );
   
   html = html.replace(
     /<input([^>]*)df-from([^>]*)>/,
-    `<input$1df-from$2 value="${value_from}" onchange="window.updateNode('${nodeId}', 'from', this.value')">`
+    `<input$1df-from$2 value="${value_from}" onchange="window.updateNode('${nodeId}', 'from', this.value)">`
   );
   
   html = html.replace(
     /<input([^>]*)df-subject([^>]*)>/,
-    `<input$1df-subject$2 value="${value_subject}" onchange="window.updateNode('${nodeId}', 'subject', this.value')">`
+    `<input$1df-subject$2 value="${value_subject}" onchange="window.updateNode('${nodeId}', 'subject', this.value)">`
   );
   
   html = html.replace(
     /<input([^>]*)df-template([^>]*)>/,
-    `<input$1df-template$2 value="${value_template}" onchange="window.updateNode('${nodeId}', 'template', this.value')">`
+    `<input$1df-template$2 value="${value_template}" onchange="window.updateNode('${nodeId}', 'template', this.value)">`
   );
   
   // Valida antes de setar o HTML
