@@ -55,7 +55,7 @@ function updateNodeHtml(editor, nodeId) {
   // Atualiza o primeiro input (df-countattributename)
   html = html.replace(
     /<input([^>]*)df-countattributename([^>]*)>/,
-    `<input$1df-countattributename$2 value="${countattributeValue}" onchange="window.updateNode('${nodeId}', 'countattributename', this.value')">`
+    `<input$1df-countattributename$2 value="${countattributeValue}" onchange="window.updateNode('${nodeId}', 'countattributename', this.value)">`
   );
   
   
