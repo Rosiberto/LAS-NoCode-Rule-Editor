@@ -15,7 +15,7 @@ authors:
     corresponding: true
     affiliation: 1
 affiliations:
- - name: [Your Institution Name], Brazil
+ - name: [Estácio University Center Recife], Brazil
    index: 1
 date: 20 February 2026
 bibliography: paper.bib
