@@ -55,7 +55,7 @@ function updateNodeHtml(editor, nodeId) {
   // Atualiza o primeiro input (df-avgattributename)
   html = html.replace(
     /<input([^>]*)df-avgattributename([^>]*)>/,
-    `<input$1df-avgattributename$2 value="${avgattributeValue}" onchange="window.updateNode('${nodeId}', 'avgattributename', this.value')">`
+    `<input$1df-avgattributename$2 value="${avgattributeValue}" onchange="window.updateNode('${nodeId}', 'avgattributename', this.value)">`
   );
     
   // Valida antes de setar o HTML
