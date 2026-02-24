@@ -46,7 +46,7 @@ function updateNodeHtml(editor, nodeId) {
   // Atualiza o primeiro input (df-group)
   html = html.replace(
     /<input([^>]*)df-group([^>]*)>/,
-    `<input$1df-group$2 value="${value}" onchange="window.updateNode('${nodeId}', 'group', this.value')">`
+    `<input$1df-group$2 value="${value}" onchange="window.updateNode('${nodeId}', 'group', this.value)">`
   );
      
   // Valida antes de setar o HTML
