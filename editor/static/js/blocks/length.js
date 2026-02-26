@@ -57,7 +57,7 @@ function updateNodeHtml(editor, nodeId) {
   // Atualiza o primeiro input (df-attributenamelength)
   html = html.replace(
     /<input([^>]*)df-attributenamelength([^>]*)>/,
-    `<input$1df-attributenamelength$2 value="${value}" onchange="window.updateNode('${nodeId}', 'attributenamelength', this.value')">`
+    `<input$1df-attributenamelength$2 value="${value}" onchange="window.updateNode('${nodeId}', 'attributenamelength', this.value)">`
   );
   
   // Atualiza o segundo input (df-length)

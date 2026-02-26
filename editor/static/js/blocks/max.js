@@ -55,7 +55,7 @@ function updateNodeHtml(editor, nodeId) {
   // Atualiza o primeiro input (df-maxattributename)
   html = html.replace(
     /<input([^>]*)df-maxattributename([^>]*)>/,
-    `<input$1df-maxattributename$2 value="${maxattributeValue}" onchange="window.updateNode('${nodeId}', 'maxattributename', this.value')">`
+    `<input$1df-maxattributename$2 value="${maxattributeValue}" onchange="window.updateNode('${nodeId}', 'maxattributename', this.value)">`
   );
   
   // Valida antes de setar o HTML
