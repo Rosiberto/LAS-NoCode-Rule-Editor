@@ -55,7 +55,7 @@ function updateNodeHtml(editor, nodeId) {
   // Atualiza o primeiro input (df-minattributename)
   html = html.replace(
     /<input([^>]*)df-minattributename([^>]*)>/,
-    `<input$1df-minattributename$2 value="${minattributeValue}" onchange="window.updateNode('${nodeId}', 'minattributename', this.value')">`
+    `<input$1df-minattributename$2 value="${minattributeValue}" onchange="window.updateNode('${nodeId}', 'minattributename', this.value)">`
   );
   
   // Valida antes de setar o HTML
