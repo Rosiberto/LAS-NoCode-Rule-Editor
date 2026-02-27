@@ -66,17 +66,17 @@ function updateNodeHtml(editor, nodeId) {
   
   html = html.replace(
     /<input([^>]*)df-attributepattern([^>]*)>/,
-    `<input$1df-attributepattern$2 value="${value_attributepattern}" onchange="window.updateNode('${nodeId}', 'attributepattern', this.value')">`
+    `<input$1df-attributepattern$2 value="${value_attributepattern}" onchange="window.updateNode('${nodeId}', 'attributepattern', this.value)">`
   );
   
   html = html.replace(
     /<input([^>]*)df-pattern([^>]*)>/,
-    `<input$1df-pattern$2 value="${value_pattern}" onchange="window.updateNode('${nodeId}', 'pattern', this.value')">`
+    `<input$1df-pattern$2 value="${value_pattern}" onchange="window.updateNode('${nodeId}', 'pattern', this.value)">`
   );
   
   html = html.replace(
     /<input([^>]*)df-typepattern([^>]*)>/,
-    `<input$1df-typepattern$2 value="${value_typepattern}" onchange="window.updateNode('${nodeId}', 'typepattern', this.value')">`
+    `<input$1df-typepattern$2 value="${value_typepattern}" onchange="window.updateNode('${nodeId}', 'typepattern', this.value)">`
   );
   
 
