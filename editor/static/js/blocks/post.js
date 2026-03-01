@@ -50,12 +50,12 @@ function updateNodeHtml(editor, nodeId) {
 
   html = html.replace(
     /<input([^>]*)df-post([^>]*)>/,
-    `<input$1df-post$2 value="${value}" onchange="window.updateNode('${nodeId}', 'post', this.value')">`
+    `<input$1df-post$2 value="${value}" onchange="window.updateNode('${nodeId}', 'post', this.value)">`
   );
 
   html = html.replace(
     /<input([^>]*)df-data_post([^>]*)>/,
-    `<input$1df-data_post$2 value="${value_data}" onchange="window.updateNode('${nodeId}', 'post', this.value')">`
+    `<input$1df-data_post$2 value="${value_data}" onchange="window.updateNode('${nodeId}', 'post', this.value)">`
   );
 
   // Valida antes de setar o HTML
