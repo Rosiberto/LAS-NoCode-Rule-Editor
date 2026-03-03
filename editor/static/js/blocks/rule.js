@@ -59,7 +59,7 @@ function updateNodeHtml(editor, nodeId) {
 
   html = html.replace(
     /<input([^>]*)df-rule([^>]*)>/,
-    `<input$1df-rule$2 value="${value}" onchange="window.updateNode('${nodeId}', 'rule', this.value')">`
+    `<input$1df-rule$2 value="${value}" onchange="window.updateNode('${nodeId}', 'rule', this.value)">`
   );
 
   
