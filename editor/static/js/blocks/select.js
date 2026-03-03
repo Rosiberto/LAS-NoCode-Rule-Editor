@@ -58,7 +58,7 @@ function updateNodeHtml(editor, nodeId) {
 
   html = html.replace(
     /<input([^>]*)df-select([^>]*)>/,
-    `<input$1df-select$2 value="${value}" onchange="window.updateNode('${nodeId}', 'select', this.value')">`
+    `<input$1df-select$2 value="${value}" onchange="window.updateNode('${nodeId}', 'select', this.value)">`
   );
   
   // Valida antes de setar o HTML
