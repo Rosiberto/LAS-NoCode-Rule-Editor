@@ -55,7 +55,7 @@ function updateNodeHtml(editor, nodeId) {
   // Atualiza o primeiro input (df-sumattributename)
   html = html.replace(
     /<input([^>]*)df-sumattributename([^>]*)>/,
-    `<input$1df-sumattributename$2 value="${sumattributeValue}" onchange="window.updateNode('${nodeId}', 'sumattributename', this.value')">`
+    `<input$1df-sumattributename$2 value="${sumattributeValue}" onchange="window.updateNode('${nodeId}', 'sumattributename', this.value)">`
   );
    
   // Valida antes de setar o HTML
