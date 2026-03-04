@@ -57,7 +57,7 @@ function updateNodeHtml(editor, nodeId) {
   // Atualiza o primeiro input (df-name)
   html = html.replace(
     /<input([^>]*)df-attributenametime([^>]*)>/,
-    `<input$1df-attributenametime$2 value="${attributeValue}" onchange="window.updateNode('${nodeId}', 'attributenametime', this.value')">`
+    `<input$1df-attributenametime$2 value="${attributeValue}" onchange="window.updateNode('${nodeId}', 'attributenametime', this.value)">`
   );
   
   // Atualiza o segundo input (df-time)

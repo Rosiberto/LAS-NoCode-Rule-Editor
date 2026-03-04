@@ -56,12 +56,12 @@ function updateNodeHtml(editor, nodeId) {
 
   html = html.replace(
     /<input([^>]*)df-attributewhere([^>]*)>/,
-    `<input$1df-attributewhere$2 value="${value_attribute}" onchange="window.updateNode('${nodeId}', 'attributewhere', this.value')">`
+    `<input$1df-attributewhere$2 value="${value_attribute}" onchange="window.updateNode('${nodeId}', 'attributewhere', this.value)">`
   );
 // Atualiza o segundo input (df-time)
   html = html.replace(
 	/<input([^>]*)df-where([^>]*)>/,
-    `<input$1df-where$2 value="${value_where}" onchange="window.updateNode('${nodeId}', 'where', this.value')">`
+    `<input$1df-where$2 value="${value_where}" onchange="window.updateNode('${nodeId}', 'where', this.value)">`
   );
   
   // Valida antes de setar o HTML
