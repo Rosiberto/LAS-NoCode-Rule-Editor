@@ -17,7 +17,7 @@ import { addSum } from './blocks/sum.js';
 import { addPattern } from './blocks/pattern.js';
 import { addAttributePattern } from './blocks/attribute-pattern.js';
 import { addPatternType } from './blocks/pattern-type.js';
-
+import { buildEPLFromNodes } from './eplBuilder.js';
 
 
 window.editor = null;
@@ -261,6 +261,9 @@ function generateEPL() {
   const data = window.editor.export();
   const nodes = data.drawflow.Home.data;
 
+  const result = buildEPLFromNodes(nodes);
+
+  /*
   let post ='', epl_='', select_ ='', whereattribute ='', 
       orderby ='', groupby ='', min ='',  max ='', avg ='', 
       count ='', sum ='', length ='', time ='', 
@@ -365,6 +368,7 @@ function generateEPL() {
     }		
   }
   const result = { rule_name, epl, action };
+*/
 
   Swal.fire({
     title: 'View EPL',
