@@ -106,13 +106,13 @@ export function buildEPLFromNodes(nodes) {
       //action.parameters.json = { ruleName: rule_name, epl: epl, data: data_post};
       //action.parameters.json = { ruleName: rule_name, data: data_post};
       //action.parameters.json = { ruleName: rule_name};
-      console.log("POST action.template " + action.template);  
+      //console.log("POST action.template " + action.template);  
     }else if (email_to){
       action.template = email_template; 
       action.parameters.to = email_to; 
       action.parameters.from = email_from; 
       action.parameters.subject = email_subject; 
-      console.log("EMAIL action.template " + action.template);  
+      //console.log("EMAIL action.template " + action.template);  
      
     }		
   }
