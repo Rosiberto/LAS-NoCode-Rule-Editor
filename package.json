@@ -8,16 +8,23 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rosiberto/LAS-NoCode-Rule-Editor.git"
   },
-  "keywords": [],
+  "keywords": [
+  "complex-event-processing",
+  "cep",
+  "iot",
+  "low-code",
+  "esper",
+  "rule-editor"
+],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Rosiberto/LAS-NoCode-Rule-Editor/issues"
   },
