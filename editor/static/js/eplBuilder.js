@@ -49,10 +49,13 @@ export function buildEPLFromNodes(nodes) {
 		//console.log(patterntype);*/
   } else if (name === 'PATTERN') {
     pattern = `every ev=iotEvent( ${d.pattern || ''} )`;  // sem SELECT *
+    //console.log(pattern);
   } else if (name === 'ATTRIBUTEPATTERN') {
     attributepattern = `FROM pattern [every ev=iotEvent( ${d.pattern || ''} )]`; // sem SELECT *
+    //console.log(attributepattern);
   } else if (name === 'PATTERNTYPE') {
     patterntype = `FROM pattern [every ev=iotEvent( ${d.pattern || ''} and type='${d.typepattern || ''}')]`; // sem SELECT *
+    //console.log(patterntype);
   } else if (name === 'EMAIL') {
 		email_to = `${d.to || ''}`;
 		email_from = `${d.from || ''}`;
