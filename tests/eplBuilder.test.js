@@ -1,4 +1,5 @@
-const { buildEPLFromNodes } = require('../../editor/static/js/eplBuilder.js');
+import { buildEPLFromNodes } 
+from '../editor/static/js/eplBuilder.js';
 
 test('gera SELECT simples', () => {
 

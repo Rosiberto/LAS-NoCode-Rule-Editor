@@ -261,8 +261,6 @@ function generateEPL() {
   const data = window.editor.export();
   const nodes = data.drawflow.Home.data;
 
-  const result = buildEPLFromNodes(nodes);
-
   /*
   let post ='', epl_='', select_ ='', whereattribute ='', 
       orderby ='', groupby ='', min ='',  max ='', avg ='', 
@@ -369,6 +367,8 @@ function generateEPL() {
   }
   const result = { rule_name, epl, action };
 */
+
+  const result = buildEPLFromNodes(nodes);
 
   Swal.fire({
     title: 'View EPL',
