@@ -1,0 +1,28 @@
+{
+  "name": "las-nocode-rule-editor",
+  "version": "1.0.0",
+  "description": "**LAS-NoCode Rule Editor (LAS)** is an open-source, containerized, low-code framework for designing, validating, and deploying **Complex Event Processing (CEP)** rules, with a focus on reproducible experimentation and education in IoT systems.",
+  "main": "index.js",
+  "directories": {
+    "example": "example",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rosiberto/LAS-NoCode-Rule-Editor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Rosiberto/LAS-NoCode-Rule-Editor/issues"
+  },
+  "homepage": "https://github.com/Rosiberto/LAS-NoCode-Rule-Editor#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
