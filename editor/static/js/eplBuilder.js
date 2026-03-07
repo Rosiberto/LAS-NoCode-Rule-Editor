@@ -1,5 +1,5 @@
 export function buildEPLFromNodes(nodes) {
- let rule_name = '';
+  let rule_name = '';
   let epl_ = '', select_ = '', whereattribute = '', groupby = '', orderby = '';
   let min = '', max = '', avg = '', count = '', sum = '';
   let length = '', time = '';
@@ -118,16 +118,15 @@ export function buildEPLFromNodes(nodes) {
       action.parameters.subject = emailNode.subject || '';
     } else {
     // Mostra alerta pro usuário ao invés de lançar erro
-		Swal.fire({
-		icon: 'error',
-		title: 'Erro na regra',
-		html: `<p>Toda regra deve ter um bloco POST ou EMAIL conectado ao ACTIONTYPE.</p>`,
-		width: 600
-		});		
-    	throw new Error("Toda regra deve ter um bloco POST ou EMAIL conectado ao ACTIONTYPE.");
-	}
-  } else if (postNode || emailNode) {
-    
+      Swal.fire({
+      icon: 'error',
+      title: 'Erro na regra',
+      html: `<p>Toda regra deve ter um bloco POST ou EMAIL conectado ao ACTIONTYPE.</p>`,
+      width: 600
+      });		
+        throw new Error("Toda regra deve ter um bloco POST ou EMAIL conectado ao ACTIONTYPE.");
+	  }
+  } else if (postNode || emailNode) {    
 	// Mostra alerta pro usuário ao invés de lançar erro
     Swal.fire({
       icon: 'error',
@@ -135,8 +134,9 @@ export function buildEPLFromNodes(nodes) {
       html: `<p>Toda regra deve ter um bloco POST ou EMAIL conectado ao ACTIONTYPE.</p>`,
       width: 600
     });
- 	throw new Error("Não é possível usar POST ou EMAIL sem um ACTIONTYPE.");
- 	}
+ 	  throw new Error("Não é possível usar POST ou EMAIL sem um ACTIONTYPE.");
+ 	} 
+  
 
   return { rule_name, epl, action };
 }
