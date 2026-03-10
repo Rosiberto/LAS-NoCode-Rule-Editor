@@ -23,7 +23,7 @@
   "rule-editor"
 ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "bugs": {
     "url": "https://github.com/Rosiberto/LAS-NoCode-Rule-Editor/issues"
