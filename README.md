@@ -88,11 +88,14 @@ The Community Edition can be integrated into other Flask applications as a **Blu
 
 ---
 
-## Documentation and Academic Reference
+## Documentation
+Additional documentation and examples are available in the [documentation folder](./documentation/) and [examples](./example).
+
+## Academic Reference
 
 A detailed description of LAS, its architecture, and example use cases is available in the internal documentation.
 
-A **paper describing LAS in detail is currently in preparation**. Once published, it will provide a formal academic reference for citation.
+A **paper describing LAS in detail is currently in preparation** and will provide a formal academic reference for citation upon publication.
 
 ---
 
