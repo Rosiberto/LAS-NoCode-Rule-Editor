@@ -1,6 +1,3 @@
-
-
-````markdown
 # LAS-NoCode Rule Editor — Community Edition
 
 **LAS-NoCode Rule Editor (LAS)** is an open-source, containerized, low-code framework for designing, validating, and deploying **Complex Event Processing (CEP)** rules, with a focus on reproducible experimentation and education in IoT systems.
@@ -50,7 +47,7 @@ The editor can be run as a standalone application or embedded into other Flask-b
 
 ## Installation and Running
 
-### Option 1: Docker
+**Option 1: Docker**
 
 ```bash
 git clone https://github.com/Rosiberto/LAS-NoCode-Rule-Editor.git
@@ -59,7 +56,7 @@ docker build -t las-editor .
 docker run -p 5000:5000 las-editor
 ````
 
-### Option 2: Docker Compose (Recommended)
+**Option 2: Docker Compose (Recommended)**
 
 ```bash
 git clone https://github.com/Rosiberto/LAS-NoCode-Rule-Editor.git
@@ -67,7 +64,7 @@ cd LAS-NoCode-Rule-Editor
 docker compose up -d
 ```
 
-### Accessing the Application
+## Accessing the Application
 
 Once the container is running, open your browser at: [http://localhost:5000](http://localhost:5000)
 
