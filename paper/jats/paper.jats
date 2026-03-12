@@ -24,6 +24,7 @@ research</article-title>
 </title-group>
 <contrib-group>
 <contrib contrib-type="author" corresp="yes">
+<contrib-id contrib-id-type="orcid">https://orcid.org/0000-0001-5158-1675</contrib-id>
 <name>
 <surname>Gonçalves</surname>
 <given-names>Rosiberto</given-names>
@@ -40,9 +41,9 @@ research</article-title>
 <author-notes>
 <corresp id="cor-1">* E-mail: <email></email></corresp>
 </author-notes>
-<pub-date date-type="pub" publication-format="electronic" iso-8601-date="2026-02-20">
-<day>20</day>
-<month>2</month>
+<pub-date date-type="pub" publication-format="electronic" iso-8601-date="2026-03-12">
+<day>12</day>
+<month>3</month>
 <year>2026</year>
 </pub-date>
 <volume>¿VOL?</volume>
@@ -151,8 +152,8 @@ a Creative Commons Attribution 4.0 International License (CC BY
   formalization of event pattern detection models
   (<xref alt="Luckham, 2002" rid="ref-luckham2002cep" ref-type="bibr">Luckham,
   2002</xref>). Engines such as Esper
-  (<xref alt="EsperTech Inc., 2024" rid="ref-espertech" ref-type="bibr">EsperTech
-  Inc., 2024</xref>) provide expressive EPL-based rule definition and
+  (<xref alt="EsperTech Inc., 2026" rid="ref-espertech" ref-type="bibr">EsperTech
+  Inc., 2026</xref>) provide expressive EPL-based rule definition and
   efficient in-memory execution. Distributed stream processing
   frameworks including Apache Flink
   (<xref alt="Carbone et al., 2015" rid="ref-carbone2015flink" ref-type="bibr">Carbone
@@ -161,16 +162,16 @@ a Creative Commons Attribution 4.0 International License (CC BY
   et al., 2011</xref>) extend event processing to large-scale,
   fault-tolerant environments.</p>
   <p>Within the FIWARE ecosystem, Perseo CEP
-  (<xref alt="FIWARE Foundation, 2024" rid="ref-fiwareperseo" ref-type="bibr">FIWARE
-  Foundation, 2024</xref>) offers rule-based event processing integrated
+  (<xref alt="FIWARE Foundation, 2026" rid="ref-fiwareperseo" ref-type="bibr">FIWARE
+  Foundation, 2026</xref>) offers rule-based event processing integrated
   with context management services. However, these systems primarily
   focus on runtime execution and scalability rather than structured rule
   modeling or visual abstraction.</p>
   <p>Visual flow-based tools such as Node-RED
-  (<xref alt="Blackstock &amp; Lea, 2014" rid="ref-node-red" ref-type="bibr">Blackstock
-  &amp; Lea, 2014</xref>) enable event-driven composition through
-  graphical interfaces, but they are not specifically designed for EPL
-  generation or CEP rule modeling.</p>
+  (<xref alt="Project, 2026" rid="ref-node-red" ref-type="bibr">Project,
+  2026</xref>) enable event-driven composition through graphical
+  interfaces, but they are not specifically designed for EPL generation
+  or CEP rule modeling.</p>
   <p>Previous work by Zimmerle de Lima
   (<xref alt="Lima, 2017" rid="ref-zimmerle" ref-type="bibr">Lima,
   2017</xref>) implemented a Node-RED plugin for Perseo CEP, enabling
@@ -206,8 +207,8 @@ a Creative Commons Attribution 4.0 International License (CC BY
     <list-item>
       <p>Supporting reproducible experimental workflows through
       containerized deployment using Docker
-      (<xref alt="Docker Inc., 2024" rid="ref-docker" ref-type="bibr">Docker
-      Inc., 2024</xref>).</p>
+      (<xref alt="Docker Inc., 2026" rid="ref-docker" ref-type="bibr">Docker
+      Inc., 2026</xref>).</p>
     </list-item>
   </list>
 </sec>
@@ -217,18 +218,18 @@ a Creative Commons Attribution 4.0 International License (CC BY
   <list list-type="bullet">
     <list-item>
       <p>Backend: Python with Flask
-      (<xref alt="Pallets Projects, 2024" rid="ref-flask" ref-type="bibr">Pallets
-      Projects, 2024</xref>).</p>
+      (<xref alt="Pallets Projects, 2026" rid="ref-flask" ref-type="bibr">Pallets
+      Projects, 2026</xref>).</p>
     </list-item>
     <list-item>
       <p>Frontend: JavaScript-based block editor built on Drawflow
-      (<xref alt="jerosoler, 2024" rid="ref-drawflow" ref-type="bibr">jerosoler,
-      2024</xref>).</p>
+      (<xref alt="jerosoler, 2026" rid="ref-drawflow" ref-type="bibr">jerosoler,
+      2026</xref>).</p>
     </list-item>
     <list-item>
       <p>Deployment: containerized environment using Docker
-      (<xref alt="Docker Inc., 2024" rid="ref-docker" ref-type="bibr">Docker
-      Inc., 2024</xref>).</p>
+      (<xref alt="Docker Inc., 2026" rid="ref-docker" ref-type="bibr">Docker
+      Inc., 2026</xref>).</p>
     </list-item>
   </list>
   <p>Rules are internally represented as directed block graphs. The
@@ -267,7 +268,7 @@ a Creative Commons Attribution 4.0 International License (CC BY
         <string-name>EsperTech Inc.</string-name>
       </person-group>
       <article-title>Esper complex event processing engine</article-title>
-      <year iso-8601-date="2024">2024</year>
+      <year iso-8601-date="2026">2026</year>
       <uri>https://www.espertech.com/esper/</uri>
     </element-citation>
   </ref>
@@ -277,7 +278,7 @@ a Creative Commons Attribution 4.0 International License (CC BY
         <string-name>FIWARE Foundation</string-name>
       </person-group>
       <article-title>FIWARE perseo CEP</article-title>
-      <year iso-8601-date="2024">2024</year>
+      <year iso-8601-date="2026">2026</year>
       <uri>https://github.com/telefonicaid/perseo-core</uri>
     </element-citation>
   </ref>
@@ -311,14 +312,13 @@ a Creative Commons Attribution 4.0 International License (CC BY
     </element-citation>
   </ref>
   <ref id="ref-node-red">
-    <element-citation publication-type="paper-conference">
+    <element-citation>
       <person-group person-group-type="author">
-        <name><surname>Blackstock</surname><given-names>Michael</given-names></name>
-        <name><surname>Lea</surname><given-names>Rodger</given-names></name>
+        <name><surname>Project</surname><given-names>Node-RED</given-names></name>
       </person-group>
-      <article-title>Node-RED: Low-code programming for event-driven applications</article-title>
-      <source>Proceedings of the 5th international workshop on the web of things</source>
-      <year iso-8601-date="2014">2014</year>
+      <article-title>Node-RED: Flow-based programming for the internet of things</article-title>
+      <publisher-name>https://nodered.org</publisher-name>
+      <year iso-8601-date="2026">2026</year>
     </element-citation>
   </ref>
   <ref id="ref-docker">
@@ -327,7 +327,7 @@ a Creative Commons Attribution 4.0 International License (CC BY
         <string-name>Docker Inc.</string-name>
       </person-group>
       <article-title>Docker: Lightweight linux containers for consistent development and deployment</article-title>
-      <year iso-8601-date="2024">2024</year>
+      <year iso-8601-date="2026">2026</year>
       <uri>https://www.docker.com/</uri>
     </element-citation>
   </ref>
@@ -337,7 +337,7 @@ a Creative Commons Attribution 4.0 International License (CC BY
         <string-name>Pallets Projects</string-name>
       </person-group>
       <article-title>Flask web development framework</article-title>
-      <year iso-8601-date="2024">2024</year>
+      <year iso-8601-date="2026">2026</year>
       <uri>https://flask.palletsprojects.com/</uri>
     </element-citation>
   </ref>
@@ -347,7 +347,7 @@ a Creative Commons Attribution 4.0 International License (CC BY
         <name><surname>jerosoler</surname></name>
       </person-group>
       <article-title>Drawflow: Simple flow library</article-title>
-      <year iso-8601-date="2024">2024</year>
+      <year iso-8601-date="2026">2026</year>
       <uri>https://github.com/jerosoler/Drawflow</uri>
     </element-citation>
   </ref>
@@ -358,7 +358,6 @@ a Creative Commons Attribution 4.0 International License (CC BY
       </person-group>
       <article-title>Uso de data flows para processamento de eventos complexos na internet das coisas</article-title>
       <publisher-name>Universidade Federal de Pernambuco, Centro de Informática</publisher-name>
-      <publisher-loc>Recife, Brasil</publisher-loc>
       <year iso-8601-date="2017">2017</year>
       <uri>https://www.cin.ufpe.br/~tg/2017-1/cezl-tg.pdf</uri>
     </element-citation>
