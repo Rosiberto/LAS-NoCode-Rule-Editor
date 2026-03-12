@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.2 20190208//EN"
+                  "JATS-publishing1.dtd">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" dtd-version="1.2" article-type="other">
+<front>
+<journal-meta>
+<journal-id></journal-id>
+<journal-title-group>
+<journal-title>Journal of Open Source Software</journal-title>
+<abbrev-journal-title>JOSS</abbrev-journal-title>
+</journal-title-group>
+<issn publication-format="electronic">2475-9066</issn>
+<publisher>
+<publisher-name>Open Journals</publisher-name>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="publisher-id">0</article-id>
+<article-id pub-id-type="doi">N/A</article-id>
+<title-group>
+<article-title>LAS-NoCode Rule Editor: A visual low-code framework for
+reproducible Complex Event Processing rule design in IoT
+research</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author" corresp="yes">
+<name>
+<surname>Gonçalves</surname>
+<given-names>Rosiberto</given-names>
+</name>
+<xref ref-type="aff" rid="aff-1"/>
+<xref ref-type="corresp" rid="cor-1"><sup>*</sup></xref>
+</contrib>
+<aff id="aff-1">
+<institution-wrap>
+<institution>Estácio University Center Recife, Brazil</institution>
+</institution-wrap>
+</aff>
+</contrib-group>
+<author-notes>
+<corresp id="cor-1">* E-mail: <email></email></corresp>
+</author-notes>
+<pub-date date-type="pub" publication-format="electronic" iso-8601-date="2026-02-20">
+<day>20</day>
+<month>2</month>
+<year>2026</year>
+</pub-date>
+<volume>¿VOL?</volume>
+<issue>¿ISSUE?</issue>
+<fpage>¿PAGE?</fpage>
+<permissions>
+<copyright-statement>Authors of papers retain copyright and release the
+work under a Creative Commons Attribution 4.0 International License (CC
+BY 4.0)</copyright-statement>
+<copyright-year>1970</copyright-year>
+<copyright-holder>The article authors</copyright-holder>
+<license license-type="open-access" xlink:href="https://creativecommons.org/licenses/by/4.0/">
+<license-p>Authors of papers retain copyright and release the work under
+a Creative Commons Attribution 4.0 International License (CC BY
+4.0)</license-p>
+</license>
+</permissions>
+<kwd-group kwd-group-type="author">
+<kwd>Python</kwd>
+<kwd>Flask</kwd>
+<kwd>IoT</kwd>
+<kwd>Complex Event Processing</kwd>
+<kwd>CEP</kwd>
+<kwd>FIWARE</kwd>
+<kwd>low-code</kwd>
+<kwd>reproducible research</kwd>
+</kwd-group>
+</article-meta>
+</front>
+<body>
+<sec id="summary">
+  <title>Summary</title>
+  <p>Complex Event Processing (CEP) supports real-time detection of
+  patterns and anomalies over continuous event streams and is widely
+  adopted in Internet of Things (IoT), smart environments, and
+  distributed systems. Despite mature execution engines, rule definition
+  typically depends on textual domain-specific languages such as Event
+  Processing Language (EPL), which increases cognitive load and
+  introduces variability in rule specification.</p>
+  <p>LAS-NoCode Rule Editor (LAS) is an open-source, containerized,
+  low-code web application that enables structured visual construction
+  of CEP rules. LAS represents rules as directed block graphs and
+  automatically generates syntactically valid EPL compatible with Perseo
+  CEP within the FIWARE ecosystem. The system is designed to support
+  reproducible experimentation, structured rule modeling, and
+  educational adoption in event-driven systems research.</p>
+  <fig>
+    <caption><p>LAS visual rule modeling and automatically generated EPL
+    code compatible with FIWARE Perseo CEP.</p></caption>
+    <graphic mimetype="image" mime-subtype="png" xlink:href="las_editor.png" />
+  </fig>
+  <p>Figure 1: LAS-NoCode Rule Editor interface showing visual
+  construction of a CEP rule using connected blocks (left) and the
+  automatically generated EPL rule compatible with Perseo CEP (right),
+  enabling direct deployment to the CEP engine.</p>
+</sec>
+<sec id="statement-of-need">
+  <title>Statement of need</title>
+  <p>CEP engines provide scalable and efficient runtime infrastructures,
+  yet rule authoring remains largely manual and text-based. This creates
+  challenges for:</p>
+  <list list-type="bullet">
+    <list-item>
+      <p>Teaching event-driven architectures and CEP concepts.</p>
+    </list-item>
+    <list-item>
+      <p>Rapid prototyping of event patterns in research scenarios.</p>
+    </list-item>
+    <list-item>
+      <p>Reproducible specification of rule logic across
+      experiments.</p>
+    </list-item>
+  </list>
+  <p>In research contexts, rule definitions are often embedded in
+  configuration files or scripts without structured modeling support,
+  making controlled experimentation and replication more difficult.</p>
+  <p>LAS addresses this limitation by introducing a visual abstraction
+  layer aligned with CEP semantics. The system:</p>
+  <list list-type="bullet">
+    <list-item>
+      <p>Encodes rule logic as structured block-based flows.</p>
+    </list-item>
+    <list-item>
+      <p>Enforces consistent rule composition patterns.</p>
+    </list-item>
+    <list-item>
+      <p>Automatically translates visual models into EPL.</p>
+    </list-item>
+    <list-item>
+      <p>Enables containerized deployment for reproducible
+      environments.</p>
+    </list-item>
+    <list-item>
+      <p>Integrates natively with Perseo CEP infrastructures within the
+      FIWARE ecosystem.</p>
+    </list-item>
+  </list>
+  <p>By formalizing the rule authoring layer, LAS reduces syntactic
+  variability in rule definitions, improves accessibility for students
+  and researchers, and supports reproducible experimentation in
+  event-driven IoT research workflows.</p>
+</sec>
+<sec id="state-of-the-field">
+  <title>State of the field</title>
+  <p>CEP has been a recognized research and industrial field since the
+  formalization of event pattern detection models
+  (<xref alt="Luckham, 2002" rid="ref-luckham2002cep" ref-type="bibr">Luckham,
+  2002</xref>). Engines such as Esper
+  (<xref alt="EsperTech Inc., 2024" rid="ref-espertech" ref-type="bibr">EsperTech
+  Inc., 2024</xref>) provide expressive EPL-based rule definition and
+  efficient in-memory execution. Distributed stream processing
+  frameworks including Apache Flink
+  (<xref alt="Carbone et al., 2015" rid="ref-carbone2015flink" ref-type="bibr">Carbone
+  et al., 2015</xref>) and Kafka Streams
+  (<xref alt="Kreps et al., 2011" rid="ref-kreps2011kafka" ref-type="bibr">Kreps
+  et al., 2011</xref>) extend event processing to large-scale,
+  fault-tolerant environments.</p>
+  <p>Within the FIWARE ecosystem, Perseo CEP
+  (<xref alt="FIWARE Foundation, 2024" rid="ref-fiwareperseo" ref-type="bibr">FIWARE
+  Foundation, 2024</xref>) offers rule-based event processing integrated
+  with context management services. However, these systems primarily
+  focus on runtime execution and scalability rather than structured rule
+  modeling or visual abstraction.</p>
+  <p>Visual flow-based tools such as Node-RED
+  (<xref alt="Blackstock &amp; Lea, 2014" rid="ref-node-red" ref-type="bibr">Blackstock
+  &amp; Lea, 2014</xref>) enable event-driven composition through
+  graphical interfaces, but they are not specifically designed for EPL
+  generation or CEP rule modeling.</p>
+  <p>Previous work by Zimmerle de Lima
+  (<xref alt="Lima, 2017" rid="ref-zimmerle" ref-type="bibr">Lima,
+  2017</xref>) implemented a Node-RED plugin for Perseo CEP, enabling
+  event-driven mashups for IoT scenarios. The plugin allows users to
+  integrate sensor readings, actuators, dashboards, and alerts through
+  Node-RED’s flow-based programming model.</p>
+  <p>While this approach facilitates rapid prototyping and benefits from
+  Node-RED’s active ecosystem, it requires the installation and
+  knowledge of Node-RED and relies on generic flow constructs that do
+  not enforce CEP-specific rule semantics or automated EPL
+  generation.</p>
+  <p>In contrast, LAS-NoCode Rule Editor provides a standalone
+  domain-specific visual environment for CEP rule construction. Rules
+  are represented as directed block graphs and automatically translated
+  into EPL compatible with Perseo CEP. LAS does not depend on Node-RED
+  or additional platforms, reducing setup complexity and making it more
+  accessible to students and researchers.</p>
+  <p>This distinction allows LAS to reduce syntactic variability,
+  enforce consistent rule composition patterns, and enhance
+  reproducibility, while preserving the accessibility benefits of visual
+  programming for educational and research contexts.</p>
+  <p>LAS contributes at the intersection of CEP and low-code tooling
+  by:</p>
+  <list list-type="order">
+    <list-item>
+      <p>Providing a domain-specific visual modeling environment
+      tailored to CEP rule construction.</p>
+    </list-item>
+    <list-item>
+      <p>Automating the transformation from visual rule graphs into
+      executable EPL code.</p>
+    </list-item>
+    <list-item>
+      <p>Supporting reproducible experimental workflows through
+      containerized deployment using Docker
+      (<xref alt="Docker Inc., 2024" rid="ref-docker" ref-type="bibr">Docker
+      Inc., 2024</xref>).</p>
+    </list-item>
+  </list>
+</sec>
+<sec id="software-design">
+  <title>Software design</title>
+  <p>LAS is implemented as a modular web application composed of:</p>
+  <list list-type="bullet">
+    <list-item>
+      <p>Backend: Python with Flask
+      (<xref alt="Pallets Projects, 2024" rid="ref-flask" ref-type="bibr">Pallets
+      Projects, 2024</xref>).</p>
+    </list-item>
+    <list-item>
+      <p>Frontend: JavaScript-based block editor built on Drawflow
+      (<xref alt="jerosoler, 2024" rid="ref-drawflow" ref-type="bibr">jerosoler,
+      2024</xref>).</p>
+    </list-item>
+    <list-item>
+      <p>Deployment: containerized environment using Docker
+      (<xref alt="Docker Inc., 2024" rid="ref-docker" ref-type="bibr">Docker
+      Inc., 2024</xref>).</p>
+    </list-item>
+  </list>
+  <p>Rules are internally represented as directed block graphs. The
+  backend parses the graph into an intermediate representation and
+  generates EPL statements. The generated rules follow the EPL structure
+  expected by Perseo CEP and can be deployed directly to the engine
+  through REST-based integration.</p>
+  <p>The system can operate as a standalone web application or as a
+  Flask Blueprint embedded into larger systems. Containerization ensures
+  consistent execution across development, experimentation, and teaching
+  environments, supporting reproducibility in research settings.</p>
+</sec>
+<sec id="acknowledgements">
+  <title>Acknowledgements</title>
+  <p>The author thanks the open-source communities behind Flask, Docker,
+  Drawflow, and FIWARE for providing the tools that enabled the
+  development of LAS-NoCode Rule Editor.</p>
+</sec>
+</body>
+<back>
+<ref-list>
+  <title></title>
+  <ref id="ref-luckham2002cep">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Luckham</surname><given-names>David</given-names></name>
+      </person-group>
+      <article-title>The power of events: An introduction to complex event processing</article-title>
+      <source>Addison-Wesley</source>
+      <year iso-8601-date="2002">2002</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-espertech">
+    <element-citation>
+      <person-group person-group-type="author">
+        <string-name>EsperTech Inc.</string-name>
+      </person-group>
+      <article-title>Esper complex event processing engine</article-title>
+      <year iso-8601-date="2024">2024</year>
+      <uri>https://www.espertech.com/esper/</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-fiwareperseo">
+    <element-citation>
+      <person-group person-group-type="author">
+        <string-name>FIWARE Foundation</string-name>
+      </person-group>
+      <article-title>FIWARE perseo CEP</article-title>
+      <year iso-8601-date="2024">2024</year>
+      <uri>https://github.com/telefonicaid/perseo-core</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-carbone2015flink">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Carbone</surname><given-names>Paris</given-names></name>
+        <name><surname>Katsifodimos</surname><given-names>Asterios</given-names></name>
+        <name><surname>Ewen</surname><given-names>Stephan</given-names></name>
+        <name><surname>Markl</surname><given-names>Volker</given-names></name>
+      </person-group>
+      <article-title>Apache flink: Stream and batch processing in a single engine</article-title>
+      <source>IEEE Data Engineering Bulletin</source>
+      <year iso-8601-date="2015">2015</year>
+      <volume>38</volume>
+      <issue>4</issue>
+      <fpage>28</fpage>
+      <lpage>38</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-kreps2011kafka">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Kreps</surname><given-names>Jay</given-names></name>
+        <name><surname>Narkhede</surname><given-names>Neha</given-names></name>
+        <name><surname>Rao</surname><given-names>Jun</given-names></name>
+      </person-group>
+      <article-title>Kafka: A distributed messaging system for log processing</article-title>
+      <source>NetDB</source>
+      <year iso-8601-date="2011">2011</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-node-red">
+    <element-citation publication-type="paper-conference">
+      <person-group person-group-type="author">
+        <name><surname>Blackstock</surname><given-names>Michael</given-names></name>
+        <name><surname>Lea</surname><given-names>Rodger</given-names></name>
+      </person-group>
+      <article-title>Node-RED: Low-code programming for event-driven applications</article-title>
+      <source>Proceedings of the 5th international workshop on the web of things</source>
+      <year iso-8601-date="2014">2014</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-docker">
+    <element-citation>
+      <person-group person-group-type="author">
+        <string-name>Docker Inc.</string-name>
+      </person-group>
+      <article-title>Docker: Lightweight linux containers for consistent development and deployment</article-title>
+      <year iso-8601-date="2024">2024</year>
+      <uri>https://www.docker.com/</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-flask">
+    <element-citation>
+      <person-group person-group-type="author">
+        <string-name>Pallets Projects</string-name>
+      </person-group>
+      <article-title>Flask web development framework</article-title>
+      <year iso-8601-date="2024">2024</year>
+      <uri>https://flask.palletsprojects.com/</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-drawflow">
+    <element-citation>
+      <person-group person-group-type="author">
+        <name><surname>jerosoler</surname></name>
+      </person-group>
+      <article-title>Drawflow: Simple flow library</article-title>
+      <year iso-8601-date="2024">2024</year>
+      <uri>https://github.com/jerosoler/Drawflow</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-zimmerle">
+    <element-citation publication-type="thesis">
+      <person-group person-group-type="author">
+        <name><surname>Lima</surname><given-names>Carlos Eduardo Zimmerle de</given-names></name>
+      </person-group>
+      <article-title>Uso de data flows para processamento de eventos complexos na internet das coisas</article-title>
+      <publisher-name>Universidade Federal de Pernambuco, Centro de Informática</publisher-name>
+      <publisher-loc>Recife, Brasil</publisher-loc>
+      <year iso-8601-date="2017">2017</year>
+      <uri>https://www.cin.ufpe.br/~tg/2017-1/cezl-tg.pdf</uri>
+    </element-citation>
+  </ref>
+</ref-list>
+</back>
+</article>
