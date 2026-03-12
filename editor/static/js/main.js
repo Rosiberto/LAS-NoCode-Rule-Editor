@@ -371,7 +371,7 @@ function generateEPL() {
   const result = buildEPLFromNodes(nodes);
 
   Swal.fire({
-    title: 'View EPL',
+    title: 'LAS – Generated EPL (Perseo CEP)',
     html: `<pre style="text-align:left; max-height:400px; overflow:auto;">${JSON.stringify(result, null, 2)}</pre>`,
     width: 800
   });
