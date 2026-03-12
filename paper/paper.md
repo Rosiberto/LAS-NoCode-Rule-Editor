@@ -11,13 +11,13 @@ tags:
   - reproducible research
 authors:
   - name: Rosiberto Gonçalves
-    orcid: "0000-0000-0000-0000"
+    orcid: "0000-0001-5158-1675"
     corresponding: true
     affiliation: 1
 affiliations:
  - name: "Estácio University Center Recife, Brazil"
    index: 1
-date: 20 February 2026
+date: 12 March 2026
 bibliography: paper.bib
 repository: https://github.com/SEU_USUARIO/LAS-NoCode-Rule-Editor
 
@@ -76,6 +76,7 @@ LAS contributes at the intersection of CEP and low-code tooling by:
 1. Providing a domain-specific visual modeling environment tailored to CEP rule construction.
 2. Automating the transformation from visual rule graphs into executable EPL code.
 3. Supporting reproducible experimental workflows through containerized deployment using Docker [@docker].
+
 
 # Software design
 
