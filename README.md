@@ -95,7 +95,7 @@ Additional documentation and examples are available in the [documentation folder
 
 A detailed description of LAS, its architecture, and example use cases is available in the internal documentation.
 
-A **paper describing LAS in detail is currently in preparation** and will provide a formal academic reference for citation upon publication.
+A **paper describing LAS in detail is currently in preparation** and will provide a formal academic reference for citation upon publication..
 
 ---
 
