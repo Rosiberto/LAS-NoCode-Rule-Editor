@@ -1,0 +1,22 @@
+name: Update v3.0.0 Tag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config user.name "Rosiberto"
+          git config user.email "rosibertosantos@gmail.com"
+
+      - name: Update v3.0.0 tag
+        run: |
+          git tag -f v3.0.0
+          git push origin -f v3.0.0
