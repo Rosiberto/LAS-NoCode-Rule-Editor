@@ -20,6 +20,8 @@ affiliations:
 date: 12 March 2026
 bibliography: paper.bib
 repository: https://github.com/SEU_USUARIO/LAS-NoCode-Rule-Editor
+version: 2.1.0
+release_url: https://github.com/SEU_USUARIO/LAS-NoCode-Rule-Editor/releases/tag/v2.1.0
 
 ---
 
