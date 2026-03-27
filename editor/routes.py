@@ -53,21 +53,23 @@ def gerar_epl():
     }
 
     try:
+        # NOTE: Update the 'perseo-fe' hostname and the 'fiware-service' parameter
+        # to match your FIWARE Perseo CEP deployment and service configuration.
         resp = requests.post(
             "http://perseo-fe:9090/rules",
             json=payload,
             headers={
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "fiware-service": "titania", 
-                "fiware-servicepath": "/"
+                "fiware-service": "titania", # change this to your FIWARE service 
+                "fiware-servicepath": "/"    # adjust service path if needed
             },
             timeout=5
         )
 
         if resp.status_code not in (200, 201):
             return jsonify({
-                "error": "Erro ao enviar para o Perseo",
+                "error": "Error sending request to Perseo",
                 "perseo_status": resp.status_code,
                 "perseo_response": resp.text
             }), 500
@@ -81,7 +83,7 @@ def gerar_epl():
 
     except requests.exceptions.RequestException as e:
         return jsonify({
-            "error": "Não foi possível conectar ao Perseo",
+            "error": "Unable to connect to Perseo",
             "details": str(e)
         }), 500
     
@@ -93,7 +95,7 @@ def save_flow():
     flow = data.get('flow')
 
     if not name or not flow:
-        return jsonify({'error': 'Parâmetros name e flow são obrigatórios'}), 400
+        return jsonify({'error': 'The parameters "name" and "flow" are required'}), 400
 
     flow_json = json.dumps(flow)
     created_at = datetime.now().isoformat()
@@ -107,7 +109,7 @@ def save_flow():
             )
             flow_id = cursor.lastrowid
             conn.commit()
-        return jsonify({'message': 'Fluxo salvo com sucesso', 'id': flow_id})
+        return jsonify({'message': 'Flow saved successfully', 'id': flow_id})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     finally:
@@ -121,7 +123,7 @@ def get_flow(flow_id):
             cursor.execute('SELECT id, name, flow_json, created_at FROM flows WHERE id = ?', (flow_id,))
             row = cursor.fetchone()
             if row is None:
-                return jsonify({'error': 'Fluxo não encontrado'}), 404
+                return jsonify({'error': 'Flow not found'}), 404
             flow = json.loads(row[2])
             return jsonify({
                 'id': row[0],

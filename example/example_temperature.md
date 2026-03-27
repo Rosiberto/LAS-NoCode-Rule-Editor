@@ -67,10 +67,12 @@ import requests
 import random
 import time
 
+# Replace with your Orion Context Broker endpoint
 ORION_URL = "http://localhost:1026/v2/entities/Room1/attrs"
+
 HEADERS = {"Content-Type": "application/json",
-           "fiware-service": "titania",
-           "fiware-servicepath": "/"}
+           "fiware-service": "titania", # change this to your FIWARE service
+           "fiware-servicepath": "/"} # adjust service path if needed
 
 i = 1
 while i < 3 :

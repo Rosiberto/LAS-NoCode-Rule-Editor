@@ -3,11 +3,11 @@ import random
 import time
 
 # Replace with your Perseo CEP endpoint
-
-PERSEO_URL = "http://localhost:9090/notices"  
+PERSEO_URL = "http://localhost:9090/notices"
+ 
 HEADERS = {"Content-Type": "application/json",
-           "fiware-service": "titania", 
-           "fiware-servicepath": "/"}
+           "fiware-service": "titania", # change this to your FIWARE service
+           "fiware-servicepath": "/"}   # adjust service path if needed
 
 i=1
 while i<3:
