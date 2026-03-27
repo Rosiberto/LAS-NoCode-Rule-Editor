@@ -15,8 +15,6 @@ flow_bp = Blueprint(
 # Ativando CORS dentro do Blueprint
 CORS(flow_bp)
 
-#DB_NAME = 'flow.db'
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_NAME = os.path.join(BASE_DIR, 'flow.db')
 

@@ -221,7 +221,6 @@
   <h3>LAS-NoCode Rule Editor</h3>
 	
 	<div class="editor-wrapper">
-		<!-- Menu lateral com blocos -->
 		<div class="col">      
 
 		  <div class="menu-section">	  
@@ -235,7 +234,6 @@
 				</div>
 		  </div>
 		  
-		  <!-- Blocos Básicos -->
 		  <div class="menu-section">
 			<div class="menu-section-header" onclick="toggleSection(this)">
 			  <i class="fas fa-chevron-right"></i> Block Basic
@@ -302,13 +300,11 @@
 					</div>
 			</div>
 
-		  <!-- Você pode adicionar mais seções como esta 👇 -->
 			<div class="menu-section">
 				<div class="menu-section-header" onclick="toggleSection(this)">
 				  <i class="fas fa-chevron-right"></i> Block Aggregation
 				</div>		
 					<div class="menu-section-content">
-					  <!-- Blocos avançados aqui -->
 					  <div class="drag-drawflow" draggable="true" data-node="AVG">
 						<i class="fas fa-balance-scale-right"></i> <small><span>AVG</span></small>
 					  </div>
@@ -346,10 +342,7 @@
 		  
 		</div>
 
-		<!-- Área principal do editor -->
 		<div class="col-right">
-
-			<!-- Menu superior com abas e botões -->
 			<div class="menu">
 				<ul>
 				  <li id="btn-generate" class="btn-generate-epl">Generate EPL</li>
@@ -363,21 +356,17 @@
 				</div>
 			</div>
 
-			<!-- Área do editor -->
 			<div id="drawflow" >
 			</div>
 
-			<!-- Botão de Info -->
 			<div class="btn-info" onclick="info()" title="information">
 				<i class="fas fa-info-circle"></i>
 			</div>
 			  
-			<!-- Botão de lock -->
 			<div class="btn-lock" onclick="toggleLock()" title="Bloquear / Desbloquear editor">
 				<i id="lock-icon" class="fas fa-lock"></i>
 			</div>
 
-			<!-- Barra de zoom -->
 			<div class="bar-zoom" title="Zoom">
 				<i class="fas fa-search-minus" onclick="editor.zoom_out()"></i>
 				<i class="fas fa-search" onclick="editor.zoom_reset()"></i>
@@ -386,7 +375,6 @@
 		</div>
 	</div>
 
-  <!-- Scripts -->
   <script type="module" src="{{ url_for('flow.static', filename='js/main.js') }}"></script>
   <script src="{{ url_for('flow.static', filename='js/drawflow.min.js') }}"></script>
   <script src="{{ url_for('flow.static', filename='js/micromodal.min.js') }}"></script>

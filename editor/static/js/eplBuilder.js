@@ -10,7 +10,6 @@ export function buildEPLFromNodes(nodes) {
   let postNode = null;
   let emailNode = null;
 
-  // Primeiro, percorre todos os nós e guarda informações
   for (const id in nodes) {
     const node = nodes[id];
     const name = node.name;
@@ -94,19 +93,16 @@ export function buildEPLFromNodes(nodes) {
         break;
 
       default:
-        // ignora nós desconhecidos
         break;
     }
   }
 
-  // Monta a instrução EPL final
   const epl = epl_ + select_ + length + time + avg + count + min + max + sum + whereattribute +
     (pattern ? `SELECT * FROM pattern [${pattern}]` : '') +
     (attributepattern ? `SELECT *, ${attributepattern}` : '') +
     (patterntype ? `SELECT *, ${patterntype}` : '') +
     orderby + groupby;
 
-  // Conecta POST ou EMAIL ao ACTIONTYPE
   if (action) {
     if (postNode) {
       action.template = postNode.data_post || '';
@@ -118,7 +114,6 @@ export function buildEPLFromNodes(nodes) {
       action.parameters.from = emailNode.from || '';
       action.parameters.subject = emailNode.subject || '';
     } else {
-    // Mostra alerta pro usuário ao invés de lançar erro
       Swal.fire({
       icon: 'error',
       title: 'Rule validation error',
@@ -128,7 +123,6 @@ export function buildEPLFromNodes(nodes) {
         throw new Error("Each rule must have a POST or EMAIL block connected to the ACTIONTYPE.");
 	  }
   } else if (postNode || emailNode) {    
-	// Mostra alerta pro usuário ao invés de lançar erro
     Swal.fire({
       icon: 'error',
       title: 'Rule validation error',
@@ -136,8 +130,7 @@ export function buildEPLFromNodes(nodes) {
       width: 600
     });
  	  throw new Error("It is not possible to use POST or EMAIL without an ACTIONTYPE.");
- 	} 
-  
+ 	}   
 
   return { rule_name, epl, action };
 }
