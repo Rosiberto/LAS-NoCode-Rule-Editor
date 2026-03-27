@@ -1,9 +1,9 @@
 import { buildEPLFromNodes } 
 from '../../editor/static/js/eplBuilder.js';
 
-describe('eplBuilder - testes de regras CEP', () => {
+describe('eplBuilder - CEP Rule Tests', () => {
 
-  test('gera regra simples SELECT', () => {
+  test('Generate simple SELECT rule', () => {
     const nodes = {
       1: { name: 'RULE', data: { rule: 'temp_rule' } },
       2: { name: 'SELECT', data: { select: 'temperature' } }
@@ -16,7 +16,7 @@ describe('eplBuilder - testes de regras CEP', () => {
     expect(result.action).toBeNull();
   });
 
-  test('gera regra com WHERE', () => {
+  test('Generate rule with WHERE clause', () => {
     const nodes = {
       1: { name: 'SELECT WHERE', data: { attributewhere: 'humidity', where: 'humidity > 50' } },
       2: { name: 'RULE', data: { rule: 'humidity_rule' } }
@@ -27,7 +27,7 @@ describe('eplBuilder - testes de regras CEP', () => {
     expect(result.epl).toBe('SELECT *, humidity FROM iotEvent WHERE humidity > 50');
   });
 
-  test('gera regra com LENGTH e TIME', () => {
+  test('Generate rule with LENGTH and TIME', () => {
     const nodes = {
       1: { name: 'LENGTH', data: { attributenamelength: 'temperature', length: 5 } },
       2: { name: 'TIME', data: { attributenametime: 'temperature', length: 10 } },
@@ -40,7 +40,7 @@ describe('eplBuilder - testes de regras CEP', () => {
     expect(result.epl).toContain('win:time(10 sec)');
   });
 
-  test('gera regra com GROUPBY e ORDERBY', () => {
+  test('Generate rule with GROUPBY and ORDERBY', () => {
     const nodes = {
       1: { name: 'GROUPBY', data: { group: 'sensor_id' } },
       2: { name: 'ORDERBY', data: { order: 'timestamp DESC' } },
@@ -52,7 +52,7 @@ describe('eplBuilder - testes de regras CEP', () => {
     expect(result.epl).toContain('ORDER BY timestamp DESC');
   });
 
-  test('gera padrão com PATTERN, ATTRIBUTEPATTERN e PATTERNTYPE', () => {
+  test('Generate pattern with PATTERN, ATTRIBUTEPATTERN, and PATTERNTYPE', () => {
     const nodes = {
       1: { name: 'PATTERN', data: { pattern: 'temperature > 30' } },
       2: { name: 'ATTRIBUTEPATTERN', data: { pattern: 'temperature > 30', attribute: 'temperature' } },
@@ -66,7 +66,7 @@ describe('eplBuilder - testes de regras CEP', () => {
     expect(result.epl).toContain("type='sensor'");
   });
 
-  test('gera agregações AVG, COUNT, MIN, MAX, SUM', () => {
+  test('Generate aggregations AVG, COUNT, MIN, MAX, SUM', () => {
     const nodes = {
       1: { name: 'AVG', data: { avgattributename: 'temperature' } },
       2: { name: 'COUNT', data: { countattributename: 'temperature' } },
@@ -84,7 +84,7 @@ describe('eplBuilder - testes de regras CEP', () => {
     expect(result.epl).toContain('sum(temperature)');
   });
 
-  test('gera ação POST', () => {
+  test('Generate POST action', () => {
     const nodes = {
       1: { name: 'ACTIONTYPE', data: { type: 'post' } },
       2: { name: 'POST', data: { post: 'http://localhost:9090', data_post: '{}' } }
@@ -97,7 +97,7 @@ describe('eplBuilder - testes de regras CEP', () => {
     expect(result.action.template).toBe('{}');
   });
 
-  test('gera ação EMAIL', () => {
+  test('Generate EMAIL action', () => {
     const nodes = {
       1: { name: 'ACTIONTYPE', data: { type: 'email' } },
       2: { name: 'EMAIL', data: { to: 'to@example.com', from: 'from@example.com', subject: 'Test', template: 'Hello' } }
