@@ -1,9 +1,9 @@
 // tests/frontend/eplBuilderFull.test.js
 import { buildEPLFromNodes } from '../../editor/static/js/eplBuilder.js';
 
-describe('eplBuilder - testes de regras CEP completos', () => {
+describe('eplBuilder – Complete CEP Rule Tests', () => {
 
-  test('gera regra simples SELECT', () => {
+  test('Generate simple SELECT rule', () => {
     const nodes = [
       { name: 'SELECT', data: { select: 'temperature' } }
     ];
@@ -11,7 +11,7 @@ describe('eplBuilder - testes de regras CEP completos', () => {
     expect(result.epl).toContain('SELECT *, temperature FROM iotEvent');
   });
 
-  test('gera regra com SELECT WHERE', () => {
+  test('Generate rule with SELECT WHERE', () => {
     const nodes = [
       { name: 'SELECT WHERE', data: { attributewhere: 'humidity', where: 'humidity > 50' } }
     ];
@@ -19,7 +19,7 @@ describe('eplBuilder - testes de regras CEP completos', () => {
     expect(result.epl).toContain('SELECT *, humidity FROM iotEvent WHERE humidity > 50');
   });
 
-  test('gera regra com LENGTH e TIME', () => {
+  test('Generate rule with LENGTH and TIME', () => {
     const nodes = [
       { name: 'LENGTH', data: { attributenamelength: 'temperature', length: 5 } },
       { name: 'TIME', data: { attributenametime: 'temperature', length: 10 } }
@@ -29,7 +29,7 @@ describe('eplBuilder - testes de regras CEP completos', () => {
     expect(result.epl).toContain('win:time(10 sec)');
   });
 
-  test('gera regra com GROUPBY e ORDERBY', () => {
+  test('Generate rule with GROUPBY and ORDERBY', () => {
     const nodes = [
       { name: 'GROUPBY', data: { group: 'deviceId' } },
       { name: 'ORDERBY', data: { order: 'temperature' } },
@@ -40,7 +40,7 @@ describe('eplBuilder - testes de regras CEP completos', () => {
     expect(result.epl).toContain('ORDER BY temperature');
   });
 
-  test('gera padrão com PATTERN, ATTRIBUTEPATTERN e PATTERNTYPE', () => {
+  test('Generate pattern with PATTERN, ATTRIBUTEPATTERN, and PATTERNTYPE', () => {
     const nodes = [
       { name: 'PATTERN', data: { pattern: 'temperature > 30' } },
       { name: 'ATTRIBUTEPATTERN', data: { pattern: 'temperature > 30', attribute: 'temperature' } },
@@ -52,7 +52,7 @@ describe('eplBuilder - testes de regras CEP completos', () => {
     expect(result.epl).toContain('SELECT *, FROM pattern [every ev=iotEvent( temperature > 30 and type=\'sensor\')]');
   });
 
-  test('gera agregações AVG, COUNT, MIN, MAX, SUM', () => {
+  test('Generate aggregations AVG, COUNT, MIN, MAX, SUM', () => {
     const nodes = [
       { name: 'AVG', data: { avgattributename: 'temperature' } },
       { name: 'COUNT', data: { countattributename: 'temperature' } },
@@ -66,7 +66,7 @@ describe('eplBuilder - testes de regras CEP completos', () => {
     });
   });
 
-  test('gera ação POST', () => {
+  test('Generate POST action', () => {
     const nodes = [
       { name: 'ACTIONTYPE', data: { type: 'POST' } },
       { name: 'POST', data: { post: 'http://example.com', data_post: '{}' } }
@@ -78,7 +78,7 @@ describe('eplBuilder - testes de regras CEP completos', () => {
     expect(result.action.parameters.url).toBe('http://example.com');
   });
 
-  test('gera ação EMAIL', () => {
+  test('Generate EMAIL action', () => {
     const nodes = [
       { name: 'ACTIONTYPE', data: { type: 'EMAIL' } },
       { name: 'EMAIL', data: { to: 'a@b.com', from: 'c@d.com', subject: 'Test', template: 'Hello' } }
@@ -92,7 +92,7 @@ describe('eplBuilder - testes de regras CEP completos', () => {
     expect(result.action.parameters.subject).toBe('Test');
   });
 
-  test('ignora node inválido', () => {
+  test('Ignore invalid node', () => {
     const nodes = [
       { name: 'SELECT', data: { select: 'temperature' } },
       { name: 'INVALID', data: {} }
@@ -101,7 +101,7 @@ describe('eplBuilder - testes de regras CEP completos', () => {
     expect(result.epl).toContain('SELECT *, temperature FROM iotEvent');
   });
 
-  test('regras complexas combinando múltiplos blocos', () => {
+  test('Complex rules combining multiple blocks', () => {
     const nodes = [
       { name: 'SELECT WHERE', data: { attributewhere: 'temperature', where: 'temperature > 30' } },
       { name: 'AVG', data: { avgattributename: 'temperature' } },
