@@ -224,7 +224,7 @@ function setupDragAndDrop(editor) {
       if (addFunc) {
         addFunc(editor, x, y); // passamos posição
       } else {
-        console.warn(`Bloco "${nodeName}" não encontrado`);
+        console.warn(`Block "${nodeName}" was not found`);
       }
     });
   }
