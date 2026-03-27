@@ -121,21 +121,21 @@ export function buildEPLFromNodes(nodes) {
     // Mostra alerta pro usuário ao invés de lançar erro
       Swal.fire({
       icon: 'error',
-      title: 'Erro na regra',
-      html: `<p>Toda regra deve ter um bloco POST ou EMAIL conectado ao ACTIONTYPE.</p>`,
+      title: 'Rule validation error',
+      html: `<p>Each rule must have a POST or EMAIL block connected to the ACTIONTYPE.</p>`,
       width: 600
       });		
-        throw new Error("Toda regra deve ter um bloco POST ou EMAIL conectado ao ACTIONTYPE.");
+        throw new Error("Each rule must have a POST or EMAIL block connected to the ACTIONTYPE.");
 	  }
   } else if (postNode || emailNode) {    
 	// Mostra alerta pro usuário ao invés de lançar erro
     Swal.fire({
       icon: 'error',
-      title: 'Erro na regra',
-      html: `<p>Toda regra deve ter um bloco POST ou EMAIL conectado ao ACTIONTYPE.</p>`,
+      title: 'Rule validation error',
+      html: `<p>Each rule must have a POST or EMAIL block connected to the ACTIONTYPE.</p>`,
       width: 600
     });
- 	  throw new Error("Não é possível usar POST ou EMAIL sem um ACTIONTYPE.");
+ 	  throw new Error("It is not possible to use POST or EMAIL without an ACTIONTYPE.");
  	} 
   
 
