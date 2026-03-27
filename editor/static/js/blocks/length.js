@@ -41,7 +41,7 @@ function getHtml(title, fields) {
 function updateNodeHtml(editor, nodeId) {
   const node = editor.getNodeFromId(nodeId);
   if (!node || !node.data) {
-    console.warn(`Nó ${nodeId} não encontrado ou sem dados.`);
+    console.warn(`Node ${nodeId} was not found or contains no data.`);
     return;
   }
 
@@ -78,14 +78,14 @@ function waitForNodeAndUpdateHtml(editor, nodeId, tries = 20) {
   const nodeExists = editor.drawflow?.drawflow?.[module]?.data?.[nodeId];
 
   if (nodeExists) {
-    console.log(`✅ Nó ${nodeId} encontrado. Atualizando HTML...`);
+    console.log(`✅ Node ${nodeId} was successfully located. Updating HTML...`);
     updateNodeHtml(editor, nodeId);
   } else if (tries > 0) {
     setTimeout(() => {
       waitForNodeAndUpdateHtml(editor, nodeId, tries - 1);
     }, 50);
   } else {
-    console.warn(`❌ Nó ${nodeId} não foi encontrado após várias tentativas.`);
+    console.warn(`❌ Node ${nodeId} could not be found after multiple attempts.`);
   }
 }
 
