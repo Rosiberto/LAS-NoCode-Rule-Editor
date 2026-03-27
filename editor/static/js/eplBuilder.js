@@ -1,6 +1,7 @@
 export function buildEPLFromNodes(nodes) {
   let rule_name = '';
-  let epl_ = '', select_ = '', whereattribute = '', groupby = '', orderby = '';
+  let epl_ = '', select_ = '', whereattribute = '', 
+      groupby = '', orderby = '';
   let min = '', max = '', avg = '', count = '', sum = '';
   let length = '', time = '';
   let pattern = '', patterntype = '', attributepattern = '';
