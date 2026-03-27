@@ -382,7 +382,7 @@ function generateEPL() {
     body: JSON.stringify(result)
   })
     .then(res => res.json())
-    .then(j => console.log('Resposta backend:', j));
+    .then(j => console.log('Backend response:', j));
 }
 
 // ** Nova função para salvar no backend **
@@ -416,7 +416,7 @@ function saveFlowToServer() {
         alert(`Flow saved successfully.! ID: ${data.id}`);
       }
     })
-    .catch(err => alert('Erro na comunicação: ' + err.message));
+    .catch(err => alert('A communication error has occurred: ' + err.message));
   }
 
 function loadFlowFromServer() {
