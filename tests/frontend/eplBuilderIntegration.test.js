@@ -1,9 +1,9 @@
 // tests/frontend/eplBuilderIntegration.test.js
 import { buildEPLFromNodes } from '../../editor/static/js/eplBuilder.js';
 
-describe('eplBuilder - teste de integração completo', () => {
+describe('eplBuilder – Complete Integration Test', () => {
 
-  test('geração de regra completa combinando múltiplos blocos', () => {
+  test('Generate complete rule combining multiple blocks', () => {
 
     const nodes = [
       { name: 'SELECT', data: { select: 'temperature' } },
