@@ -104,8 +104,14 @@ export function buildEPLFromNodes(nodes) {
     orderby + groupby;
 
   if (action) {
-    if (postNode) {
-      action.template = postNode.data_post || '';
+    if (postNode) {																   
+      const priority = (postNode.priority || 'I').trim().toUpperCase();
+      const payload = { ruleName: rule_name,
+                        template: postNode.template || '',
+                        priority: priority,
+                        epl: epl
+                      };
+      action.template = JSON.stringify(payload) || '';
       action.parameters.url = postNode.post || '';
       action.parameters.headers = { "Content-Type": "application/json" };
     } else if (emailNode) {
@@ -132,5 +138,5 @@ export function buildEPLFromNodes(nodes) {
  	  throw new Error("It is not possible to use POST or EMAIL without an ACTIONTYPE.");
  	}   
 
-  return { rule_name, epl, action };
+  return { ruleName: rule_name, epl, action };
 }

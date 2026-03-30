@@ -27,7 +27,12 @@ function getHtml(title, fields) {
       <div class="box">
         <input type="text" placeholder="Enter URL." df-post>
         <br/><br/>
-        <input type="text" placeholder="Enter template." df-data_post>
+        <input type="text" placeholder="Ex: Level= \${level}." df-template>
+        <br/><br/>
+        <input type="text" placeholder="Enter priority (C, W, I)." df-priority>
+        <small style="margin-left:10px; color:#555; font-size:0.62rem;">
+          C = Critical, W = Warning, I = Info
+        </small>
       </div>
     </div>
   `;
@@ -46,7 +51,8 @@ function updateNodeHtml(editor, nodeId) {
 
   // Substituímos o input para adicionar o onchange com nodeId e o valor atual
   const value = node.data.post || '';
-  const value_data = node.data.data_post || '';
+  const value_template = node.data.template || '';
+  const value_priority = node.data.priority || '';
 
   html = html.replace(
     /<input([^>]*)df-post([^>]*)>/,
@@ -54,8 +60,13 @@ function updateNodeHtml(editor, nodeId) {
   );
 
   html = html.replace(
-    /<input([^>]*)df-data_post([^>]*)>/,
-    `<input$1df-data_post$2 value="${value_data}" onchange="window.updateNode('${nodeId}', 'post', this.value)">`
+    /<input([^>]*)df-template([^>]*)>/,
+    `<input$1df-template$2 value="${value_template}" onchange="window.updateNode('${nodeId}', 'template', this.value)">`
+  );
+
+  html = html.replace(
+    /<input([^>]*)df-priority([^>]*)>/,
+    `<input$1df-priority$2 value="${value_priority}" onchange="window.updateNode('${nodeId}', 'priority', this.value)">`
   );
 
   // Valida antes de setar o HTML
