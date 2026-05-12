@@ -201,7 +201,7 @@ function setupDragAndDrop(editor) {
       if (addFunc) {
         addFunc(editor, x, y); 
       } else {
-        console.warn(`Block "${nodeName}" was not found`);
+        console.warn(`Block '${nodeName}' not found.`);
       }
     });
   }

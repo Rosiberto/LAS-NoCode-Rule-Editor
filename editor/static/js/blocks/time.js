@@ -7,13 +7,13 @@ export function addTime(editor, x = 100, y = 100) {
   }
   
   const nodeId = editor.addNode(
-    'SELECT TIME',
+    'TIME',
     0, 1,
     x,
     y,
-    'select time',
+    'time',
     {},
-    getHtml('SELECT TIME', [
+    getHtml('TIME', [
       { default: 'SELECT *, '}, 
 	  { default_time: 'FROM iotEvent.win:TIME ' }
     ], null)

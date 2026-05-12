@@ -7,13 +7,13 @@ export function addWhere(editor, x = 100, y = 100) {
   }
   
   const nodeId = editor.addNode(
-    'SELECT WHERE',
+    'WHERE',
     0, 1,
     x,
     y,
-    'select where',
+    'where',
     {},
-    getHtml('SELECT WHERE', [
+    getHtml('WHERE', [
       { default: 'SELECT *, '}, 
 	  { default_fromwhere: 'FROM iotEvent WHERE ' }
     ], null)
