@@ -7,13 +7,13 @@ export function addLength(editor, x = 100, y = 100) {
   }
   
   const nodeId = editor.addNode(
-    'SELECT LENGTH',
+    'LENGTH',
     0, 1,
     x,
     y,
-    'select length',
+    'length',
     {},
-    getHtml('SELECT WHERE', [
+    getHtml('LENGTH', [
       { default: 'SELECT *, '}, 
 	  { default_length: 'FROM iotEvent.win:LENGTH ' }
     ], null)

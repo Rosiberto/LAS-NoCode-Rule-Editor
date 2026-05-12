@@ -49,7 +49,7 @@ function updateNodeHtml(editor, nodeId) {
 
 	  
  // Pegamos o HTML base
-  let html = getHtml('PATTERN', [{ default: 'SELECT *,'},
+  let html = getHtml('ATTRIBUTEPATTERN', [{ default: 'SELECT *,'},
 								 { default_from:'FROM pattern [every ev=iotEvent('}, 
 								 { close_pattern: ' )]' }
 							    ]);
