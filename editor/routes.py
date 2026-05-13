@@ -16,25 +16,25 @@ flow_bp = Blueprint(
 CORS(flow_bp)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_NAME = os.path.join(BASE_DIR, 'flow.db')
-
-#Minify(app=app, html=False, js=True, cssless=False)
-
+DB_NAME  = os.path.join(BASE_DIR, 'flow.db')
 CONFIG_FILE = os.path.join(BASE_DIR, 'config.json')
 
 def load_config():
-    if not os.path.exists(CONFIG_FILE):
-        with open(CONFIG_FILE, 'w') as f:
-            json.dump(DEFAULT_CONFIG, f, indent=4)
-        return DEFAULT_CONFIG
-
     try:
         with open(CONFIG_FILE, 'r') as f:
             return json.load(f)
-    except Exception:
-        return DEFAULT_CONFIG
+    except FileNotFoundError:
+        raise Exception(
+            f'Configuration file not found: "{CONFIG_FILE}". '
+            'Please create config.json before starting the application.'
+        )
+    except json.JSONDecodeError as e:
+        raise Exception(
+            f'Invalid JSON syntax in "{CONFIG_FILE}" '
+            f'(line {e.lineno}, column {e.colno}).'
+        )
 
-CONFIG = load_config()
+CONFIG = load_config() 
 
 
 def init_db():
@@ -114,7 +114,7 @@ def save_flow():
     if not name or not flow:
         return jsonify({'error': 'The parameters "name" and "flow" are required'}), 400
 
-    flow_json = json.dumps(flow)
+    flow_json  = json.dumps(flow)
     created_at = datetime.now().isoformat()
 
     try:
@@ -158,7 +158,7 @@ def list_flows():
         with sqlite3.connect(DB_NAME) as conn:
             cursor = conn.cursor()
             cursor.execute('SELECT id, name, created_at FROM flows ORDER BY created_at DESC')
-            rows = cursor.fetchall()
+            rows  = cursor.fetchall()
             flows = [
                 {'id': row[0], 'name': row[1], 'created_at': row[2]}
                 for row in rows
