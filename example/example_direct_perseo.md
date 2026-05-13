@@ -1,14 +1,13 @@
-# LAS-NoCode Rule Editor - Example: Direct Perseo CEP Event Trigger
+# LAS-NoCode Rule Editor - Example: CEP Workflow with FIWARE Perseo CEP
 
-This example demonstrates how to use the LAS-NoCode Rule Editor to create a **rule and trigger it directly via Perseo CEP** using Python. No Orion Context Broker is required.
-
+This example demonstrates a CEP workflow where LAS is used for rule design and FIWARE Perseo CEP serves as the execution engine. LAS operates at design-time, generating EPL rules that are deployed to Perseo CEP for runtime evaluation.
 ---
 
 ## Scenario
 
-**Objective:** Define a rule that triggers an alert when a temperature value exceeds 30°C. The rule is created in LAS, deployed to Perseo CEP, and triggered by sending events directly to Perseo via its REST API.
+**Objective:** Define a rule that triggers an alert when a temperature value exceeds 30°C. The rule is created in LAS, deployed to Perseo CEP, and triggered by sending events directly to the Perseo CEP REST API.
 
-- **Input:** Events sent directly to Perseo CEP using Python  
+- **Input:** Events are sent directly to the Perseo CEP REST API to emulate runtime conditions  
 - **CEP Rule:** If `temperature > 30`, trigger an alert  
 - **Output:** Perseo CEP executes the rule and produces the alert
 
@@ -57,18 +56,18 @@ i = 1
 while i <3:
     temp = random.randint(25, 35)
 
-event = {
-        "data": [
-            {
-                "id": "Room1",
-                "type": "Room",
-                "temperature": {
-                    "type": "Number",
-                    "value": temp
+    event = {
+            "data": [
+                {
+                    "id": "Room1",
+                    "type": "Room",
+                    "temperature": {
+                        "type": "Number",
+                        "value": temp
+                    }
                 }
-            }
-        ],
-        "subscriptionId": "simulated-sent-event"
+            ],
+            "subscriptionId": "simulated-sent-event"
     }
 
     response = requests.post(PERSEO_URL, json=event, headers=HEADERS)
@@ -94,7 +93,7 @@ Sent event: {'data': [{'id': 'Room1', 'type': 'Room', 'temperature': {'type': 'N
 time=2026-02-22T04:12:55.597Z | lvl=INFO | from=::ffff:172.19.0.1 | corr=f9a98452-b878-496d-86bd-70dcb8b0a80e; node=O8MgEottSa; perseocep=64 | trans=034cafb1-611e-4339-82f5-fdab7b23bc56 | srv=titania | subsrv=/ | op=doPost | comp=perseo-core | msg=incoming event: {"noticeId":"c3954970-0fa4-11f1-b823-d55bae7843ea","noticeTS":1771733575561,"id":"Room1","type":"Room","isPattern":false,"subservice":"/","service":"titania","temperature__type":"Number","temperature":30}
 ```
 
-Alerts are logged by Perseo CEP based on the deployed rule.
+Perseo CEP evaluates the rule and generates alerts when the conditions are satisfied.
 
 ## 5. Instructions for Use
 
