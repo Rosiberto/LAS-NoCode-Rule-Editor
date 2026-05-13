@@ -1,0 +1,5 @@
+{
+  "PERSEO_URL": "http://localhost:9090/rules",
+  "FIWARE_SERVICE": "las",
+  "FIWARE_SERVICEPATH": "/"
+}

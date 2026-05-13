@@ -20,6 +20,30 @@ DB_NAME = os.path.join(BASE_DIR, 'flow.db')
 
 #Minify(app=app, html=False, js=True, cssless=False)
 
+CONFIG_FILE = os.path.join(BASE_DIR, 'config.json')
+
+# Configuração padrão
+DEFAULT_CONFIG = {
+    "PERSEO_URL": "http://perseo-fe:9090/rules",
+    "FIWARE_SERVICE": "titania",
+    "FIWARE_SERVICEPATH": "/"
+}
+
+def load_config():
+    if not os.path.exists(CONFIG_FILE):
+        with open(CONFIG_FILE, 'w') as f:
+            json.dump(DEFAULT_CONFIG, f, indent=4)
+        return DEFAULT_CONFIG
+
+    try:
+        with open(CONFIG_FILE, 'r') as f:
+            return json.load(f)
+    except Exception:
+        return DEFAULT_CONFIG
+
+CONFIG = load_config()
+
+
 def init_db():
     with sqlite3.connect(DB_NAME) as conn:
         cursor = conn.cursor()
