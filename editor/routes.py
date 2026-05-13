@@ -22,13 +22,6 @@ DB_NAME = os.path.join(BASE_DIR, 'flow.db')
 
 CONFIG_FILE = os.path.join(BASE_DIR, 'config.json')
 
-# Configuração padrão
-DEFAULT_CONFIG = {
-    "PERSEO_URL": "http://perseo-fe:9090/rules",
-    "FIWARE_SERVICE": "titania",
-    "FIWARE_SERVICEPATH": "/"
-}
-
 def load_config():
     if not os.path.exists(CONFIG_FILE):
         with open(CONFIG_FILE, 'w') as f:
@@ -80,13 +73,13 @@ def gerar_epl():
         # NOTE: Update the 'perseo-fe' hostname and the 'fiware-service' parameter
         # to match your FIWARE Perseo CEP deployment and service configuration.
         resp = requests.post(
-            "http://perseo-fe:9090/rules",
+            CONFIG["PERSEO_URL"], # adjust url perseo in config.json
             json=payload,
             headers={
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "fiware-service": "titania", # change this to your FIWARE service 
-                "fiware-servicepath": "/"    # adjust service path if needed
+                "fiware-service": CONFIG["FIWARE_SERVICE"], # change this to your FIWARE service in config.json
+                "fiware-servicepath": CONFIG["FIWARE_SERVICEPATH"] # adjust service path if needed in config.json
             },
             timeout=5
         )

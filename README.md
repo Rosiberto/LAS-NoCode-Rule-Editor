@@ -64,6 +64,18 @@ cd LAS-NoCode-Rule-Editor
 docker compose up -d
 ```
 
+## Configuration
+
+Edit the `config.json` file before running the application:
+
+```json
+{
+  "PERSEO_URL": "http://localhost:9090/rules",
+  "FIWARE_SERVICE": "las",
+  "FIWARE_SERVICEPATH": "/"
+}
+```
+
 ## Accessing the Application
 
 Once the container is running, open your browser at: [http://localhost:5000](http://localhost:5000)
