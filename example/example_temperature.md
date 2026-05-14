@@ -8,13 +8,12 @@ The example also demonstrates a reproducible experimentation setup using contain
 
 ---
 
-
 ## Scenario
 
 The objective is to define a CEP rule that detects temperature values above a predefined threshold.
 
-- **Input:** Temperature events sent to Orion Context Broker by simulated sources
-Rule Condition: `temperature > 30`.
+- **Input:** Temperature events sent to Orion Context Broker by simulated sources.
+- **Rule Condition:** `temperature > 30`.
 - **Execution Engine:** FIWARE Perseo CEP.
 - **Expected Behavior:** An alert is triggered whenever the condition is satisfied.
 
@@ -22,22 +21,20 @@ This example focuses on the rule authoring and deployment workflow provided by L
 
 ---
 
-
 ## 1. Rule Definition in LAS
 
 Using the visual editor, the rule can be defined through block-based components representing conditions and actions.
 
 [Condition: TEMPERATURE > 30] ---> [Action: GENERATE ALERT]
 
-Once the rule is complete, click **“Generate EPL”** to automatically generate the EPL and deploy the rule to Perseo CEP.
+Once the rule is complete, LAS automatically generates the corresponding EPL rule and deploys it to Perseo CEP through its REST API.
 
-The **Condition Block** defines the event filtering criteria.
-The **Action Block** specifies the action executed when the condition is satisfied.
+- The **Condition Block** defines the event filtering criteria.
+- The **Action Block** specifies the action executed when the condition is satisfied.
 
 After the flow is completed, LAS automatically generates the corresponding EPL rule and deploys it to Perseo CEP through its REST API.
 
 ---
-
 
 ## 2. Automatically Generated EPL
 
@@ -49,10 +46,11 @@ FROM iotEvent
 WHERE temperature! > 30
 ```
 
+The `!` notation follows the attribute reference syntax used by FIWARE Perseo CEP during EPL evaluation.
+
 The generated EPL is deployed to Perseo CEP, which evaluates incoming events received from Orion Context Broker.
 
 ---
-
 
 ## 3. Event Processing Workflow
 
@@ -69,7 +67,6 @@ The event flow associated with this example is summarized below:
 This architecture preserves the design-time/runtime separation adopted by LAS, where the editor is responsible for rule authoring and Perseo CEP handles event processing and execution.
 
 ---
-
 
 ## 4. Optional Event Simulation Script
 
@@ -109,27 +106,21 @@ The script sends randomized temperature values to Orion Context Broker, enabling
 
 ---
 
-
-## 5. Expected Runtime Behavior
+## 5. Runtime Execution Example
 
 When temperature values exceed the configured threshold, Perseo CEP evaluates the deployed EPL rule and executes the corresponding action.
 
 Example Orion Context Broker logs produced during event submission are shown below:
 
 ```yaml
-time=2026-02-22T03:49:33.985Z | lvl=INFO | corr=7fe63ee4-0fa1-11f1-8d3f-a20024534928 | trans=1771729386-998-00000000051 | from=172.19.0.6 | srv=titania | subsrv=/ | comp=Orion | op=logTracing.cpp[211]:logInfoRequestWithPayload | msg=Request received: POST /v2/entities?options=upsert, request payload (217 bytes): {"id":"Tank:tank:001","type":"Tank","l":{"type":"Text","value":28,"metadata":{"TimeInstant":{"type":"DateTime","value":"2026-02-22T03:49:33.121Z"}}},"TimeInstant":{"type":"DateTime","value":"2026-02-22T03:49:33.121Z"}}, response code: 204
+time=2026-02-22T03:49:33.985Z | lvl=INFO | corr=7fe63ee4-0fa1-11f1-8d3f-a20024534928 | trans=1771729386-998-00000000051 | from=172.19.0.6 | srv=las | subsrv=/ | comp=Orion | op=logTracing.cpp[211]:logInfoRequestWithPayload | msg=Request received: POST /v2/entities?options=upsert, request payload (217 bytes): {"id":"Tank:tank:001","type":"Tank","temperature":{"type":"Text","value":28,"metadata":{"TimeInstant":{"type":"DateTime","value":"2026-02-22T03:49:33.121Z"}}},"TimeInstant":{"type":"DateTime","value":"2026-02-22T03:49:33.121Z"}}, response code: 204
 
-
-time=2026-02-22T04:33:08.450Z | lvl=INFO | corr=95f525be-0fa7-11f1-ba28-a20024534928 | trans=1771729386-998-00000000099 | from=172.19.0.6 | srv=titania | subsrv=/ | comp=Orion | op=logTracing.cpp[211]:logInfoRequestWithPayload | msg=Request received: POST /v2/entities?options=upsert, request payload (218 bytes): {"id":"Tank:tank:001","type":"Tank","l":{"type":"Text","value":32,"metadata":{"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:33:06.838Z"}}},"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:33:06.838Z"}}, response code: 204
-
-
-time=2026-02-22T04:32:49.332Z | lvl=INFO | corr=8a5025c4-0fa7-11f1-b284-a20024534928 | trans=1771729386-998-00000000097 | from=172.19.0.6 | srv=titania | subsrv=/ | comp=Orion | op=logTracing.cpp[211]:logInfoRequestWithPayload | msg=Request received: POST /v2/entities?options=upsert, request payload (218 bytes): {"id":"Tank:tank:001","type":"Tank","l":{"type":"Text","value":27,"metadata":{"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:32:47.252Z"}}},"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:32:47.252Z"}}, response code: 204
+time=2026-02-22T04:33:08.450Z | lvl=INFO | corr=95f525be-0fa7-11f1-ba28-a20024534928 | trans=1771729386-998-00000000099 | from=172.19.0.6 | srv=las | subsrv=/ | comp=Orion | op=logTracing.cpp[211]:logInfoRequestWithPayload | msg=Request received: POST /v2/entities?options=upsert, request payload (218 bytes): {"id":"Tank:tank:001","type":"Tank","temperature":{"type":"Text","value":32,"metadata":{"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:33:06.838Z"}}},"TimeInstant":{"type":"DateTime","value":"2026-02-22T04:33:06.838Z"}}, response code: 204
 ```
 
 Alerts or notifications generated by Perseo CEP can be logged, forwarded, or integrated with external services depending on the configured actions.
 
 ---
-
 
 ## 6. Reproducing the Example
 
@@ -149,7 +140,6 @@ To reproduce this workflow:
 
 ---
 
-
 ### Notes
 
 * This example demonstrates the complete workflow of visual CEP rule authoring, EPL generation, and deployment using LAS.
@@ -158,4 +148,4 @@ To reproduce this workflow:
 
 * The workflow is fully reproducible using containerized services and simulated event sources.
 
-* The example is suitable for experimentation, teaching, and IoT-oriented CEP studies.
+* The example is suitable for reproducible experimentation, teaching, and IoT-oriented CEP studies.

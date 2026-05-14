@@ -17,13 +17,14 @@ authors:
 affiliations:
  - name: "Estácio University Center Recife, Brazil"
    index: 1
-date: 27 March 2026
+date: 14 April 2026
 bibliography: paper.bib
 repository: https://github.com/Rosiberto/LAS-NoCode-Rule-Editor
 version: 3.0.0
 release_url: https://github.com/Rosiberto/LAS-NoCode-Rule-Editor/releases/tag/v3.0.0
 
 ---
+
 
 # Summary
 
@@ -52,7 +53,7 @@ LAS addresses this limitation by introducing a visual abstraction layer aligned 
 - Enforces consistent rule composition patterns.
 - Automatically translates visual models into EPL.
 - Enables containerized deployment for reproducible environments.
-* Integrates natively with Perseo CEP infrastructures within the FIWARE ecosystem.
+- Integrates natively with Perseo CEP infrastructures within the FIWARE ecosystem.
 
 By formalizing the rule authoring layer, LAS reduces syntactic variability in rule definitions, improves accessibility for students and researchers, and supports reproducible experimentation in event-driven IoT research workflows.
 
@@ -96,5 +97,6 @@ The system can operate as a standalone web application or as a Flask Blueprint e
 # Acknowledgements
 
 The author thanks the open-source communities behind Flask, Docker, Drawflow, and FIWARE for providing the tools that enabled the development of LAS-NoCode Rule Editor.
+
 
 # References
