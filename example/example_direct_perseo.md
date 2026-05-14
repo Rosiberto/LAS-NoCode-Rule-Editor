@@ -1,15 +1,18 @@
 # LAS-NoCode Rule Editor - Example: CEP Workflow with FIWARE Perseo CEP
 
-This example demonstrates a CEP workflow where LAS is used for rule design and FIWARE Perseo CEP serves as the execution engine. LAS operates at design-time, generating EPL rules that are deployed to Perseo CEP for runtime evaluation.
+This example demonstrates a CEP workflow where LAS is used for rule design and FIWARE Perseo CEP serves as the execution engine. LAS operates at design-time, generating EPL rules that are deployed to Perseo CEP for runtime evaluation, while a Python-based generator simulates the event ingestion layer.
+
 ---
 
 ## Scenario
 
+This setup simulates the event ingestion layer typically provided by a context broker, allowing Perseo CEP to evaluate rules without requiring a full FIWARE deployment.
+
 **Objective:** Define a rule that triggers an alert when a temperature value exceeds 30°C. The rule is created in LAS, deployed to Perseo CEP, and triggered by sending events directly to the Perseo CEP REST API.
 
-- **Input:** Events are sent directly to the Perseo CEP REST API to emulate runtime conditions  
-- **CEP Rule:** If `temperature > 30`, trigger an alert  
-- **Output:** Perseo CEP executes the rule and produces the alert
+- **Input:** A Python-based event generator simulates external IoT sources and sends notifications to Perseo CEP to emulate a runtime event ingestion layer.
+- **CEP Rule:** If `temperature > 30`, trigger an alert.
+- **Output:** Perseo CEP executes the rule and produces the alert.
 
 ---
 
@@ -19,12 +22,12 @@ In the editor, create a rule using blocks:
 
 [Condition: temperature! > 30] ---> [Action: GENERATE ALERT FOR EMAIL]
 
-- **RULE:** defines the rule name  
-- **WHERE Block:** sets the temperature threshold  
-- **Action Type Block:** specifies the action that Perseo CEP executes when the condition is met  
-- **EMAIL Block:** defines the configuration for sending the email alert
+- **RULE:** defines the rule name.
+- **WHERE Block:** sets the temperature threshold.
+- **Action Type Block:** specifies the action that Perseo CEP executes when the condition is met.
+- **EMAIL Block:** defines the configuration for sending the email alert.
 
-Click **“Generate EPL”** to deploy the rule to Perseo CEP via the editor’s API.
+Click **“Generate EPL”** to generate and deploy the rule to Perseo CEP via the editor’s API.
 
 ---
 
@@ -50,7 +53,7 @@ import time
 PERSEO_URL = "http://localhost:9090/notices"
  
 HEADERS = {"Content-Type": "application/json",
-           "fiware-service": "titania",  # change this to your FIWARE service
+           "fiware-service": "las",  # change this to your FIWARE service
            "fiware-servicepath": "/"} # adjust service path if needed
 i = 1
 while i <3:
@@ -76,43 +79,43 @@ while i <3:
     time.sleep(1)
 ```
 
-* Sends random temperature readings directly to Perseo CEP
+- Sends random temperature readings directly to Perseo CEP.
 
-* If temperature > 30, the rule created in LAS will trigger the alert
+- If temperature > 30, the rule created in LAS will trigger the alert.
 
 ## 4. Expected Output
 
 ```yaml
 Sent event: {'data': [{'id': 'Room1', 'type': 'Room', 'temperature': {'type': 'Number', 'value': 32}}], 'subscriptionId': 'simulated-sent-event'}, response status: 200
 
-time=2026-02-22T04:12:54.300Z | lvl=INFO | from=::ffff:172.19.0.1 | corr=945db4e5-9c81-4906-b770-0133fbcbc4ad; node=O8MgEottSa; perseocep=63 | trans=7c4e8818-b6d1-45d6-bee2-f1556f47099d | srv=titania | subsrv=/ | op=doPost | comp=perseo-core | msg=incoming event: {"noticeId":"c292cd90-0fa4-11f1-b823-d55bae7843ea","noticeTS":1771733573870,"id":"Room1","type":"Room","isPattern":false,"subservice":"/","service":"titania","temperature__type":"Number","temperature":32}
+time=2026-02-22T04:12:54.300Z | lvl=INFO | from=::ffff:172.19.0.1 | corr=945db4e5-9c81-4906-b770-0133fbcbc4ad; node=O8MgEottSa; perseocep=63 | trans=7c4e8818-b6d1-45d6-bee2-f1556f47099d | srv=las | subsrv=/ | op=doPost | comp=perseo-core | msg=incoming event: {"noticeId":"c292cd90-0fa4-11f1-b823-d55bae7843ea","noticeTS":1771733573870,"id":"Room1","type":"Room","isPattern":false,"subservice":"/","service":"titania","temperature__type":"Number","temperature":32}
 
 
 Sent event: {'data': [{'id': 'Room1', 'type': 'Room', 'temperature': {'type': 'Number', 'value': 30}}], 'subscriptionId': 'simulated-sent-event'}, response status: 200
 
-time=2026-02-22T04:12:55.597Z | lvl=INFO | from=::ffff:172.19.0.1 | corr=f9a98452-b878-496d-86bd-70dcb8b0a80e; node=O8MgEottSa; perseocep=64 | trans=034cafb1-611e-4339-82f5-fdab7b23bc56 | srv=titania | subsrv=/ | op=doPost | comp=perseo-core | msg=incoming event: {"noticeId":"c3954970-0fa4-11f1-b823-d55bae7843ea","noticeTS":1771733575561,"id":"Room1","type":"Room","isPattern":false,"subservice":"/","service":"titania","temperature__type":"Number","temperature":30}
+time=2026-02-22T04:12:55.597Z | lvl=INFO | from=::ffff:172.19.0.1 | corr=f9a98452-b878-496d-86bd-70dcb8b0a80e; node=O8MgEottSa; perseocep=64 | trans=034cafb1-611e-4339-82f5-fdab7b23bc56 | srv=las | subsrv=/ | op=doPost | comp=perseo-core | msg=incoming event: {"noticeId":"c3954970-0fa4-11f1-b823-d55bae7843ea","noticeTS":1771733575561,"id":"Room1","type":"Room","isPattern":false,"subservice":"/","service":"titania","temperature__type":"Number","temperature":30}
 ```
 
 Perseo CEP evaluates the rule and generates alerts when the conditions are satisfied.
 
 ## 5. Instructions for Use
 
-1. Run Perseo CEP (Docker recommended)
+1. Run Perseo CEP (Docker recommended).
 
-2. Open LAS-NoCode Rule Editor (Docker or Docker Compose)
+2. Open LAS-NoCode Rule Editor (Docker or Docker Compose).
 
-3. Create a new rule: define the condition and action blocks
+3. Create a new rule: define the condition and action blocks.
 
-4. Click “Generate EPL” to deploy the rule to Perseo CEP
+4. Click “Generate EPL” to deploy the rule to Perseo CEP.
 
-5. Run simulate_perseo.py to send events directly to Perseo CEP
+5. Run simulate_perseo.py to send events directly to Perseo CEP.
 
-6. Observe alerts generated according to the rule
+6. Observe alerts generated according to the rule.
 
 ## Notes
 
-* This example demonstrates direct interaction with Perseo CEP without using Orion Broker
+- This example demonstrates direct interaction with Perseo CEP without using Orion Broker.
 
-* Fully reproducible using Docker and Python scripts
+- Fully reproducible using Docker and Python scripts.
 
-* Ideal for testing, teaching, or demonstrating CEP event handling in IoT systems
+- Ideal for testing, teaching, or demonstrating CEP event handling in IoT systems.

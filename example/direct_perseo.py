@@ -6,7 +6,7 @@ import time
 PERSEO_URL = "http://localhost:9090/notices"
  
 HEADERS = {"Content-Type": "application/json",
-           "fiware-service": "titania", # change this to your FIWARE service
+           "fiware-service": "las", # change this to your FIWARE service
            "fiware-servicepath": "/"}   # adjust service path if needed
 
 i=1
