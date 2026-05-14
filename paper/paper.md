@@ -17,7 +17,7 @@ authors:
 affiliations:
  - name: "Estácio University Center Recife, Brazil"
    index: 1
-date: 14 April 2026
+date: 14 May 2026
 bibliography: paper.bib
 repository: https://github.com/Rosiberto/LAS-NoCode-Rule-Editor
 version: 3.0.0
