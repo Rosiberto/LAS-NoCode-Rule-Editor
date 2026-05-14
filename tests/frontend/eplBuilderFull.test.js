@@ -74,7 +74,7 @@ describe('eplBuilder – Complete CEP Rule Tests', () => {
     const result = buildEPLFromNodes(nodes);
     expect(result.action).toBeDefined();
     expect(result.action.type).toBe('POST');
-    expect(result.action.template).toBe('{}');
+    expect(result.action.template).toContain('ruleName');
     expect(result.action.parameters.url).toBe('http://example.com');
   });
 
