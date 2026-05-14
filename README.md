@@ -107,7 +107,7 @@ This allows the editor interface to be incorporated into larger systems while pr
 ---
 
 ## Documentation
-Additional documentation and examples are available in the [documentation folder](./documentation) and [examples](./example).
+Additional documentation and examples are available in the [documentation folder](./Documentation) and [examples](./example).
 
 ## Academic Reference
 
