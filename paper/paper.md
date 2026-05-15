@@ -80,6 +80,8 @@ LAS contributes at the intersection of CEP and low-code tooling by:
 2. Automating the transformation from visual rule graphs into executable EPL code.
 3. Supporting reproducible experimental workflows through containerized deployment using Docker [@docker].
 
+The current version represents the latest stage of a multi-year development process that originated within a broader IoT research platform developed during doctoral research and has since been refactored into a standalone open-source tool.
+
 
 # Software design
 
@@ -92,6 +94,21 @@ LAS is implemented as a modular web application composed of:
 Rules are internally represented as directed block graphs. The backend parses the graph into an intermediate representation and generates EPL statements. The generated rules follow the EPL structure expected by Perseo CEP and can be deployed directly to the engine through REST-based integration.
 
 The system can operate as a standalone web application or as a Flask Blueprint embedded into larger systems. Containerization ensures consistent execution across development, experimentation, and teaching environments, supporting reproducibility in research settings.
+
+LAS-NoCode Rule Editor has a longer development history than the current repository suggests. The system originated as an internal component of a larger IoT platform developed during doctoral research, with initial implementation starting approximately two years prior to the first public release. Earlier versions were implemented using the Barfi library as part of that platform. In 2025, the previous version was archived, and the editor was redesigned and migrated to a standalone implementation based on Drawflow. As a result, a substantial portion of the functionality had already been implemented prior to the current repository structure, and the initial public commit reflects the consolidation of pre-existing development work. Subsequent commits correspond to incremental refactoring and the addition of features supporting reproducibility and standalone usage.
+
+# Research Impact Statement
+
+LAS-NoCode Rule Editor advances the state of the art in Complex Event Processing (CEP) tooling by providing a domain-specific visual environment for reproducible CEP rule design in Internet of Things (IoT) research. The software reduces reliance on manual EPL coding through structured visual modeling and automatic rule generation, improving accessibility, consistency, and reproducibility in event-driven experimentation.
+
+The platform contributes to research workflows by enabling standardized CEP rule specification, deterministic EPL generation, and containerized deployment using Docker. Its integration with the FIWARE ecosystem facilitates reproducible experimentation, rapid prototyping, and educational adoption in IoT and smart environment research.
+
+LAS also lowers the entry barrier for students and non-specialist users by allowing them to focus on event semantics and system behavior rather than low-level EPL syntax, supporting broader adoption of CEP methodologies in academic and applied research contexts.
+
+
+# AI usage disclosure
+
+The generative AI tool OpenAI’s ChatGPT was used exclusively for grammatical corrections and assistance with the revision of the English text.
 
 
 # Acknowledgements
